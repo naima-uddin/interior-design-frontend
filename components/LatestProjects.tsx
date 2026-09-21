@@ -24,14 +24,14 @@ export default function LatestProjects({ projects: input }: { projects?: Project
           </p>
         </div>
 
-        <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid gap-1.5 sm:grid-cols-2 lg:grid-cols-4">
           {projects.map((p) => (
             <Link
               key={p._id}
               href={`/projects/${p.slug}`}
-              className="group overflow-hidden rounded-2xl border border-ink/10 bg-cream transition hover:-translate-y-1 hover:shadow-[0_30px_60px_-35px_rgba(42,38,34,0.5)]"
+              className="group overflow-hidden rounded-sm border border-olive-600/40 bg-cream transition hover:-translate-y-1 hover:shadow-[0_30px_60px_-35px_rgba(42,38,34,0.5)]"
             >
-              <div className="relative aspect-[4/4.4] overflow-hidden bg-cream-200">
+              <div className="relative aspect-[4/3.6] overflow-hidden bg-cream-200">
                 <Image
                   src={p.cover.url}
                   alt={p.title}
@@ -40,11 +40,11 @@ export default function LatestProjects({ projects: input }: { projects?: Project
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                 />
               </div>
-              <div className="px-5 py-5 text-center">
-                <h3 className="text-[11px] font-semibold uppercase leading-relaxed tracking-[0.08em] text-ink transition-colors group-hover:text-clay">
+              <div className="px-4 py-2 text-center">
+                <h3 className="text-[11px] font-semibold uppercase leading-[1.4] tracking-[0.08em] text-ink transition-colors group-hover:text-clay">
                   {p.title}
                 </h3>
-                <p className="mt-2 text-sm font-light text-stone">
+                <p className="mt-1 text-sm font-light text-stone">
                   {p.area} Apartment
                 </p>
               </div>
@@ -52,7 +52,7 @@ export default function LatestProjects({ projects: input }: { projects?: Project
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-4 text-center">
           <Link
             href="/projects"
             className="eyebrow group inline-flex items-center gap-3 rounded-full border border-ink/20 px-7 py-4 text-ink transition hover:border-olive hover:bg-[#383927] hover:text-cream-100"
