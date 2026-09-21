@@ -12,7 +12,7 @@ export default function ContactForm({ services }: { services?: Service[] }) {
 
   if (sent) {
     return (
-      <div className="rounded-2xl border border-olive/20 bg-olive/5 p-10 text-center">
+      <div className="rounded-2xl border border-olive/20 bg-[#383927]/5 p-10 text-center">
         <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#383927] text-cream-100">
           <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -76,7 +76,7 @@ export default function ContactForm({ services }: { services?: Service[] }) {
       </div>
       <button
         type="submit"
-        className="eyebrow h-13 w-full rounded-full bg-olive px-6 py-4 !tracking-[0.18em] !text-cream-100 transition hover:bg-olive-800"
+        className="eyebrow h-13 w-full rounded-full bg-[#383927] px-6 py-4 !tracking-[0.18em] !text-cream-100 transition hover:bg-[#383927]-800"
       >
         Request a free consultation
       </button>

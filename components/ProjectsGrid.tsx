@@ -42,11 +42,10 @@ export default function ProjectsGrid({
             <button
               key={c.slug}
               onClick={() => setActive(c.slug)}
-              className={`eyebrow rounded-full border px-5 py-2.5 !tracking-[0.14em] transition ${
-                active === c.slug
-                  ? "border-olive bg-olive !text-cream-100"
+              className={`eyebrow rounded-full border px-5 py-2.5 !tracking-[0.14em] transition ${active === c.slug
+                  ? "border-olive bg-[#383927] !text-cream-100"
                   : "border-ink/15 text-ink/70 hover:border-ink/40 hover:text-ink"
-              }`}
+                }`}
             >
               {c.name}
             </button>

@@ -145,14 +145,14 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
       <div className="absolute" style={INSET}>
         {/* badge — top-left */}
         {slide.badge && (
-          <span className="eyebrow absolute left-5 top-5 inline-block rounded-full border border-white/30 bg-olive-800/25 px-3.5 py-1.5 !text-[9px] !text-white/90 backdrop-blur-md sm:left-7 sm:top-7">
+          <span className="eyebrow absolute left-5 top-5 inline-block rounded-full border border-white/30 bg-[#383927]-800/25 px-3.5 py-1.5 !text-[9px] !text-white/90 backdrop-blur-md sm:left-7 sm:top-7">
             {slide.badge}
           </span>
         )}
 
         {/* description card — top-right */}
         {(slide.subtitle || slide.buttonText) && (
-          <div className="absolute right-5 top-5 max-w-[15rem] rounded-3xl border border-white/20 bg-olive-800/20 p-5 text-right backdrop-blur-xl sm:right-7 sm:top-7 sm:max-w-xs sm:p-6">
+          <div className="absolute right-5 top-5 max-w-[15rem] rounded-3xl border border-white/20 bg-[#383927]-800/20 p-5 text-right backdrop-blur-xl sm:right-7 sm:top-7 sm:max-w-xs sm:p-6">
             {slide.subtitle && (
               <p className="text-[13px] font-light leading-relaxed text-white/95">
                 {slide.subtitle}

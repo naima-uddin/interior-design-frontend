@@ -56,7 +56,7 @@ export default function LatestProjects({ projects: input }: { projects?: Project
         <div className="mt-12 text-center">
           <Link
             href="/projects"
-            className="eyebrow group inline-flex items-center gap-3 rounded-full border border-ink/20 px-7 py-4 text-ink transition hover:border-olive hover:bg-olive hover:text-cream-100"
+            className="eyebrow group inline-flex items-center gap-3 rounded-full border border-ink/20 px-7 py-4 text-ink transition hover:border-olive hover:bg-[#383927] hover:text-cream-100"
           >
             View all projects
             <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">

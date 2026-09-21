@@ -54,7 +54,7 @@ export default async function ServicePage({
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/contact"
-                  className="eyebrow inline-flex items-center gap-2 rounded-full bg-olive px-6 py-3.5 !tracking-[0.16em] !text-cream-100 transition hover:bg-olive-800"
+                  className="eyebrow inline-flex items-center gap-2 rounded-full bg-[#383927] px-6 py-3.5 !tracking-[0.16em] !text-cream-100 transition hover:bg-[#383927]-800"
                 >
                   Book a free consultation
                 </Link>

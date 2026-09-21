@@ -4,7 +4,7 @@
    VELOR — interior design storefront design system
    Warm, editorial, premium: cream paper, dark olive, ink text, sand accents.
    Tokens are exposed to Tailwind v4 via @theme so utilities like
-   `bg-cream`, `text-ink`, `text-stone`, `bg-olive` work everywhere.
+   `bg-cream`, `text-ink`, `text-stone`, `bg-[#383927]` work everywhere.
    ───────────────────────────────────────────────────────────────────────── */
 
 @theme {

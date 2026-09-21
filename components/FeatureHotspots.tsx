@@ -37,7 +37,7 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
             className="object-cover"
           />
           {/* subtle darkening so white dots and popovers read clearly */}
-          <div className="absolute inset-0 bg-olive-800/10" />
+          <div className="absolute inset-0 bg-[#383927]-800/10" />
 
           {points.map((pt, i) => {
             const isActive = active === i;

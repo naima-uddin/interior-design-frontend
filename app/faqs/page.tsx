@@ -35,7 +35,7 @@ export default async function FaqsPage() {
             </p>
             <Link
               href="/contact"
-              className="eyebrow mt-6 inline-flex items-center gap-2 rounded-full bg-olive px-7 py-4 !tracking-[0.16em] !text-cream-100 transition hover:bg-olive-800"
+              className="eyebrow mt-6 inline-flex items-center gap-2 rounded-full bg-[#383927] px-7 py-4 !tracking-[0.16em] !text-cream-100 transition hover:bg-[#383927]-800"
             >
               Get in touch
               <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">

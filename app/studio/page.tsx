@@ -111,7 +111,7 @@ export default function StudioPage() {
             </p>
             <Link
               href="/collection"
-              className="eyebrow group mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-ink/20 px-6 py-3.5 text-ink transition hover:border-olive hover:bg-olive hover:text-cream-100"
+              className="eyebrow group mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-ink/20 px-6 py-3.5 text-ink transition hover:border-olive hover:bg-[#383927] hover:text-cream-100"
             >
               Explore the collection
               <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">

@@ -96,7 +96,7 @@ export default async function ContactPage() {
       {/* Map placeholder band */}
       <section className="bg-cream">
         <div className="mx-auto max-w-[1260px] px-5 sm:px-8">
-          <div className="relative flex aspect-[21/9] items-center justify-center overflow-hidden rounded-2xl border border-ink/10 bg-olive/5">
+          <div className="relative flex aspect-[21/9] items-center justify-center overflow-hidden rounded-2xl border border-ink/10 bg-[#383927]/5">
             <div className="text-center">
               <svg className="mx-auto h-8 w-8 text-olive/50" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s-7-6.5-7-11a7 7 0 1114 0c0 4.5-7 11-7 11z" />

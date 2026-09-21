@@ -38,7 +38,7 @@ export default async function ProjectPage({
   return (
     <main>
       {/* Cover hero */}
-      <section className="relative h-[62vh] min-h-[440px] w-full overflow-hidden bg-olive">
+      <section className="relative h-[62vh] min-h-[440px] w-full overflow-hidden bg-[#383927]">
         <Image
           src={project.cover.url}
           alt={project.title}
