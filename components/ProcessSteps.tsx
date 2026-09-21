@@ -16,7 +16,7 @@ export default function ProcessSteps({
       <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
         <div className="mb-12 max-w-2xl">
           <span className="eyebrow">How it works</span>
-          <h2 className="font-serif mt-4 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
+          <h2 className="font-serif mt-4 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl -mb-2">
             From first hello to handover.
           </h2>
           <p className="mt-5 text-[15px] font-light leading-relaxed text-stone">

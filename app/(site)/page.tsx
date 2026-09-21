@@ -20,7 +20,7 @@ export default async function Home() {
       <Banner slides={data.banners} />
       <ConsideredBand />
       <ServicesPreview services={data.services} />
-      <FeaturedPieces products={data.featured} />
+      {/* <FeaturedPieces products={data.featured} /> */}
       <ShopByRoom rooms={data.rooms} />
       <FeatureHotspots scene={data.hotspot} />
       <LatestProjects projects={data.projects} />

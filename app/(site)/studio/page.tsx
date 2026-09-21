@@ -103,7 +103,7 @@ export default function StudioPage() {
           {/* Copy */}
           <div>
             <span className="eyebrow">→ About Us</span>
-            <h2 className="font-serif mt-4 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
+            <h2 className="font-serif mt-4 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl -mb-2">
               Our passion for design, your
               <br />
               <span className="text-stone-400">vision realized</span>

@@ -1,12 +1,13 @@
 "use client";
 
-// Single-image uploader: drag/click to pick a file, uploads straight to
-// Cloudinary via the backend (/api/upload), shows a preview + progress state.
-// Value is always the plain { url } shape the storefront expects.
+// Single-image uploader: drag/click to upload straight to Cloudinary, or pick
+// an already-uploaded image from the Media Library. Value is always the plain
+// { url } shape the storefront expects.
 
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { uploadImage } from "@/lib/adminApi";
+import MediaPickerModal from "./MediaPickerModal";
 
 export default function ImageUploader({
   value,
@@ -22,6 +23,7 @@ export default function ImageUploader({
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [pickerOpen, setPickerOpen] = useState(false);
 
   const pick = () => inputRef.current?.click();
 
@@ -78,7 +80,21 @@ export default function ImageUploader({
         className="hidden"
         onChange={(e) => handleFile(e.target.files?.[0])}
       />
+      <button
+        type="button"
+        onClick={() => setPickerOpen(true)}
+        className="eyebrow mt-2 text-clay transition hover:text-ink"
+      >
+        Choose from library
+      </button>
       {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+
+      {pickerOpen && (
+        <MediaPickerModal
+          onSelect={(item) => onChange({ url: item.url })}
+          onClose={() => setPickerOpen(false)}
+        />
+      )}
     </div>
   );
 }

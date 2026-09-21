@@ -6,6 +6,10 @@
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 const TOKEN_KEY = "velor_admin_token";
+const ADMIN_KEY = "velor_admin_info";
+
+export type Role = "admin" | "moderator";
+export type AdminInfo = { email: string; name: string; role: Role };
 
 export function getToken(): string | null {
   if (typeof window === "undefined") return null;
@@ -18,6 +22,26 @@ export function setToken(token: string) {
 
 export function clearToken() {
   localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(ADMIN_KEY);
+}
+
+export function getStoredAdmin(): AdminInfo | null {
+  if (typeof window === "undefined") return null;
+  const raw = localStorage.getItem(ADMIN_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as AdminInfo;
+  } catch {
+    return null;
+  }
+}
+
+function setStoredAdmin(admin: AdminInfo) {
+  localStorage.setItem(ADMIN_KEY, JSON.stringify(admin));
+}
+
+export function isAdminRole(): boolean {
+  return getStoredAdmin()?.role === "admin";
 }
 
 export class ApiError extends Error {
@@ -51,11 +75,12 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
 /* ── Auth ──────────────────────────────────────────────────────────────── */
 
 export async function login(email: string, password: string) {
-  const data = await request<{ token: string; admin: { email: string; name: string } }>(
-    "/api/auth/login",
-    { method: "POST", body: JSON.stringify({ email, password }) },
-  );
+  const data = await request<{ token: string; admin: AdminInfo }>("/api/auth/login", {
+    method: "POST",
+    body: JSON.stringify({ email, password }),
+  });
   setToken(data.token);
+  setStoredAdmin(data.admin);
   return data.admin;
 }
 
@@ -64,8 +89,10 @@ export async function logout() {
   await request("/api/auth/logout", { method: "POST" }).catch(() => {});
 }
 
-export function checkSession() {
-  return request<{ admin: { email: string } }>("/api/auth/me");
+export async function checkSession() {
+  const data = await request<{ admin: AdminInfo & { id: string } }>("/api/auth/me");
+  setStoredAdmin(data.admin);
+  return data;
 }
 
 /* ── Generic resource CRUD ────────────────────────────────────────────── */
@@ -118,4 +145,73 @@ export async function uploadImage(file: File, folder: string): Promise<string> {
     body: form,
   });
   return data.url;
+}
+
+/* ── Media library ─────────────────────────────────────────────────────── */
+
+export type MediaItem = {
+  publicId: string;
+  url: string;
+  width: number;
+  height: number;
+  bytes: number;
+  format: string;
+  folder: string;
+  createdAt: string;
+};
+
+export function listMedia(folder?: string, cursor?: string | null) {
+  const params = new URLSearchParams();
+  if (folder && folder !== "all") params.set("folder", folder);
+  if (cursor) params.set("cursor", cursor);
+  const qs = params.toString();
+  return request<{ items: MediaItem[]; nextCursor: string | null }>(
+    `/api/media${qs ? `?${qs}` : ""}`,
+  );
+}
+
+export function deleteMedia(publicId: string) {
+  return request<{ ok: true }>(`/api/media?publicId=${encodeURIComponent(publicId)}`, {
+    method: "DELETE",
+  });
+}
+
+/* ── Team (admin/moderator accounts) ─────────────────────────────────────── */
+
+export type TeamMember = {
+  _id: string;
+  email: string;
+  name: string;
+  role: Role;
+  createdAt: string;
+};
+
+export function listTeam() {
+  return request<{ items: TeamMember[] }>("/api/team");
+}
+
+export function createTeamMember(body: {
+  email: string;
+  password: string;
+  name: string;
+  role: Role;
+}) {
+  return request<{ item: TeamMember }>("/api/team", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export function updateTeamMember(
+  id: string,
+  body: Partial<{ name: string; role: Role; password: string }>,
+) {
+  return request<{ item: TeamMember }>(`/api/team/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(body),
+  });
+}
+
+export function deleteTeamMember(id: string) {
+  return request<{ ok: true }>(`/api/team/${id}`, { method: "DELETE" });
 }

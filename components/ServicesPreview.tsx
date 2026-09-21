@@ -14,7 +14,7 @@ export default function ServicesPreview({ services: input }: { services?: Servic
         <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <span className="eyebrow">Our Services</span>
-            <h2 className="font-serif mt-4 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
+            <h2 className="font-serif mt-4 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl -mb-2">
               Everything your space needs, in one studio.
             </h2>
           </div>
@@ -29,7 +29,7 @@ export default function ServicesPreview({ services: input }: { services?: Servic
           </Link>
         </div>
 
-        <div className="grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
             <Link
               key={s.slug}

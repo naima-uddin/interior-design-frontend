@@ -13,7 +13,7 @@ export default function ShopByRoom({ rooms }: { rooms?: Room[] }) {
         <div className="mb-10 flex items-end justify-between">
           <div>
             <span className="eyebrow">Shop by Room</span>
-            <h2 className="font-serif mt-3 text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+            <h2 className="font-serif mt-2 text-3xl font-medium tracking-tight text-ink sm:text-4xl -mb-2">
               Every corner, considered.
             </h2>
           </div>
@@ -30,7 +30,7 @@ export default function ShopByRoom({ rooms }: { rooms?: Room[] }) {
                   sizes="(min-width:1024px) 280px, 45vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-olive-800/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-olive-800/40 via-transparent to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-5">
                   <span className="font-serif text-xl text-cream-100">{room.name}</span>
                   <span className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/50 text-cream-100 transition group-hover:bg-cream-100 group-hover:text-ink">

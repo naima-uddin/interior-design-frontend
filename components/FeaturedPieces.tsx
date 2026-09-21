@@ -10,7 +10,7 @@ export default function FeaturedPieces({ products }: { products?: Product[] }) {
     <section className="bg-cream">
       <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-14">
         <div className="mb-10 flex items-end justify-between">
-          <span className="eyebrow">Featured Pieces</span>
+          <span className="font-serif mt-4 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl -mb-2">Featured Pieces</span>
           <Link
             href="/collection"
             className="eyebrow inline-flex items-center gap-2 text-ink/80 transition hover:text-ink"
