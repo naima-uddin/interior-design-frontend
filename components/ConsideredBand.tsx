@@ -5,8 +5,8 @@
 export default function ConsideredBand() {
   return (
     <section className="bg-[#383927] text-cream-100">
-      <div className="mx-auto grid max-w-[1260px] items-center gap-8 px-5 py-6 sm:px-8 md:grid-cols-[auto_1fr_auto] md:gap-12 md:py-8">
-        <ul className="eyebrow !text-cream-100/60 flex gap-6 md:flex-col md:gap-2">
+      <div className="mx-auto grid max-w-[1260px] items-center gap-8 px-5 py-3 sm:px-8 md:grid-cols-[auto_1fr_auto] md:gap-12 md:py-5">
+        <ul className="eyebrow !text-cream-100/60 flex gap-2 md:flex-col md:gap-1">
           <li>Materials</li>
           <li>People</li>
           <li>Places</li>

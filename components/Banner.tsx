@@ -22,8 +22,8 @@ import { SLIDES, type Slide } from "@/lib/data";
 // screens; vertical insets leave room for the fixed navbar (top) and the
 // title / thumbnail band (bottom).
 const SIDE = "max(2%, calc((100% - 1320px) / 2))";
-const INSET = { top: "8%", bottom: "17%", left: SIDE, right: SIDE } as const;
-const WINDOW_CLIP = `inset(8% ${SIDE} 17% ${SIDE} round 28px)`;
+const INSET = { top: "8%", bottom: "13%", left: SIDE, right: SIDE } as const;
+const WINDOW_CLIP = `inset(8% ${SIDE} 13% ${SIDE} round 28px)`;
 
 // words wrapped in *asterisks* render in a serif italic accent
 const renderHighlight = (text: string) =>
@@ -152,7 +152,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
 
         {/* description card — top-right */}
         {(slide.subtitle || slide.buttonText) && (
-          <div className="absolute right-5 top-5 max-w-[15rem] rounded-3xl border border-white/20 bg-[#383927]-800/20 p-5 text-right backdrop-blur-xl sm:right-7 sm:top-7 sm:max-w-xs sm:p-6">
+          <div className="absolute right-5 top-5 max-w-[15rem] rounded-3xl border border-white/20 bg-[#383927]-800/20 px-3 py-4 text-right backdrop-blur-xl sm:right-7 sm:top-7 sm:max-w-xs sm:px-2 sm:py-4">
             {slide.subtitle && (
               <p className="text-[13px] font-light leading-relaxed text-white/95">
                 {slide.subtitle}
@@ -193,7 +193,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
       {/* ── Big title — bottom-left, over the blurred paper ── */}
       <h1
         style={{ left: SIDE }}
-        className="font-serif absolute bottom-[7%] max-w-[62%] text-balance text-[2rem] font-semibold leading-[1.03] tracking-tight text-ink sm:text-5xl lg:text-[3.6rem] "
+        className="font-serif absolute bottom-[3%] max-w-[62%] text-balance text-[2rem] font-semibold leading-[1.03] tracking-tight text-ink sm:text-5xl lg:text-[3.6rem] "
       >
         {renderHighlight(slide.title)}
       </h1>
@@ -202,7 +202,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
       {thumbs.length > 0 && (
         <div
           style={{ right: SIDE }}
-          className="absolute bottom-[7%] hidden items-center gap-2.5 sm:flex"
+          className="absolute bottom-[3%] hidden items-center gap-2.5 sm:flex"
         >
           {thumbs.map(({ s, i }) => (
             <button

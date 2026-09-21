@@ -134,7 +134,7 @@ export default function Navbar({ projectCategories, services }: NavProps) {
         : "border-b border-transparent bg-transparent"
         }`}
     >
-      <nav className="mx-auto grid h-12 max-w-[1260px] grid-cols-[auto_1fr_auto] items-center px-5 md:h-16 sm:px-4">
+      <nav className="mx-auto grid h-12 max-w-[1280px] grid-cols-[auto_1fr_auto] items-center px-2 md:h-16 sm:px-2">
 
         {/* Left: wordmark */}
         <Link
