@@ -1,25 +1,106 @@
 "use client";
 
-// Frosted, editorial navbar. Transparent over the hero, then it settles onto a
-// cream frosted surface once the page scrolls. Includes a "Projects" dropdown
-// (hover on desktop, expand on mobile) listing the project categories.
+// Frosted, editorial navbar for an interior-design studio. Transparent over the
+// hero, settling onto a cream frosted surface on scroll. Includes hover
+// dropdowns for "Projects" (by category) and "Services".
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { projectCategoriesWithCounts } from "@/lib/data";
+import { projectCategoriesWithCounts, SERVICES } from "@/lib/data";
 
 const LINKS = [
   { label: "Collection", href: "/collection" },
-  { label: "Spaces", href: "/spaces" },
   { label: "Studio", href: "/studio" },
+  { label: "Journal", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
+
+type Item = { name: string; href: string; count?: number };
+
+function NavDropdown({
+  label,
+  href,
+  items,
+  onToggle,
+}: {
+  label: string;
+  href: string;
+  items: Item[];
+  onToggle: (open: boolean) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const set = (v: boolean) => {
+    setOpen(v);
+    onToggle(v);
+  };
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => set(true)}
+      onMouseLeave={() => set(false)}
+    >
+      <Link
+        href={href}
+        className="eyebrow flex items-center gap-1.5 !tracking-[0.18em] text-ink/80 transition-colors hover:text-ink"
+      >
+        {label}
+        <svg
+          className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+        </svg>
+      </Link>
+
+      {open && (
+        <div className="absolute left-1/2 top-full w-64 -translate-x-1/2 pt-4">
+          <div className="max-h-[70vh] overflow-y-auto rounded-2xl border border-ink/10 bg-cream-100 p-2 shadow-[0_30px_70px_-30px_rgba(42,38,34,0.45)]">
+            {items.map((it) => (
+              <Link
+                key={it.href}
+                href={it.href}
+                className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-light text-ink/85 transition hover:bg-cream-200 hover:text-ink"
+              >
+                {it.name}
+                {it.count != null && (
+                  <span className="text-xs text-stone-400">{it.count}</span>
+                )}
+              </Link>
+            ))}
+            <Link
+              href={href}
+              className="eyebrow mt-1 flex items-center gap-2 rounded-xl border-t border-ink/10 px-4 py-3 !tracking-[0.16em] text-ink transition hover:text-clay"
+            >
+              View all
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false); // mobile menu
-  const [projOpen, setProjOpen] = useState(false); // desktop dropdown
-  const [mobileProj, setMobileProj] = useState(false); // mobile submenu
-  const categories = projectCategoriesWithCounts();
+  const [anyDropdown, setAnyDropdown] = useState(0); // count of open desktop dropdowns
+  const [mobileSub, setMobileSub] = useState<string | null>(null);
+
+  const projectItems: Item[] = projectCategoriesWithCounts().map((c) => ({
+    name: c.name,
+    href: `/projects?category=${c.slug}`,
+    count: c.count,
+  }));
+  const serviceItems: Item[] = SERVICES.map((s) => ({
+    name: s.name,
+    href: `/services/${s.slug}`,
+  }));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -28,17 +109,22 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const solid = scrolled || anyDropdown > 0;
+  const track = (v: boolean) => setAnyDropdown((n) => Math.max(0, n + (v ? 1 : -1)));
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        scrolled || projOpen
+        solid
           ? "border-b border-ink/8 bg-cream/85 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-[1260px] items-center justify-between px-5 sm:h-20 sm:px-8">
-        {/* Left: primary links (desktop) */}
-        <div className="hidden flex-1 items-center gap-9 md:flex">
+        {/* Left: primary links + dropdowns (desktop) */}
+        <div className="hidden flex-1 items-center gap-7 lg:flex">
+          <NavDropdown label="Projects" href="/projects" items={projectItems} onToggle={track} />
+          <NavDropdown label="Services" href="/services" items={serviceItems} onToggle={track} />
           {LINKS.map((l) => (
             <Link
               key={l.href}
@@ -48,55 +134,6 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-
-          {/* Projects dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setProjOpen(true)}
-            onMouseLeave={() => setProjOpen(false)}
-          >
-            <Link
-              href="/projects"
-              className="eyebrow flex items-center gap-1.5 !tracking-[0.18em] text-ink/80 transition-colors hover:text-ink"
-            >
-              Projects
-              <svg
-                className={`h-3 w-3 transition-transform ${projOpen ? "rotate-180" : ""}`}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
-              </svg>
-            </Link>
-
-            {projOpen && (
-              <div className="absolute left-1/2 top-full w-64 -translate-x-1/2 pt-4">
-                <div className="overflow-hidden rounded-2xl border border-ink/10 bg-cream-100 p-2 shadow-[0_30px_70px_-30px_rgba(42,38,34,0.45)]">
-                  {categories.map((c) => (
-                    <Link
-                      key={c.slug}
-                      href={`/projects?category=${c.slug}`}
-                      className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-light text-ink/85 transition hover:bg-cream-200 hover:text-ink"
-                    >
-                      {c.name}
-                      <span className="text-xs text-stone-400">{c.count}</span>
-                    </Link>
-                  ))}
-                  <Link
-                    href="/projects"
-                    className="eyebrow mt-1 flex items-center gap-2 rounded-xl border-t border-ink/10 px-4 py-3 !tracking-[0.16em] text-ink transition hover:text-clay"
-                  >
-                    View all projects
-                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Center: wordmark */}
@@ -119,7 +156,7 @@ export default function Navbar() {
           <button
             aria-label="Menu"
             onClick={() => setOpen((v) => !v)}
-            className="text-ink/80 transition hover:text-ink md:hidden"
+            className="text-ink/80 transition hover:text-ink lg:hidden"
           >
             <MenuIcon />
           </button>
@@ -128,56 +165,34 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="border-t border-ink/8 bg-cream/95 backdrop-blur-xl md:hidden">
+        <div className="max-h-[80vh] overflow-y-auto border-t border-ink/8 bg-cream/95 backdrop-blur-xl lg:hidden">
           <div className="mx-auto flex max-w-[1260px] flex-col gap-1 px-5 py-4">
+            <MobileSub
+              label="Projects"
+              open={mobileSub === "projects"}
+              onClick={() => setMobileSub((v) => (v === "projects" ? null : "projects"))}
+              items={projectItems}
+              allHref="/projects"
+              close={() => setOpen(false)}
+            />
+            <MobileSub
+              label="Services"
+              open={mobileSub === "services"}
+              onClick={() => setMobileSub((v) => (v === "services" ? null : "services"))}
+              items={serviceItems}
+              allHref="/services"
+              close={() => setOpen(false)}
+            />
             {LINKS.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="eyebrow !tracking-[0.18em] py-2 text-ink/80"
+                className="eyebrow !tracking-[0.18em] py-2.5 text-ink/80"
               >
                 {l.label}
               </Link>
             ))}
-
-            {/* Mobile Projects submenu */}
-            <button
-              onClick={() => setMobileProj((v) => !v)}
-              className="eyebrow flex items-center justify-between !tracking-[0.18em] py-2 text-ink/80"
-            >
-              Projects
-              <svg
-                className={`h-3.5 w-3.5 transition-transform ${mobileProj ? "rotate-180" : ""}`}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
-              </svg>
-            </button>
-            {mobileProj && (
-              <div className="mb-2 flex flex-col gap-1 border-l border-ink/10 pl-4">
-                {categories.map((c) => (
-                  <Link
-                    key={c.slug}
-                    href={`/projects?category=${c.slug}`}
-                    onClick={() => setOpen(false)}
-                    className="py-1.5 text-sm font-light text-ink/75"
-                  >
-                    {c.name}
-                  </Link>
-                ))}
-                <Link
-                  href="/projects"
-                  onClick={() => setOpen(false)}
-                  className="eyebrow py-2 !tracking-[0.16em] text-clay"
-                >
-                  View all projects →
-                </Link>
-              </div>
-            )}
           </div>
         </div>
       )}
@@ -185,9 +200,62 @@ export default function Navbar() {
   );
 }
 
+function MobileSub({
+  label,
+  open,
+  onClick,
+  items,
+  allHref,
+  close,
+}: {
+  label: string;
+  open: boolean;
+  onClick: () => void;
+  items: Item[];
+  allHref: string;
+  close: () => void;
+}) {
+  return (
+    <div>
+      <button
+        onClick={onClick}
+        className="eyebrow flex w-full items-center justify-between !tracking-[0.18em] py-2.5 text-ink/80"
+      >
+        {label}
+        <svg
+          className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+      {open && (
+        <div className="mb-2 flex max-h-64 flex-col gap-1 overflow-y-auto border-l border-ink/10 pl-4">
+          {items.map((it) => (
+            <Link
+              key={it.href}
+              href={it.href}
+              onClick={close}
+              className="py-1.5 text-sm font-light text-ink/75"
+            >
+              {it.name}
+            </Link>
+          ))}
+          <Link href={allHref} onClick={close} className="eyebrow py-2 !tracking-[0.16em] text-clay">
+            View all →
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SearchIcon() {
   return (
-    <svg className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+    <svg className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="7" />
       <path strokeLinecap="round" d="M20 20l-3.2-3.2" />
     </svg>
@@ -196,7 +264,7 @@ function SearchIcon() {
 
 function BagIcon() {
   return (
-    <svg className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+    <svg className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M6 8h12l-1 12H7L6 8Z" />
       <path strokeLinecap="round" d="M9 8V6.5a3 3 0 0 1 6 0V8" />
     </svg>
@@ -205,7 +273,7 @@ function BagIcon() {
 
 function MenuIcon() {
   return (
-    <svg className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+    <svg className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
       <path strokeLinecap="round" d="M4 7h16M4 12h16M4 17h16" />
     </svg>
   );

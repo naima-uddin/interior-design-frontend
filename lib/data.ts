@@ -801,3 +801,455 @@ export const HOTSPOT_SCENE = {
     },
   ] as Hotspot[],
 };
+
+/* ── Company / contact ─────────────────────────────────────────────────── */
+
+export const COMPANY = {
+  founded: "2014",
+  stats: [
+    { value: "500+", label: "Projects delivered" },
+    { value: "10+", label: "Years of craft" },
+    { value: "50+", label: "In-house makers" },
+    { value: "8", label: "Cities served" },
+  ],
+  contact: {
+    office: "House 127 (2nd floor), Road 05, Mohakhali New DOHS, Dhaka 1206",
+    factory: "1920 Koborsthan Road, East Badda, Dhaka 1212",
+    phones: ["+880 1633 033033", "+880 1971 968888"],
+    email: "hello@velor.studio",
+    hours: "Sat–Thu, 10:00 – 19:00",
+    cities: [
+      "Dhaka",
+      "Chattogram",
+      "Sylhet",
+      "Khulna",
+      "Rajshahi",
+      "Barishal",
+      "Rangpur",
+      "Mymensingh",
+    ],
+  },
+};
+
+/* ── Services ──────────────────────────────────────────────────────────── */
+
+export type Service = {
+  slug: string;
+  name: string;
+  tagline: string;
+  summary: string; // card / grid text
+  intro: string; // detail page lead
+  image: { url: string };
+  includes: string[];
+};
+
+export const SERVICES: Service[] = [
+  {
+    slug: "home-interior-design",
+    name: "Home Interior Design",
+    tagline: "Complete turnkey homes",
+    summary:
+      "End-to-end interior design for apartments, flats and houses — one team, from first sketch to final handover.",
+    intro:
+      "A single, coherent design language carried through every room of your home. We handle space planning, materials, joinery, lighting and styling so the whole space feels considered and complete.",
+    image: { url: U("photo-1618221195710-dd6b41faaea6", 1200) },
+    includes: [
+      "Full space planning & 3D visualisation",
+      "Material & finish selection",
+      "Custom joinery throughout",
+      "Lighting & electrical layout",
+      "Furnishing, styling & handover",
+    ],
+  },
+  {
+    slug: "bedroom-interior-design",
+    name: "Bedroom Interior Design",
+    tagline: "Master, kids & guest rooms",
+    summary:
+      "Restful bedrooms with smart storage, headboard features and warm, low lighting tailored to how you sleep and live.",
+    intro:
+      "From master suites to kids' and guest rooms — bedrooms designed for rest, with generous storage and a calm, tactile material palette.",
+    image: { url: U("photo-1540574163026-643ea20ade25", 1200) },
+    includes: [
+      "Headboard & feature wall design",
+      "Wardrobe & concealed storage",
+      "Dressing & study zones",
+      "Ambient & task lighting",
+      "Drapery & soft furnishings",
+    ],
+  },
+  {
+    slug: "living-room-design",
+    name: "Living Room Design",
+    tagline: "The heart of the home",
+    summary:
+      "Living rooms planned around real life — layouts, feature walls, media units and layered lighting that bring a room together.",
+    intro:
+      "The room everyone gathers in. We plan the layout, design the feature wall and media unit, and layer the lighting so it works for quiet evenings and full houses alike.",
+    image: { url: U("photo-1616486338812-3dadae4b4ace", 1200) },
+    includes: [
+      "TV / feature wall design",
+      "Media & display joinery",
+      "Seating layout planning",
+      "False ceiling & cove lighting",
+      "Rug, art & styling",
+    ],
+  },
+  {
+    slug: "dining-room-design",
+    name: "Dining Room Design",
+    tagline: "Made for gathering",
+    summary:
+      "Coordinated dining spaces with custom crockery cabinetry, statement lighting and seating built for long meals.",
+    intro:
+      "Dining rooms designed for lingering — crockery display cabinetry, a statement pendant and a table setting that invites long, slow meals.",
+    image: { url: U("photo-1617806118233-18e1de247200", 1200) },
+    includes: [
+      "Crockery & display cabinetry",
+      "Statement pendant lighting",
+      "Accent wall panelling",
+      "Seating configuration",
+      "Ceiling detailing",
+    ],
+  },
+  {
+    slug: "modular-kitchen-design",
+    name: "Modular Kitchen Design",
+    tagline: "Modern & handleless",
+    summary:
+      "Sleek modular kitchens with integrated appliances, tall pantry units and hard-wearing worktops built around real cooking.",
+    intro:
+      "Efficient, beautiful modular kitchens with handleless cabinetry, integrated appliances and durable worktops — planned around the way you actually cook.",
+    image: { url: U("photo-1556228453-efd6c1ff04f6", 1200) },
+    includes: [
+      "Handleless modular cabinetry",
+      "Integrated appliance planning",
+      "Tall pantry & storage towers",
+      "Quartz / stone worktops",
+      "Task & under-cabinet lighting",
+    ],
+  },
+  {
+    slug: "open-kitchen-design",
+    name: "Open Kitchen Design",
+    tagline: "Cook, connected",
+    summary:
+      "Open-concept kitchens that flow into living areas — breakfast islands, smart zoning and seamless materials.",
+    intro:
+      "Open kitchens that connect to the living space without losing function — an island to gather around, clever zoning and a material palette that ties the two rooms together.",
+    image: { url: U("photo-1600607687939-ce8a6c25118c", 1200) },
+    includes: [
+      "Breakfast island with seating",
+      "Open-plan zoning",
+      "Continuous material palette",
+      "Concealed storage",
+      "Layered lighting",
+    ],
+  },
+  {
+    slug: "traditional-kitchen-design",
+    name: "Traditional Kitchen Design",
+    tagline: "Classic & warm",
+    summary:
+      "Timeless kitchens with shaker cabinetry, warm timber and classic detailing for a homely, enduring feel.",
+    intro:
+      "Warm, classic kitchens with shaker-style cabinetry and natural timber — timeless detailing that never dates.",
+    image: { url: U("photo-1600585154340-be6161a56a0c", 1200) },
+    includes: [
+      "Shaker-style cabinetry",
+      "Natural timber finishes",
+      "Classic hardware & detailing",
+      "Larder & pantry storage",
+      "Warm ambient lighting",
+    ],
+  },
+  {
+    slug: "bathroom-design",
+    name: "Bathroom Design",
+    tagline: "Calm & considered",
+    summary:
+      "Spa-like bathrooms with coordinated fixtures, honed stone finishes and clever, clutter-free storage.",
+    intro:
+      "Bathrooms designed as a retreat — coordinated fixtures, natural stone and tile, and concealed storage that keeps everything calm and clutter-free.",
+    image: { url: U("photo-1600210492486-724fe5c67fb0", 1200) },
+    includes: [
+      "Fixture & sanitaryware selection",
+      "Tile & stone finishes",
+      "Vanity & storage joinery",
+      "Waterproofing & MEP coordination",
+      "Lighting & mirror design",
+    ],
+  },
+  {
+    slug: "common-space-design",
+    name: "Common Space Design",
+    tagline: "Flexible shared zones",
+    summary:
+      "Formal sitting rooms and multi-use common areas designed to flex between family time and entertaining.",
+    intro:
+      "Shared spaces that adapt — formal sitting rooms, family lounges and multi-use zones that move easily between quiet days and busy gatherings.",
+    image: { url: U("photo-1524758631624-e2822e304c36", 1200) },
+    includes: [
+      "Flexible seating layouts",
+      "Feature storage walls",
+      "Connected living–dining flow",
+      "Layered lighting",
+      "Custom joinery & styling",
+    ],
+  },
+  {
+    slug: "custom-furniture-design",
+    name: "Custom Furniture Design",
+    tagline: "Made to measure",
+    summary:
+      "Bespoke wardrobes, cabinetry and furniture, designed for your space and built in our own workshop.",
+    intro:
+      "Furniture made to fit your space exactly — wardrobes, cabinetry and standalone pieces, designed with you and crafted in our own workshop.",
+    image: { url: U("photo-1595428774223-ef52624120d2", 1200) },
+    includes: [
+      "Bespoke wardrobes & cabinetry",
+      "Standalone furniture pieces",
+      "Material & finish sampling",
+      "In-house manufacturing",
+      "Precise on-site fitting",
+    ],
+  },
+  {
+    slug: "landscape-design",
+    name: "Landscape Design",
+    tagline: "Outdoor living",
+    summary:
+      "Balconies, terraces and gardens planned as living spaces — greenery, seating and warm outdoor lighting.",
+    intro:
+      "Outdoor spaces designed to be lived in — balconies, terraces and gardens with considered planting, comfortable seating and soft evening light.",
+    image: { url: U("photo-1512212621149-107ffe572d2f", 1200) },
+    includes: [
+      "Planting & greenery scheme",
+      "Terrace / balcony seating",
+      "Decking & surface finishes",
+      "Outdoor lighting",
+      "Weatherproof materials",
+    ],
+  },
+];
+
+export function getServiceBySlug(slug: string): Service | undefined {
+  return SERVICES.find((s) => s.slug === slug);
+}
+
+/* ── Why choose us / process ───────────────────────────────────────────── */
+
+export const WHY_CHOOSE = [
+  {
+    title: "A decade of craft",
+    body: "More than ten years designing and building interiors — experience that shows in every detail and every deadline met.",
+  },
+  {
+    title: "Transparent pricing",
+    body: "Clear, itemised quotations with no surprises. You always know exactly what you are paying for and why.",
+  },
+  {
+    title: "One team, end to end",
+    body: "A single dedicated point of contact manages your project from first consultation through to final handover.",
+  },
+  {
+    title: "On-time delivery",
+    body: "Coordinated schedules and our own production line mean we hand over when we say we will.",
+  },
+  {
+    title: "In-house workshop",
+    body: "Our own furniture factory connects design to production — better quality control, better prices, fewer middlemen.",
+  },
+];
+
+export const PROCESS = [
+  {
+    step: "01",
+    title: "Free consultation",
+    body: "We start by listening — your taste, how you live, and what the space needs to do.",
+  },
+  {
+    step: "02",
+    title: "Site survey",
+    body: "A detailed measure and assessment of your space, light and existing conditions.",
+  },
+  {
+    step: "03",
+    title: "Concept & 3D",
+    body: "Layouts, materials and photoreal 3D visuals so you can see the space before we build it.",
+  },
+  {
+    step: "04",
+    title: "Approval & quote",
+    body: "We refine the design together and lock in a clear, itemised quotation.",
+  },
+  {
+    step: "05",
+    title: "Execution",
+    body: "Manufacturing in our workshop and coordinated on-site work, managed end to end.",
+  },
+  {
+    step: "06",
+    title: "Handover",
+    body: "A final walkthrough, styling and the keys to a space that's ready to live in.",
+  },
+];
+
+/* ── Testimonials ──────────────────────────────────────────────────────── */
+
+export type Testimonial = {
+  name: string;
+  role: string;
+  quote: string;
+  avatar: { url: string };
+};
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    name: "Farhana Rahman",
+    role: "Apartment · Bashundhara R/A",
+    quote:
+      "They understood exactly the calm, warm home we wanted. Every deadline was met and the finish quality is genuinely beautiful.",
+    avatar: { url: U("photo-1556228453-efd6c1ff04f6", 200) },
+  },
+  {
+    name: "Tanvir Ahmed",
+    role: "Duplex · Gulshan-1",
+    quote:
+      "From the 3D visuals to the final handover, nothing was left to guesswork. The itemised pricing built real trust.",
+    avatar: { url: U("photo-1584622650111-993a426fbf0a", 200) },
+  },
+  {
+    name: "Nusrat Jahan",
+    role: "Master bedroom · Dhanmondi",
+    quote:
+      "The custom wardrobe and headboard wall completely transformed the room. It feels like a five-star hotel suite.",
+    avatar: { url: U("photo-1554995207-c18c203602cb", 200) },
+  },
+];
+
+/* ── FAQs ──────────────────────────────────────────────────────────────── */
+
+export const FAQS = [
+  {
+    q: "How does a project start?",
+    a: "It begins with a free consultation — in person or online. We talk through your taste, needs and budget, then arrange a site survey to measure and assess the space.",
+  },
+  {
+    q: "How long does an interior project take?",
+    a: "Most single rooms take 5–8 weeks; full apartments run 10–16 weeks depending on scope. We agree a schedule up front and manage it end to end.",
+  },
+  {
+    q: "How is pricing worked out?",
+    a: "Every quotation is fully itemised — you see the cost of each element, from joinery to lighting, with no hidden charges.",
+  },
+  {
+    q: "Do you make the furniture yourselves?",
+    a: "Yes. We run our own furniture workshop, which gives us tight quality control, better pricing and a direct line from design to production.",
+  },
+  {
+    q: "Can I see the design before work begins?",
+    a: "Always. We produce photoreal 3D visualisations so you can walk through the space and approve every detail before anything is built.",
+  },
+  {
+    q: "Which areas do you serve?",
+    a: "We work across Bangladesh — Dhaka, Chattogram, Sylhet, Khulna, Rajshahi, Barishal, Rangpur and Mymensingh.",
+  },
+  {
+    q: "Do you handle small or single-room projects?",
+    a: "Yes — from a single bedroom or kitchen to a complete home. The same process and care applies at every scale.",
+  },
+  {
+    q: "What about after handover?",
+    a: "We stand behind our work with a service warranty and are only a call away for any adjustments after you move in.",
+  },
+];
+
+/* ── Blog / Journal ────────────────────────────────────────────────────── */
+
+export type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  author: string;
+  readingTime: string;
+  cover: { url: string };
+  body: string[]; // paragraphs
+};
+
+export const POSTS: Post[] = [
+  {
+    slug: "warm-minimalism-guide",
+    title: "Warm minimalism: less clutter, more feeling",
+    excerpt:
+      "How to strip a room back without making it feel cold — the case for warm materials, soft light and a considered palette.",
+    category: "Design Notes",
+    date: "2026-08-14",
+    author: "Velor Studio",
+    readingTime: "5 min read",
+    cover: { url: U("photo-1493809842364-78817add7ffb", 1400) },
+    body: [
+      "Minimalism gets a bad name when it tips into the clinical — bare walls, hard edges and nothing to hold onto. Warm minimalism is different. It keeps the calm of an uncluttered room but brings back the feeling through material, texture and light.",
+      "Start with a narrow, warm palette: creams, oatmeal, soft clay and the honey of natural oak. When everything sits within a few close tones, the eye relaxes and the room feels whole.",
+      "Then layer texture instead of colour — bouclé against smooth plaster, linen against oiled timber, honed stone against wool. The interest comes from how surfaces feel, not from visual noise.",
+      "Finally, light it low and in layers. A single bright ceiling light flattens a room; several warm, low sources give it depth and make even a spare space feel generous.",
+    ],
+  },
+  {
+    slug: "choosing-the-right-sofa",
+    title: "Choosing a sofa you'll still love in ten years",
+    excerpt:
+      "Frame, fill and fabric — the three things that decide whether a sofa lasts a decade or sags in a season.",
+    category: "Buying Guide",
+    date: "2026-07-30",
+    author: "Velor Studio",
+    readingTime: "6 min read",
+    cover: { url: U("photo-1493663284031-b7e3aefcae8e", 1400) },
+    body: [
+      "A sofa is one of the few pieces you touch every single day, so it repays getting right. Three things decide how well it ages: the frame, the fill and the fabric.",
+      "The frame is everything. Look for kiln-dried hardwood, joined and glued rather than stapled. It's hidden, but it's the difference between a sofa that holds its shape for years and one that loosens in months.",
+      "For the fill, feather-wrapped foam gives the best balance — the plushness of down with the support of a foam core. Pure foam is firmer and lower-maintenance; pure down is luxurious but needs regular plumping.",
+      "Fabric is where comfort meets real life. Performance weaves and tight bouclés wear beautifully and clean easily. If you have children or pets, choose a removable, washable cover.",
+    ],
+  },
+  {
+    slug: "small-apartment-storage",
+    title: "Smart storage ideas for a small Dhaka apartment",
+    excerpt:
+      "Ten ways to build in storage that disappears — so a compact flat feels open, calm and twice its size.",
+    category: "Ideas",
+    date: "2026-07-11",
+    author: "Velor Studio",
+    readingTime: "4 min read",
+    cover: { url: U("photo-1533090161767-e6ffed986c88", 1400) },
+    body: [
+      "In a compact apartment, storage is the difference between calm and chaos — but bulky cabinets can make small rooms feel smaller. The trick is to build storage in, so it disappears into the architecture.",
+      "Go full height. Wardrobes and units that run floor to ceiling use otherwise-wasted space and draw the eye up, making the room feel taller.",
+      "Use the in-between spaces — under beds, over doors, the sides of a kitchen island. A little bespoke joinery in these gaps adds up to a lot of hidden storage.",
+      "And keep the fronts calm: handleless, in the same tone as the wall, so storage recedes and the room stays open and quiet.",
+    ],
+  },
+  {
+    slug: "lighting-layers-explained",
+    title: "The three layers of light every room needs",
+    excerpt:
+      "Ambient, task and accent — get the mix right and any room can shift from bright and busy to soft and restful.",
+    category: "Design Notes",
+    date: "2026-06-22",
+    author: "Velor Studio",
+    readingTime: "5 min read",
+    cover: { url: U("photo-1524758870432-af57e54afa26", 1400) },
+    body: [
+      "Good lighting is rarely one bright light — it's several, working together. Think in three layers: ambient, task and accent.",
+      "Ambient is your base wash of light — cove lighting, downlights or a soft ceiling fixture. It should be gentle and, ideally, dimmable.",
+      "Task light is focused where you do things — reading, cooking, working. A floor lamp beside a chair or under-cabinet strips in a kitchen.",
+      "Accent light adds mood and drama — a wall light grazing a textured surface, a picture light, a low table lamp. Together, these layers let one room feel completely different at breakfast and at midnight.",
+    ],
+  },
+];
+
+export function getPostBySlug(slug: string): Post | undefined {
+  return POSTS.find((p) => p.slug === slug);
+}

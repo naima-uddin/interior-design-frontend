@@ -7,16 +7,31 @@ import Link from "next/link";
 
 const COLUMNS = [
   {
-    title: "Shop",
-    links: ["Collection", "Spaces", "New Arrivals"],
+    title: "Explore",
+    links: [
+      { label: "Collection", href: "/collection" },
+      { label: "Projects", href: "/projects" },
+      { label: "Services", href: "/services" },
+      { label: "Spaces", href: "/spaces" },
+    ],
   },
   {
     title: "Company",
-    links: ["Our Story", "Sustainability", "Journal"],
+    links: [
+      { label: "Our Story", href: "/studio" },
+      { label: "Journal", href: "/blog" },
+      { label: "FAQs", href: "/faqs" },
+      { label: "Contact", href: "/contact" },
+    ],
   },
   {
-    title: "Support",
-    links: ["Contact", "Shipping & Returns", "Care Guide"],
+    title: "Services",
+    links: [
+      { label: "Home Interior", href: "/services/home-interior-design" },
+      { label: "Kitchen Design", href: "/services/modular-kitchen-design" },
+      { label: "Custom Furniture", href: "/services/custom-furniture-design" },
+      { label: "Bedroom Design", href: "/services/bedroom-interior-design" },
+    ],
   },
 ];
 
@@ -39,12 +54,12 @@ export default function Footer() {
               <p className="eyebrow !text-cream-100/50">{col.title}</p>
               <ul className="mt-4 space-y-3">
                 {col.links.map((l) => (
-                  <li key={l}>
+                  <li key={l.label}>
                     <Link
-                      href="#"
+                      href={l.href}
                       className="text-sm font-light text-cream-100/85 transition hover:text-cream-100"
                     >
-                      {l}
+                      {l.label}
                     </Link>
                   </li>
                 ))}
