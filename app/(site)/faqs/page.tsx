@@ -18,10 +18,7 @@ export default async function FaqsPage() {
         eyebrow="FAQs"
         title="Good questions, answered."
         subtitle="Everything you might want to know before starting a project with us."
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "FAQs", href: "/faqs" },
-        ]}
+        breadcrumb={[{ label: "FAQs" }]}
       />
 
       <section className="bg-cream">

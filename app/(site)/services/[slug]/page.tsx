@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { SERVICES } from "@/lib/data";
 import { getService, getServices } from "@/lib/api";
 import ProcessSteps from "@/components/ProcessSteps";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -34,13 +35,14 @@ export default async function ServicePage({
       {/* Intro */}
       <section className="bg-cream pt-28 sm:pt-36">
         <div className="mx-auto max-w-[1260px] px-5 sm:px-8">
-          <nav className="eyebrow mb-8 flex items-center gap-2 !tracking-[0.16em] text-stone">
-            <Link href="/" className="transition hover:text-ink">Home</Link>
-            <span className="text-stone-400">/</span>
-            <Link href="/services" className="transition hover:text-ink">Services</Link>
-            <span className="text-stone-400">/</span>
-            <span className="text-ink">{service.name}</span>
-          </nav>
+          <div className="mb-8">
+            <Breadcrumb
+              items={[
+                { label: "Services", href: "/services" },
+                { label: service.name },
+              ]}
+            />
+          </div>
 
           <div className="grid items-center gap-10 pb-16 lg:grid-cols-2 lg:gap-16">
             <div>

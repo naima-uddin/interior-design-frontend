@@ -25,10 +25,7 @@ export default async function ProjectsPage({
         eyebrow="Projects"
         title="Interiors we've brought to life."
         subtitle="A portfolio of completed homes across Bangladesh — each designed around how its owners actually live."
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Projects", href: "/projects" },
-        ]}
+        breadcrumb={[{ label: "Projects" }]}
       />
       <ProjectsGrid
         initialCategory={category}

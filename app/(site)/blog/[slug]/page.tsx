@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { POSTS } from "@/lib/data";
 import { getPost, getPosts } from "@/lib/api";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }));
@@ -38,11 +39,14 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
       <article>
         {/* Header */}
         <header className="mx-auto max-w-3xl px-5 pt-28 text-center sm:px-8 sm:pt-36">
-          <nav className="eyebrow mb-6 flex items-center justify-center gap-2 !tracking-[0.16em] text-stone">
-            <Link href="/" className="transition hover:text-ink">Home</Link>
-            <span className="text-stone-400">/</span>
-            <Link href="/blog" className="transition hover:text-ink">Journal</Link>
-          </nav>
+          <div className="mb-6 flex justify-center">
+            <Breadcrumb
+              items={[
+                { label: "Journal", href: "/blog" },
+                { label: post.title },
+              ]}
+            />
+          </div>
           <div className="eyebrow flex items-center justify-center gap-3">
             <span className="text-clay">{post.category}</span>
             <span className="text-stone-400">·</span>

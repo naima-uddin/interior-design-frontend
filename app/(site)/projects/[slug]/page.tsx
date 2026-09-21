@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PROJECTS, relatedProjects, projectCategoryName } from "@/lib/data";
 import { getProject, getProjects } from "@/lib/api";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.slug }));
@@ -50,11 +51,15 @@ export default async function ProjectPage({
         <div className="absolute inset-0 bg-gradient-to-t from-olive-800/85 via-olive-800/25 to-olive-800/40" />
         <div className="absolute inset-x-0 bottom-0">
           <div className="mx-auto max-w-[1260px] px-5 pb-10 sm:px-8 sm:pb-14">
-            <nav className="eyebrow mb-4 flex items-center gap-2 !tracking-[0.16em] text-cream-100/70">
-              <Link href="/" className="transition hover:text-cream-100">Home</Link>
-              <span>/</span>
-              <Link href="/projects" className="transition hover:text-cream-100">Projects</Link>
-            </nav>
+            <div className="mb-4">
+              <Breadcrumb
+                variant="dark"
+                items={[
+                  { label: "Projects", href: "/projects" },
+                  { label: project.title },
+                ]}
+              />
+            </div>
             <span className="eyebrow rounded-full bg-cream-100/15 px-3.5 py-1.5 !text-cream-100/90 backdrop-blur-sm">
               {projectCategoryName(project.category)}
             </span>

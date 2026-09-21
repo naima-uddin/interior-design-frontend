@@ -7,6 +7,7 @@ import { fmtPrice } from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
 import ProductCard from "@/components/ProductCard";
 import AddToCart from "@/components/AddToCart";
+import Breadcrumb from "@/components/Breadcrumb";
 
 // Pre-render every product page at build time.
 export function generateStaticParams() {
@@ -47,14 +48,14 @@ export default async function ProductPage({
   return (
     <main className="bg-cream pb-20 pt-28 sm:pt-36">
       <div className="mx-auto max-w-[1260px] px-5 sm:px-8">
-        {/* Breadcrumb */}
-        <nav className="eyebrow mb-8 flex items-center gap-2 !tracking-[0.16em] text-stone">
-          <Link href="/" className="transition hover:text-ink">Home</Link>
-          <span className="text-stone-400">/</span>
-          <Link href="/collection" className="transition hover:text-ink">Collection</Link>
-          <span className="text-stone-400">/</span>
-          <span className="text-ink">{product.title}</span>
-        </nav>
+        <div className="mb-8">
+          <Breadcrumb
+            items={[
+              { label: "Collection", href: "/collection" },
+              { label: product.title },
+            ]}
+          />
+        </div>
 
         {/* Gallery + details */}
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">

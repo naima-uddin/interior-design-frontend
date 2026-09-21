@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PortfolioPromo from "@/components/PortfolioPromo";
+import ScrollToTop from "@/components/ScrollToTop";
 import { getNavData } from "@/lib/api";
 
 // Storefront chrome (Navbar + Footer) for every public page. Scoped to the
@@ -13,6 +14,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       {children}
       <Footer />
       <PortfolioPromo />
+      <ScrollToTop />
     </>
   );
 }

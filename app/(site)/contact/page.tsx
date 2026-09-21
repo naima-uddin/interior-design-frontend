@@ -30,10 +30,7 @@ export default async function ContactPage() {
         eyebrow="Contact"
         title="Let's plan your space."
         subtitle="Book a free consultation and tell us about your project — we'll take it from there."
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Contact", href: "/contact" },
-        ]}
+        breadcrumb={[{ label: "Contact" }]}
       />
 
       <section className="bg-cream">

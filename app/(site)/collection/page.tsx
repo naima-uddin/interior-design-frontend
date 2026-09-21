@@ -17,10 +17,7 @@ export default async function CollectionPage() {
         eyebrow="The Collection"
         title="Considered pieces, made to last."
         subtitle="Honest materials and quiet forms across every room — designed slowly, built to be lived with for years."
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Collection", href: "/collection" },
-        ]}
+        breadcrumb={[{ label: "Collection" }]}
       />
       <CollectionGrid products={items} categories={categories} />
     </main>

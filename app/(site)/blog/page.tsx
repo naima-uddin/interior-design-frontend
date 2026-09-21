@@ -27,10 +27,7 @@ export default async function BlogPage() {
         eyebrow="Journal"
         title="Notes on living well."
         subtitle="Ideas, guides and quiet thinking on materials, light and the making of a considered home."
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Journal", href: "/blog" },
-        ]}
+        breadcrumb={[{ label: "Journal" }]}
       />
 
       <section className="bg-cream">

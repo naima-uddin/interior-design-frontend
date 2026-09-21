@@ -19,10 +19,7 @@ export default async function ServicesPage() {
         eyebrow="Our Services"
         title="Everything your space needs."
         subtitle="Design, custom manufacturing and project management under one roof — for a single room or a whole home."
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Services", href: "/services" },
-        ]}
+        breadcrumb={[{ label: "Services" }]}
       />
 
       <section className="bg-cream">

@@ -17,10 +17,7 @@ export default function StudioPage() {
         eyebrow="Our Story"
         title="A more human home."
         subtitle="We make furniture the slow way — with people we know, materials that age well, and real homes in mind."
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Studio", href: "/studio" },
-        ]}
+        breadcrumb={[{ label: "Studio" }]}
       />
 
       {/* Intro image + text */}

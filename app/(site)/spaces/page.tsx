@@ -18,10 +18,7 @@ export default async function SpacesPage() {
         eyebrow="Spaces"
         title="Made to belong."
         subtitle="Real homes, quietly composed — a lookbook of the rooms our pieces were made for."
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Spaces", href: "/spaces" },
-        ]}
+        breadcrumb={[{ label: "Spaces" }]}
       />
 
       <section className="bg-cream">
