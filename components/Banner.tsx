@@ -21,9 +21,9 @@ import { SLIDES, type Slide } from "@/lib/data";
 // The centred sharp window. Horizontal inset caps it and centres it on wide
 // screens; vertical insets leave room for the fixed navbar (top) and the
 // title / thumbnail band (bottom).
-const SIDE = "max(3.5%, calc((100% - 1260px) / 2))";
-const INSET = { top: "13%", bottom: "14%", left: SIDE, right: SIDE } as const;
-const WINDOW_CLIP = `inset(13% ${SIDE} 14% ${SIDE} round 28px)`;
+const SIDE = "max(2%, calc((100% - 1320px) / 2))";
+const INSET = { top: "8%", bottom: "17%", left: SIDE, right: SIDE } as const;
+const WINDOW_CLIP = `inset(8% ${SIDE} 17% ${SIDE} round 28px)`;
 
 // words wrapped in *asterisks* render in a serif italic accent
 const renderHighlight = (text: string) =>
