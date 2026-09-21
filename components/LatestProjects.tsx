@@ -11,7 +11,7 @@ export default function LatestProjects({ projects: input }: { projects?: Project
 
   return (
     <section className="bg-cream-100">
-      <div className="mx-auto max-w-[1260px] px-5 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
         <div className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">Portfolio</span>
           <h2 className="font-serif mt-4 text-3xl font-semibold uppercase tracking-tight text-ink sm:text-4xl">

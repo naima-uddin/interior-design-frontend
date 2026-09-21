@@ -8,7 +8,7 @@ export default function FeaturedPieces({ products }: { products?: Product[] }) {
   const items = products?.length ? products : FEATURED;
   return (
     <section className="bg-cream">
-      <div className="mx-auto max-w-[1260px] px-5 py-16 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-14">
         <div className="mb-10 flex items-end justify-between">
           <span className="eyebrow">Featured Pieces</span>
           <Link

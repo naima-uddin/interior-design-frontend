@@ -13,7 +13,7 @@ export default function ProcessSteps({
   const items = steps?.length ? steps : PROCESS;
   return (
     <section className={className}>
-      <div className="mx-auto max-w-[1260px] px-5 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
         <div className="mb-12 max-w-2xl">
           <span className="eyebrow">How it works</span>
           <h2 className="font-serif mt-4 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">

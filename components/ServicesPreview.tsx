@@ -10,7 +10,7 @@ export default function ServicesPreview({ services: input }: { services?: Servic
 
   return (
     <section className="bg-cream">
-      <div className="mx-auto max-w-[1260px] px-5 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
         <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <span className="eyebrow">Our Services</span>

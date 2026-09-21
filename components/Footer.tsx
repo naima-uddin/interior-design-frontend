@@ -1,112 +1,172 @@
-"use client";
-
-// Deep-olive footer: wordmark + tagline, three link columns, a newsletter
-// capture, socials, and the legal strip — mirroring the reference layout.
+// Deep, near-black footer: brand + CTA on the left, a heading, contact
+// details and two address columns on the right, then a legal strip —
+// mirroring the reference layout.
 
 import Link from "next/link";
+import { COMPANY } from "@/lib/data";
 
-const COLUMNS = [
-  {
-    title: "Explore",
-    links: [
-      { label: "Collection", href: "/collection" },
-      { label: "Projects", href: "/projects" },
-      { label: "Services", href: "/services" },
-      { label: "Spaces", href: "/spaces" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "Our Story", href: "/studio" },
-      { label: "Journal", href: "/blog" },
-      { label: "FAQs", href: "/faqs" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    title: "Services",
-    links: [
-      { label: "Home Interior", href: "/services/home-interior-design" },
-      { label: "Kitchen Design", href: "/services/modular-kitchen-design" },
-      { label: "Custom Furniture", href: "/services/custom-furniture-design" },
-      { label: "Bedroom Design", href: "/services/bedroom-interior-design" },
-    ],
-  },
+const QUICK_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "Collection", href: "/collection" },
+  { label: "Projects", href: "/projects" },
+  { label: "Services", href: "/services" },
+  { label: "Journal", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+];
+
+const SUPPORT_LINKS = [
+  { label: "FAQs", href: "/faqs" },
+  { label: "Studio", href: "/studio" },
+  { label: "Spaces", href: "/spaces" },
+];
+
+const COMPANY_LINKS = [
+  { label: "About Us", href: "/studio" },
+  { label: "Our Story", href: "/studio" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-[#383927] text-cream-100">
+    <footer className="bg-ink text-cream-100">
       <div className="mx-auto max-w-[1260px] px-5 py-16 sm:px-8 sm:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1.3fr]">
-          {/* Brand */}
+        <div className="grid gap-14 lg:grid-cols-[1fr_1.3fr]">
+          {/* Brand + CTA */}
           <div>
-            <p className="font-serif text-2xl font-medium uppercase tracking-[0.4em]">
+            <p className="font-serif text-2xl font-medium uppercase tracking-[0.3em]">
               Velor
             </p>
-            <p className="eyebrow mt-3 !text-cream-100/50">A more human home</p>
+            <p className="mt-4 max-w-xs text-sm font-light leading-relaxed text-cream-100/60">
+              Supporting modern living through thoughtfully designed
+              interiors, furniture and timeless spaces for every home.
+            </p>
+            <Link
+              href="/collection"
+              className="eyebrow mt-7 inline-flex w-fit items-center rounded-full bg-cream-100 px-7 py-3.5 !text-ink transition hover:bg-cream-100/90"
+            >
+              Explore Collection
+            </Link>
+
+            <div className="mt-10 grid grid-cols-3 gap-6 sm:grid-cols-3">
+              <FooterCol title="Quick Links" links={QUICK_LINKS} />
+              <FooterCol title="Support" links={SUPPORT_LINKS} />
+              <FooterCol title="Company" links={COMPANY_LINKS} />
+            </div>
           </div>
 
-          {/* Link columns */}
-          {COLUMNS.map((col) => (
-            <div key={col.title}>
-              <p className="eyebrow !text-cream-100/50">{col.title}</p>
-              <ul className="mt-4 space-y-3">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <Link
-                      href={l.href}
-                      className="text-sm font-light text-cream-100/85 transition hover:text-cream-100"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Heading + contact */}
+          <div className="lg:border-l lg:border-cream-100/10 lg:pl-14">
+            <h2 className="font-serif max-w-sm text-3xl font-medium leading-tight tracking-tight sm:text-4xl">
+              Designing Homes For Inspired Living
+            </h2>
 
-          {/* Newsletter */}
-          <div>
-            <p className="eyebrow !text-cream-100/50">Join a calmer inbox</p>
-            <form
-              className="mt-4 flex items-center gap-2 border-b border-cream-100/25 pb-2"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                required
-                placeholder="Your email address"
-                className="w-full bg-transparent text-sm font-light text-cream-100 placeholder:text-cream-100/40 focus:outline-none"
-              />
-              <button aria-label="Subscribe" className="text-cream-100 transition hover:translate-x-0.5">
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </form>
-            <div className="mt-5 flex items-center gap-4 text-cream-100/70">
-              {["Instagram", "Pinterest", "Facebook", "YouTube"].map((s) => (
-                <Link key={s} href="#" aria-label={s} className="transition hover:text-cream-100">
-                  <span className="grid h-8 w-8 place-items-center rounded-full border border-cream-100/25 text-[10px]">
-                    {s[0]}
-                  </span>
-                </Link>
-              ))}
+            <div className="mt-6 space-y-1.5">
+              <p className="text-lg font-light text-cream-100">{COMPANY.contact.phones[0]}</p>
+              <a
+                href={`mailto:${COMPANY.contact.email}`}
+                className="block text-sm font-light text-cream-100/70 transition hover:text-cream-100"
+              >
+                {COMPANY.contact.email}
+              </a>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+              <div>
+                <p className="eyebrow !text-cream-100/45">Office</p>
+                <p className="mt-2 text-sm font-light leading-relaxed text-cream-100/75">
+                  {COMPANY.contact.office}
+                </p>
+              </div>
+              <div>
+                <p className="eyebrow !text-cream-100/45">Factory</p>
+                <p className="mt-2 text-sm font-light leading-relaxed text-cream-100/75">
+                  {COMPANY.contact.factory}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center gap-8">
+              <div>
+                <p className="eyebrow !text-cream-100/45">Follow Us</p>
+                <div className="mt-3 flex items-center gap-3">
+                  {["Instagram", "Facebook", "Pinterest"].map((s) => (
+                    <Link
+                      key={s}
+                      href="#"
+                      aria-label={s}
+                      className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/20 text-[10px] text-cream-100/80 transition hover:border-cream-100 hover:text-cream-100"
+                    >
+                      {s[0]}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="eyebrow !text-cream-100/45">Let&apos;s Chat</p>
+                <div className="mt-3 flex items-center gap-3">
+                  <a
+                    href={`https://wa.me/${COMPANY.contact.phones[0].replace(/\D/g, "")}`}
+                    aria-label="WhatsApp"
+                    className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/20 text-cream-100/80 transition hover:border-cream-100 hover:text-cream-100"
+                  >
+                    <ChatIcon />
+                  </a>
+                  <a
+                    href={`mailto:${COMPANY.contact.email}`}
+                    aria-label="Email"
+                    className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/20 text-cream-100/80 transition hover:border-cream-100 hover:text-cream-100"
+                  >
+                    <SendIcon />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-cream-100/15 pt-6 sm:flex-row sm:items-center">
-          <p className="eyebrow !text-cream-100/45 !tracking-[0.2em]">
+        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-cream-100/12 pt-6 sm:flex-row sm:items-center">
+          <p className="text-xs font-light text-cream-100/45">
             © 2026 Velor. All rights reserved.
           </p>
-          <p className="eyebrow !text-cream-100/45 !tracking-[0.2em]">
-            Beautiful spaces. Brighter lives.
-          </p>
+          <div className="flex items-center gap-6 text-xs font-light text-cream-100/45">
+            <Link href="#" className="transition hover:text-cream-100">Privacy Policy</Link>
+            <Link href="#" className="transition hover:text-cream-100">Terms &amp; Conditions</Link>
+            <Link href="#" className="transition hover:text-cream-100">Cookies</Link>
+          </div>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+  return (
+    <div>
+      <p className="eyebrow !text-cream-100/45">{title}</p>
+      <ul className="mt-3 space-y-2.5">
+        {links.map((l) => (
+          <li key={l.label}>
+            <Link href={l.href} className="text-[13px] font-light text-cream-100/75 transition hover:text-cream-100">
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ChatIcon() {
+  return (
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" />
+    </svg>
+  );
+}
+function SendIcon() {
+  return (
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7Z" />
+    </svg>
   );
 }

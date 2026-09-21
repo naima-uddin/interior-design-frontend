@@ -15,7 +15,7 @@ export default function WhyChooseUs({
   const stats = (company ?? COMPANY).stats;
   return (
     <section className="bg-[#383927] text-cream-100">
-      <div className="mx-auto max-w-[1260px] px-5 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           {/* Left: intro + image + stats */}
           <div>

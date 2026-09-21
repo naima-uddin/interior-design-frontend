@@ -7,7 +7,7 @@ export default function Testimonials({ items }: { items?: Testimonial[] }) {
   const list = items?.length ? items : TESTIMONIALS;
   return (
     <section className="bg-cream-100">
-      <div className="mx-auto max-w-[1260px] px-5 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
         <div className="mb-12 text-center">
           <span className="eyebrow">Kind words</span>
           <h2 className="font-serif mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">

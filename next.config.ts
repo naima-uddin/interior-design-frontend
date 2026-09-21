@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
     ],
     // Next 16 requires the set of allowed quality values to be declared.
     // The hero uses 45 (blurred surround) and 100 (sharp window); 75 is default.

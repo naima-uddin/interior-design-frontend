@@ -12,6 +12,7 @@ import {
   type Service,
   type Category,
 } from "@/lib/data";
+import NavDrawer from "@/components/NavDrawer";
 
 type NavProps = {
   projectCategories?: (Category & { count: number })[];
@@ -100,7 +101,6 @@ export default function Navbar({ projectCategories, services }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false); // mobile menu
   const [anyDropdown, setAnyDropdown] = useState(0); // count of open desktop dropdowns
-  const [mobileSub, setMobileSub] = useState<string | null>(null);
 
   const cats = projectCategories?.length
     ? projectCategories
@@ -134,9 +134,9 @@ export default function Navbar({ projectCategories, services }: NavProps) {
         : "border-b border-transparent bg-transparent"
         }`}
     >
-      <nav className="mx-auto flex h-12 max-w-[1260px] items-center justify-between px-5 md:h-16 sm:px-4">
+      <nav className="mx-auto grid h-12 max-w-[1260px] grid-cols-[auto_1fr_auto] items-center px-5 md:h-16 sm:px-4">
 
-        {/* Center: wordmark */}
+        {/* Left: wordmark */}
         <Link
           href="/"
           className="font-serif text-2xl font-medium uppercase text-ink sm:text-[1.7rem]"
@@ -145,9 +145,8 @@ export default function Navbar({ projectCategories, services }: NavProps) {
           <span className="pl-[0.42em]">Velor</span>
         </Link>
 
-
-        {/* Left: primary links + dropdowns (desktop) */}
-        <div className="hidden flex-1 items-center gap-7 lg:flex">
+        {/* Center: primary links + dropdowns (desktop) */}
+        <div className="hidden items-center justify-center gap-7 lg:flex">
           <NavDropdown label="Projects" href="/projects" items={projectItems} onToggle={track} />
           <NavDropdown label="Services" href="/services" items={serviceItems} onToggle={track} />
           {LINKS.map((l) => (
@@ -161,111 +160,24 @@ export default function Navbar({ projectCategories, services }: NavProps) {
           ))}
         </div>
 
-
-
         {/* Right: icons */}
-        <div className="flex flex-1 items-center justify-end gap-4 sm:gap-5">
+        <div className="flex items-center justify-end gap-4 sm:gap-5">
           <button aria-label="Search" className="text-ink/80 transition hover:text-ink">
             <SearchIcon />
           </button>
 
           <button
-            aria-label="Menu"
-            onClick={() => setOpen((v) => !v)}
-            className="text-ink/80 transition hover:text-ink lg:hidden"
+            aria-label="Open menu"
+            onClick={() => setOpen(true)}
+            className="text-ink/80 transition hover:text-ink"
           >
             <MenuIcon />
           </button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="max-h-[80vh] overflow-y-auto border-t border-ink/8 bg-cream/95 backdrop-blur-xl lg:hidden">
-          <div className="mx-auto flex max-w-[1260px] flex-col gap-1 px-5 py-4">
-            <MobileSub
-              label="Projects"
-              open={mobileSub === "projects"}
-              onClick={() => setMobileSub((v) => (v === "projects" ? null : "projects"))}
-              items={projectItems}
-              allHref="/projects"
-              close={() => setOpen(false)}
-            />
-            <MobileSub
-              label="Services"
-              open={mobileSub === "services"}
-              onClick={() => setMobileSub((v) => (v === "services" ? null : "services"))}
-              items={serviceItems}
-              allHref="/services"
-              close={() => setOpen(false)}
-            />
-            {LINKS.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="eyebrow !tracking-[0.18em] py-2.5 text-ink/80"
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      <NavDrawer open={open} onClose={() => setOpen(false)} />
     </header>
-  );
-}
-
-function MobileSub({
-  label,
-  open,
-  onClick,
-  items,
-  allHref,
-  close,
-}: {
-  label: string;
-  open: boolean;
-  onClick: () => void;
-  items: Item[];
-  allHref: string;
-  close: () => void;
-}) {
-  return (
-    <div>
-      <button
-        onClick={onClick}
-        className="eyebrow flex w-full items-center justify-between !tracking-[0.18em] py-2.5 text-ink/80"
-      >
-        {label}
-        <svg
-          className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
-        </svg>
-      </button>
-      {open && (
-        <div className="mb-2 flex max-h-64 flex-col gap-1 overflow-y-auto border-l border-ink/10 pl-4">
-          {items.map((it) => (
-            <Link
-              key={it.href}
-              href={it.href}
-              onClick={close}
-              className="py-1.5 text-sm font-light text-ink/75"
-            >
-              {it.name}
-            </Link>
-          ))}
-          <Link href={allHref} onClick={close} className="eyebrow py-2 !tracking-[0.16em] text-clay">
-            View all →
-          </Link>
-        </div>
-      )}
-    </div>
   );
 }
 

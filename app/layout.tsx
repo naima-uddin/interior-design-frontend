@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Jost } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { getNavData } from "@/lib/api";
 
 // High-contrast display serif for headings (upright + italic accents)
 const playfair = Playfair_Display({
@@ -28,18 +25,16 @@ export const metadata: Metadata = {
     "Furniture and interiors for a calmer tomorrow. Timeless, natural and considered pieces made to belong in your home.",
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const nav = await getNavData();
+// Root layout only sets up html/body/fonts. The storefront chrome (Navbar +
+// Footer) lives in app/(site)/layout.tsx so admin routes — which need none of
+// it — aren't forced to fetch nav data or render the public header/footer.
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${playfair.variable} ${jost.variable} h-full antialiased`}
     >
-      <body className="min-h-full">
-        <Navbar projectCategories={nav.projectCategories} services={nav.services} />
-        {children}
-        <Footer />
-      </body>
+      <body className="min-h-full">{children}</body>
     </html>
   );
 }
