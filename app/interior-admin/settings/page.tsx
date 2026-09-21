@@ -9,6 +9,7 @@ import { getSettingsAdmin, updateSettings, ApiError } from "@/lib/adminApi";
 import ObjectListEditor from "@/components/admin/ObjectListEditor";
 import StringListEditor from "@/components/admin/StringListEditor";
 import ImageUploader from "@/components/admin/ImageUploader";
+import HotspotPositionEditor from "@/components/admin/HotspotPositionEditor";
 
 type Settings = {
   company?: {
@@ -32,7 +33,7 @@ type Settings = {
     title?: string;
     intro?: string;
     image?: { url: string };
-    points?: Record<string, unknown>[];
+    points?: { x: number; y: number; title: string; body: string }[];
   };
 };
 
@@ -257,16 +258,10 @@ export default function SettingsPage() {
           onChange={(img) => set("hotspot.image", img)}
           folder="misc"
         />
-        <ObjectListEditor
-          label="Hotspot points (x/y are % position, 0–100)"
-          value={data.hotspot?.points}
+        <HotspotPositionEditor
+          image={data.hotspot?.image}
+          points={data.hotspot?.points ?? []}
           onChange={(v) => set("hotspot.points", v)}
-          fields={[
-            { key: "x", label: "X %", type: "number" },
-            { key: "y", label: "Y %", type: "number" },
-            { key: "title", label: "Title", type: "text" },
-            { key: "body", label: "Body", type: "textarea" },
-          ]}
         />
       </Section>
     </div>

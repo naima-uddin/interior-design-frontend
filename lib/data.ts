@@ -784,7 +784,7 @@ export const HOTSPOT_SCENE = {
   image: { url: U("photo-1616486338812-3dadae4b4ace", 1800) },
   points: [
     {
-      x: 50,
+      x: 100,
       y: 20,
       title: "Layered lighting",
       body: "Cove, spot and pendant lighting combined for a warm, adjustable glow at every hour of the day.",

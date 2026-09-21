@@ -74,16 +74,14 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
                 {/* Popover */}
                 {isActive && (
                   <div
-                    className={`absolute top-1/2 z-10 w-56 -translate-y-1/2 rounded-2xl border border-white/40 bg-cream-100/95 p-4 shadow-[0_24px_50px_-20px_rgba(42,38,34,0.6)] backdrop-blur-md ${flip ? "right-6" : "left-6"
+                    className={`absolute top-1/2 z-10 w-56 -translate-y-1/2 rounded-2xl border border-white/40 bg-cream-100/95 p-3 shadow-[0_24px_50px_-20px_rgba(42,38,34,0.6)] backdrop-blur-md ${flip ? "right-6" : "left-6"
                       }`}
                   >
-                    <p className="eyebrow !text-clay">
-                      {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <h3 className="font-serif mt-1 text-lg font-medium text-ink">
+
+                    <h3 className="font-serif text-lg font-medium text-ink">
                       {pt.title}
                     </h3>
-                    <p className="mt-1.5 text-[13px] font-light leading-relaxed text-stone">
+                    <p className="mt-1.5 text-[13px] font-light leading-[0.9] text-stone">
                       {pt.body}
                     </p>
                   </div>
