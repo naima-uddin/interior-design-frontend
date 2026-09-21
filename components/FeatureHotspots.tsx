@@ -16,10 +16,10 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
 
   return (
     <section className="bg-[#e7e0d5]">
-      <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
+      <div className="mx-auto max-w-[1260px] px-5 py-6 sm:px-8 sm:py-8">
         <div className="max-w-2xl">
           <span className="eyebrow">{eyebrow}</span>
-          <h2 className="font-serif mt-4 text-3xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-4xl lg:text-[2.8rem]">
+          <h2 className="font-serif mt-4 text-3xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-4xl lg:text-[2.3rem]">
             {title}
           </h2>
           <p className="mt-5 max-w-xl text-[15px] font-light leading-relaxed text-stone">
