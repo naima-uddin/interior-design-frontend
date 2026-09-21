@@ -129,13 +129,23 @@ export default function Navbar({ projectCategories, services }: NavProps) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        solid
-          ? "border-b border-ink/8 bg-cream/85 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${solid
+        ? "border-b border-ink/8 bg-cream/85 backdrop-blur-xl"
+        : "border-b border-transparent bg-transparent"
+        }`}
     >
       <nav className="mx-auto flex h-16 max-w-[1260px] items-center justify-between px-5 sm:h-20 sm:px-8">
+
+        {/* Center: wordmark */}
+        <Link
+          href="/"
+          className="font-serif text-2xl font-medium uppercase text-ink sm:text-[1.7rem]"
+          style={{ letterSpacing: "0.42em" }}
+        >
+          <span className="pl-[0.42em]">Velor</span>
+        </Link>
+
+
         {/* Left: primary links + dropdowns (desktop) */}
         <div className="hidden flex-1 items-center gap-7 lg:flex">
           <NavDropdown label="Projects" href="/projects" items={projectItems} onToggle={track} />
@@ -151,23 +161,14 @@ export default function Navbar({ projectCategories, services }: NavProps) {
           ))}
         </div>
 
-        {/* Center: wordmark */}
-        <Link
-          href="/"
-          className="font-serif text-2xl font-medium uppercase text-ink sm:text-[1.7rem]"
-          style={{ letterSpacing: "0.42em" }}
-        >
-          <span className="pl-[0.42em]">Velor</span>
-        </Link>
+
 
         {/* Right: icons */}
         <div className="flex flex-1 items-center justify-end gap-4 sm:gap-5">
           <button aria-label="Search" className="text-ink/80 transition hover:text-ink">
             <SearchIcon />
           </button>
-          <button aria-label="Bag" className="text-ink/80 transition hover:text-ink">
-            <BagIcon />
-          </button>
+
           <button
             aria-label="Menu"
             onClick={() => setOpen((v) => !v)}
