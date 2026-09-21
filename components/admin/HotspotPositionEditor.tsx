@@ -68,7 +68,7 @@ export default function HotspotPositionEditor({
         onPointerMove={onContainerPointerMove}
         onPointerUp={stopDrag}
         onPointerLeave={stopDrag}
-        className="relative aspect-16/9 w-full max-w-2xl touch-none select-none overflow-hidden rounded-2xl border border-ink/15 bg-cream-200"
+        className="relative aspect-16/7 w-full max-w-2xl touch-none select-none overflow-hidden rounded-2xl border border-ink/15 bg-cream-200"
         style={{ cursor: dragIndex === null ? "crosshair" : "grabbing" }}
       >
         {image?.url && (

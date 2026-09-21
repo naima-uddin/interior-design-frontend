@@ -11,13 +11,12 @@ export default function LatestProjects({ projects: input }: { projects?: Project
 
   return (
     <section className="bg-cream-100">
-      <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Portfolio</span>
+      <div className="mx-auto max-w-[1260px] px-5 py-4 sm:px-8 sm:py-6">
+        <div className="mx-auto max-w-5xl text-center">
           <h2 className="font-serif mt-4 text-3xl font-semibold uppercase tracking-tight text-ink sm:text-4xl">
             Latest Home Interior Design Projects
           </h2>
-          <p className="mt-5 text-[15px] font-light leading-relaxed text-stone">
+          <p className="mt-3 text-[15px] font-light leading-relaxed text-stone">
             Explore our portfolio of completed home interiors across Bangladesh —
             from drawing-room and living spaces to bedrooms, kitchens and full
             apartments. Each project reflects its owner&apos;s taste, practical
@@ -25,14 +24,14 @@ export default function LatestProjects({ projects: input }: { projects?: Project
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {projects.map((p) => (
             <Link
               key={p._id}
               href={`/projects/${p.slug}`}
               className="group overflow-hidden rounded-2xl border border-ink/10 bg-cream transition hover:-translate-y-1 hover:shadow-[0_30px_60px_-35px_rgba(42,38,34,0.5)]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-cream-200">
+              <div className="relative aspect-[4/4.4] overflow-hidden bg-cream-200">
                 <Image
                   src={p.cover.url}
                   alt={p.title}
