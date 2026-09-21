@@ -1,0 +1,226 @@
+"use client";
+
+// ─────────────────────────────────────────────────────────────────────────
+// Banner — the homepage hero.
+// Adapted from the original "BannerClassic" blur-window design into VELOR's
+// warm interior palette, and made self-contained on static data (lib/data.ts)
+// so it renders with no backend. The mechanism is unchanged: the same image is
+// painted twice — a full-bleed BLURRED surround, and a razor-sharp copy clipped
+// to a centred rounded "window" that lines up perfectly on top. Title sits
+// bottom-left over the calm blurred paper; a glassy description card sits
+// top-right inside the window.
+// ─────────────────────────────────────────────────────────────────────────
+
+import { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { SLIDES, type Slide } from "@/lib/data";
+
+// The centred sharp window. Horizontal inset caps it and centres it on wide
+// screens; vertical insets leave room for the fixed navbar (top) and the
+// title / thumbnail band (bottom).
+const SIDE = "max(3.5%, calc((100% - 1260px) / 2))";
+const INSET = { top: "13%", bottom: "14%", left: SIDE, right: SIDE } as const;
+const WINDOW_CLIP = `inset(13% ${SIDE} 14% ${SIDE} round 28px)`;
+
+// words wrapped in *asterisks* render in a serif italic accent
+const renderHighlight = (text: string) =>
+  String(text)
+    .split(/(\*[^*]+\*)/g)
+    .map((part, i) =>
+      part.startsWith("*") && part.endsWith("*") ? (
+        <span key={i} className="font-serif font-normal italic text-clay">
+          {part.slice(1, -1)}
+        </span>
+      ) : (
+        part
+      ),
+    );
+
+export default function Banner() {
+  const slides: Slide[] = SLIDES;
+  const [current, setCurrent] = useState(0);
+  const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const total = slides.length;
+
+  const startAuto = useCallback(() => {
+    if (autoRef.current) clearInterval(autoRef.current);
+    if (total <= 1) return;
+    autoRef.current = setInterval(
+      () => setCurrent((p) => (p + 1) % total),
+      7000,
+    );
+  }, [total]);
+
+  useEffect(() => {
+    startAuto();
+    return () => {
+      if (autoRef.current) clearInterval(autoRef.current);
+    };
+  }, [startAuto]);
+
+  const goTo = (idx: number) => {
+    setCurrent(((idx % total) + total) % total);
+    startAuto();
+  };
+
+  const stop = () => {
+    if (autoRef.current) clearInterval(autoRef.current);
+  };
+
+  const slide = slides[current] ?? slides[0];
+  if (!slide) return <section className="h-[70vh] bg-cream" />;
+
+  const thumbs = slides
+    .map((s, i) => ({ s, i }))
+    .filter((x) => x.i !== current)
+    .slice(0, 3);
+
+  return (
+    <section
+      className="relative h-[86vh] max-h-[880px] min-h-[560px] w-full overflow-hidden bg-cream"
+      onMouseEnter={stop}
+      onMouseLeave={startAuto}
+    >
+      {/* ── Layer 1: full-bleed BLURRED image (the surround) ── */}
+      <div className="absolute inset-0">
+        {slides.map((s, i) => (
+          <Image
+            key={s._id}
+            src={s.image.url}
+            alt=""
+            fill
+            aria-hidden
+            priority={i === 0}
+            quality={45}
+            sizes="100vw"
+            className={`scale-105 object-cover object-center blur-[3px] brightness-[1.04] saturate-[0.92] transition-opacity duration-700 ease-out ${
+              i === current ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Warm veil + vignette so the surround reads as calm cream paper */}
+      <div className="absolute inset-0 bg-gradient-to-b from-cream/55 via-cream/30 to-cream/65" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(115% 82% at 50% 34%, transparent 40%, rgba(237,233,226,0.72) 100%)",
+        }}
+      />
+
+      {/* ── Layer 2: the SAME image kept SHARP, clipped to the centred window ── */}
+      <div className="absolute inset-0" style={{ clipPath: WINDOW_CLIP }}>
+        {slides.map((s, i) => (
+          <div
+            key={s._id}
+            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+              i === current ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={s.image.url}
+              alt={s.title.replace(/\*/g, "")}
+              fill
+              priority={i === 0}
+              quality={100}
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </div>
+        ))}
+        {/* gentle shade inside the window for card legibility */}
+        <div className="absolute inset-0 bg-gradient-to-l from-olive-800/35 via-transparent to-transparent" />
+      </div>
+
+      {/* ── Window frame: hairline border + soft shadow onto the paper ── */}
+      <div
+        className="pointer-events-none absolute rounded-[28px] border border-white/50 shadow-[0_50px_110px_-40px_rgba(42,38,34,0.55)]"
+        style={INSET}
+      />
+
+      {/* ── Content anchored to the window ── */}
+      <div className="absolute" style={INSET}>
+        {/* badge — top-left */}
+        {slide.badge && (
+          <span className="eyebrow absolute left-5 top-5 inline-block rounded-full border border-white/30 bg-olive-800/25 px-3.5 py-1.5 !text-[9px] !text-white/90 backdrop-blur-md sm:left-7 sm:top-7">
+            {slide.badge}
+          </span>
+        )}
+
+        {/* description card — top-right */}
+        {(slide.subtitle || slide.buttonText) && (
+          <div className="absolute right-5 top-5 max-w-[15rem] rounded-3xl border border-white/20 bg-olive-800/20 p-5 text-right backdrop-blur-xl sm:right-7 sm:top-7 sm:max-w-xs sm:p-6">
+            {slide.subtitle && (
+              <p className="text-[13px] font-light leading-relaxed text-white/95">
+                {slide.subtitle}
+              </p>
+            )}
+            {slide.buttonText && slide.buttonLink && (
+              <Link
+                href={slide.buttonLink}
+                className="eyebrow mt-5 inline-flex items-center gap-2 rounded-full bg-cream-100 px-5 py-2.5 !tracking-[0.16em] !text-ink shadow-sm transition hover:bg-white"
+              >
+                {slide.buttonText}
+                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </Link>
+            )}
+          </div>
+        )}
+
+        {/* dots — bottom-center of the window */}
+        {total > 1 && (
+          <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2">
+            {slides.map((s, i) => (
+              <button
+                key={s._id}
+                onClick={() => goTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all ${
+                  i === current ? "w-7 bg-white" : "w-1.5 bg-white/60 hover:bg-white/90"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ── Big title — bottom-left, over the blurred paper ── */}
+      <h1
+        style={{ left: SIDE }}
+        className="font-serif absolute bottom-[7%] max-w-[62%] text-balance text-[2rem] font-semibold leading-[1.03] tracking-tight text-ink sm:text-5xl lg:text-[3.6rem]"
+      >
+        {renderHighlight(slide.title)}
+      </h1>
+
+      {/* ── Thumbnails — bottom-right, over the blurred paper ── */}
+      {thumbs.length > 0 && (
+        <div
+          style={{ right: SIDE }}
+          className="absolute bottom-[7%] hidden items-center gap-2.5 sm:flex"
+        >
+          {thumbs.map(({ s, i }) => (
+            <button
+              key={s._id}
+              onClick={() => goTo(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className="group relative h-12 w-12 overflow-hidden rounded-xl border border-white/70 bg-white shadow-lg ring-1 ring-ink/5 transition hover:scale-105 lg:h-14 lg:w-14"
+            >
+              <Image
+                src={s.image.url}
+                alt={s.title.replace(/\*/g, "")}
+                fill
+                sizes="80px"
+                className="object-cover transition group-hover:scale-110"
+              />
+            </button>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}

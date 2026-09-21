@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────────────────
+   VELOR — interior design storefront design system
+   Warm, editorial, premium: cream paper, dark olive, ink text, sand accents.
+   Tokens are exposed to Tailwind v4 via @theme so utilities like
+   `bg-cream`, `text-ink`, `text-stone`, `bg-olive` work everywhere.
+   ───────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Surfaces */
+  --color-cream: #ede9e2; /* page background */
+  --color-cream-100: #f4f1ea; /* raised cards / lighter panels */
+  --color-cream-200: #e6e1d6; /* subtle fills */
+  --color-sand: #d8d0c1; /* borders on light, image mats */
+
+  /* Deep olive (bands, footer, primary buttons) */
+  --color-olive: #40432d;
+  --color-olive-600: #4a4d34;
+  --color-olive-800: #33361f;
+
+  /* Ink + muted text */
+  --color-ink: #2a2622;
+  --color-stone: #6f675c;
+  --color-stone-400: #938a7c;
+
+  /* Accent (warm terracotta-ish, used sparingly) */
+  --color-clay: #a6795a;
+
+  /* Fonts (wired in layout.tsx via next/font) */
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-jost);
+
+  /* Rhythm */
+  --radius-window: 28px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Small uppercase eyebrow labels used throughout the site */
+.eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.66rem;
+  font-weight: 500;
+  color: var(--color-stone);
+}
+
+/* Hairline used between sections / under labels */
+.hairline {
+  height: 1px;
+  background: color-mix(in srgb, var(--color-ink) 14%, transparent);
 }
