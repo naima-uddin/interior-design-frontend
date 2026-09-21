@@ -11,7 +11,7 @@ export default function ServicesPreview({ services: input }: { services?: Servic
   return (
     <section className="bg-cream">
       <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
-        <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <span className="eyebrow">Our Services</span>
             <h2 className="font-serif mt-4 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
@@ -29,27 +29,25 @@ export default function ServicesPreview({ services: input }: { services?: Servic
           </Link>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}
-              className="group relative overflow-hidden rounded-2xl bg-cream-200"
+              className="group relative aspect-[16/10] overflow-hidden rounded-2xl bg-cream-200 shadow-sm transition-shadow duration-300 hover:shadow-[0_25px_50px_-25px_rgba(42,38,34,0.5)]"
             >
-              <div className="relative aspect-[5/4] overflow-hidden">
-                <Image
-                  src={s.image.url}
-                  alt={s.name}
-                  fill
-                  sizes="(min-width:1024px) 380px, (min-width:640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-olive-800/80 via-olive-800/10 to-transparent" />
-              </div>
-              <div className="absolute inset-x-0 bottom-0 p-6">
+              <Image
+                src={s.image.url}
+                alt={s.name}
+                fill
+                sizes="(min-width:1024px) 380px, (min-width:640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-olive-800/85 via-olive-800/15 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-5">
                 <p className="eyebrow !text-cream-100/70">{s.tagline}</p>
-                <h3 className="font-serif mt-1.5 text-xl text-cream-100">{s.name}</h3>
-                <p className="mt-2 max-w-xs text-[13px] font-light leading-relaxed text-cream-100/0 transition-all duration-300 group-hover:text-cream-100/85">
+                <h3 className="font-serif mt-1 text-xl text-cream-100">{s.name}</h3>
+                <p className="mt-1.5 max-w-xs text-[13px] font-light leading-relaxed text-cream-100/0 transition-all duration-300 group-hover:text-cream-100/85">
                   {s.summary}
                 </p>
               </div>
