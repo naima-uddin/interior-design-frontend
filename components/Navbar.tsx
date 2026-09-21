@@ -130,11 +130,11 @@ export default function Navbar({ projectCategories, services }: NavProps) {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${solid
-        ? "border-b border-ink/8 bg-cream/85 backdrop-blur-xl"
+        ? "border-b border-[#383927]/60 bg-cream/85 backdrop-blur-xl"
         : "border-b border-transparent bg-transparent"
         }`}
     >
-      <nav className="mx-auto flex h-16 max-w-[1260px] items-center justify-between px-5 sm:h-20 sm:px-8">
+      <nav className="mx-auto flex h-12 max-w-[1260px] items-center justify-between px-5 md:h-16 sm:px-4">
 
         {/* Center: wordmark */}
         <Link

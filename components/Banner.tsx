@@ -80,12 +80,12 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
 
   return (
     <section
-      className="relative h-[86vh] max-h-[880px] min-h-[560px] w-full overflow-hidden bg-cream"
+      className="relative h-[80vh] max-h-[880px] min-h-[560px] w-full overflow-hidden bg-cream"
       onMouseEnter={stop}
       onMouseLeave={startAuto}
     >
       {/* ── Layer 1: full-bleed BLURRED image (the surround) ── */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 ">
         {slides.map((s, i) => (
           <Image
             key={s._id}
@@ -96,9 +96,8 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
             priority={i === 0}
             quality={45}
             sizes="100vw"
-            className={`scale-105 object-cover object-center blur-[3px] brightness-[1.04] saturate-[0.92] transition-opacity duration-700 ease-out ${
-              i === current ? "opacity-100" : "opacity-0"
-            }`}
+            className={`scale-105 object-cover object-center blur-[3px] brightness-[1.04] saturate-[0.92] transition-opacity duration-700 ease-out ${i === current ? "opacity-100" : "opacity-0"
+              }`}
           />
         ))}
       </div>
@@ -114,13 +113,12 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
       />
 
       {/* ── Layer 2: the SAME image kept SHARP, clipped to the centred window ── */}
-      <div className="absolute inset-0" style={{ clipPath: WINDOW_CLIP }}>
+      <div className="absolute inset-0 " style={{ clipPath: WINDOW_CLIP }}>
         {slides.map((s, i) => (
           <div
             key={s._id}
-            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-              i === current ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 transition-opacity duration-700 ease-out ${i === current ? "opacity-100" : "opacity-0"
+              }`}
           >
             <Image
               src={s.image.url}
@@ -182,19 +180,20 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
                 key={s._id}
                 onClick={() => goTo(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all ${
-                  i === current ? "w-7 bg-white" : "w-1.5 bg-white/60 hover:bg-white/90"
-                }`}
+                className={`h-1.5 rounded-full transition-all ${i === current ? "w-7 bg-white" : "w-1.5 bg-white/60 hover:bg-white/90"
+                  }`}
               />
             ))}
           </div>
         )}
       </div>
 
+
+
       {/* ── Big title — bottom-left, over the blurred paper ── */}
       <h1
         style={{ left: SIDE }}
-        className="font-serif absolute bottom-[7%] max-w-[62%] text-balance text-[2rem] font-semibold leading-[1.03] tracking-tight text-ink sm:text-5xl lg:text-[3.6rem]"
+        className="font-serif absolute bottom-[7%] max-w-[62%] text-balance text-[2rem] font-semibold leading-[1.03] tracking-tight text-ink sm:text-5xl lg:text-[3.6rem] "
       >
         {renderHighlight(slide.title)}
       </h1>
@@ -223,6 +222,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
           ))}
         </div>
       )}
+
     </section>
   );
 }

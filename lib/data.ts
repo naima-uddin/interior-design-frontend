@@ -6,8 +6,8 @@
 // ─────────────────────────────────────────────────────────────────────────
 
 const U = (id: string, w = 1600) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
-
+`  https://unsplash.com/photos/${id}?auto=format&fit=crop&w=${w}&q=80
+`
 /* ── Hero slides ───────────────────────────────────────────────────────── */
 
 export type Slide = {
@@ -34,7 +34,7 @@ export const SLIDES: Slide[] = [
   },
   {
     _id: "s2",
-    image: { url: U("photo-1616486338812-3dadae4b4ace") },
+    image: { url: "/interior-banner.png" },
     badge: "The Autumn Edit",
     title: "Warmth, *considered.*",
     subtitle:
