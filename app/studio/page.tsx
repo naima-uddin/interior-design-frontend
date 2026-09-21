@@ -56,7 +56,7 @@ export default function StudioPage() {
       </section>
 
       {/* Stats band */}
-      <section className="bg-olive text-cream-100">
+      <section className="bg-[#383927] text-cream-100">
         <div className="mx-auto grid max-w-[1260px] grid-cols-2 gap-8 px-5 py-16 sm:px-8 lg:grid-cols-4">
           {STUDIO.stats.map((s) => (
             <div key={s.label} className="text-center lg:text-left">

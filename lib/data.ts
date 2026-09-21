@@ -6,8 +6,8 @@
 // ─────────────────────────────────────────────────────────────────────────
 
 const U = (id: string, w = 1600) =>
-`  https://unsplash.com/photos/${id}?auto=format&fit=crop&w=${w}&q=80
-`
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+
 /* ── Hero slides ───────────────────────────────────────────────────────── */
 
 export type Slide = {

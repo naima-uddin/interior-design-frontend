@@ -13,7 +13,7 @@ export default function ContactForm({ services }: { services?: Service[] }) {
   if (sent) {
     return (
       <div className="rounded-2xl border border-olive/20 bg-olive/5 p-10 text-center">
-        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-olive text-cream-100">
+        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#383927] text-cream-100">
           <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>

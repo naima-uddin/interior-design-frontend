@@ -66,7 +66,7 @@ export default async function ProjectPage({
       </section>
 
       {/* Meta strip */}
-      <section className="bg-olive text-cream-100">
+      <section className="bg-[#383927] text-cream-100">
         <div className="mx-auto grid max-w-[1260px] grid-cols-2 gap-6 px-5 py-8 sm:px-8 lg:grid-cols-4">
           {meta("Location", project.location)}
           {meta("Area", `${project.area} apartment`)}
@@ -108,9 +108,8 @@ export default async function ProjectPage({
             {project.gallery.map((im, i) => (
               <div
                 key={im.url}
-                className={`relative overflow-hidden rounded-2xl bg-cream-200 ${
-                  i === 0 ? "sm:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
-                }`}
+                className={`relative overflow-hidden rounded-2xl bg-cream-200 ${i === 0 ? "sm:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
+                  }`}
               >
                 <Image
                   src={im.url}

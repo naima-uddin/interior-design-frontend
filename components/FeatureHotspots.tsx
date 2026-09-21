@@ -28,9 +28,9 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
         </div>
 
         {/* Image with hotspots */}
-        <div className="relative mt-12 aspect-[16/10] w-full overflow-hidden rounded-3xl bg-cream-200 sm:aspect-[16/9]">
+        <div className="relative mt-2 aspect-[16/9] w-full overflow-hidden rounded-3xl bg-cream-200 sm:aspect-[16/7]">
           <Image
-            src={image.url}
+            src="/79837bd2-762f-42a2-9bed-e38d9ea6d0e7.png"
             alt="Interior scene with interactive details"
             fill
             sizes="(min-width:1024px) 1200px, 100vw"
@@ -58,16 +58,14 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
                 >
                   {/* pulse ring */}
                   <span
-                    className={`absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cream-100/50 ${
-                      isActive ? "opacity-0" : "animate-ping"
-                    }`}
+                    className={`absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cream-100/50 ${isActive ? "opacity-0" : "animate-ping"
+                      }`}
                   />
                   <span
-                    className={`relative grid h-7 w-7 place-items-center rounded-full border-2 border-white text-[11px] font-semibold shadow-lg transition ${
-                      isActive
-                        ? "bg-clay text-cream-100 scale-110"
-                        : "bg-white/85 text-ink group-hover:bg-clay group-hover:text-cream-100"
-                    }`}
+                    className={`relative grid h-7 w-7 place-items-center rounded-full border-2 border-white text-[11px] font-semibold shadow-lg transition ${isActive
+                      ? "bg-clay text-cream-100 scale-110"
+                      : "bg-white/85 text-ink group-hover:bg-clay group-hover:text-cream-100"
+                      }`}
                   >
                     {i + 1}
                   </span>
@@ -76,9 +74,8 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
                 {/* Popover */}
                 {isActive && (
                   <div
-                    className={`absolute top-1/2 z-10 w-56 -translate-y-1/2 rounded-2xl border border-white/40 bg-cream-100/95 p-4 shadow-[0_24px_50px_-20px_rgba(42,38,34,0.6)] backdrop-blur-md ${
-                      flip ? "right-6" : "left-6"
-                    }`}
+                    className={`absolute top-1/2 z-10 w-56 -translate-y-1/2 rounded-2xl border border-white/40 bg-cream-100/95 p-4 shadow-[0_24px_50px_-20px_rgba(42,38,34,0.6)] backdrop-blur-md ${flip ? "right-6" : "left-6"
+                      }`}
                   >
                     <p className="eyebrow !text-clay">
                       {String(i + 1).padStart(2, "0")}
@@ -97,16 +94,15 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
         </div>
 
         {/* Legend / quick jump chips */}
-        <div className="mt-8 flex flex-wrap gap-2.5">
+        <div className="mt-2 flex flex-wrap gap-2.5">
           {points.map((pt, i) => (
             <button
               key={pt.title}
               onClick={() => setActive(i)}
-              className={`eyebrow flex items-center gap-2 rounded-full border px-4 py-2.5 !tracking-[0.14em] transition ${
-                active === i
-                  ? "border-clay bg-clay !text-cream-100"
-                  : "border-ink/15 text-ink/70 hover:border-ink/40 hover:text-ink"
-              }`}
+              className={`eyebrow flex items-center gap-2 rounded-full border px-4 py-2.5 !tracking-[0.14em] transition ${active === i
+                ? "border-clay bg-clay !text-cream-100"
+                : "border-ink/15 text-ink/70 hover:border-ink/40 hover:text-ink"
+                }`}
             >
               <span className="grid h-4 w-4 place-items-center rounded-full bg-current text-[8px]">
                 <span className={active === i ? "text-clay" : "text-cream-100"}>

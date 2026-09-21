@@ -33,9 +33,8 @@ export default async function SpacesPage() {
                 className={`group ${s.tall ? "lg:row-span-2" : ""}`}
               >
                 <div
-                  className={`relative overflow-hidden rounded-2xl bg-cream-200 ${
-                    s.tall ? "aspect-[3/4] lg:h-full" : "aspect-[4/3]"
-                  }`}
+                  className={`relative overflow-hidden rounded-2xl bg-cream-200 ${s.tall ? "aspect-[3/4] lg:h-full" : "aspect-[4/3]"
+                    }`}
                 >
                   <Image
                     src={s.image.url}
@@ -60,7 +59,7 @@ export default async function SpacesPage() {
       </section>
 
       {/* CTA band */}
-      <section className="bg-olive text-cream-100">
+      <section className="bg-[#383927] text-cream-100">
         <div className="mx-auto flex max-w-[1260px] flex-col items-center gap-6 px-5 py-20 text-center sm:px-8">
           <span className="eyebrow !text-cream-100/60">Studio Services</span>
           <h2 className="font-serif max-w-2xl text-3xl font-normal leading-tight tracking-tight sm:text-[2.6rem]">
