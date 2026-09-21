@@ -34,7 +34,7 @@ export default function ServicesPreview({ services: input }: { services?: Servic
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}
-              className="group relative aspect-[16/10] overflow-hidden rounded-2xl bg-cream-200 shadow-sm transition-shadow duration-300 hover:shadow-[0_25px_50px_-25px_rgba(42,38,34,0.5)]"
+              className="group relative aspect-[16/10] overflow-hidden bg-cream-200 shadow-sm transition-shadow duration-300 hover:shadow-[0_25px_50px_-25px_rgba(42,38,34,0.5)]"
             >
               <Image
                 src={s.image.url}
