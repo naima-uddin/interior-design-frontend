@@ -16,9 +16,15 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
-    // Next 16 requires the set of allowed quality values to be declared.
-    // The hero uses 45 (blurred surround) and 100 (sharp window); 75 is default.
-    qualities: [45, 75, 100],
+    // Serve every image exactly as uploaded — no re-encoding, no resizing,
+    // no quality change in either direction. Next's built-in optimizer always
+    // re-compresses (even at quality:100 it's a lossy re-encode), which is
+    // not what a photography-led interior site wants. Cloudinary already
+    // stores uploads at their original quality, so this guarantees pixel-for-
+    // pixel identical delivery. Trade-off: no automatic responsive srcset,
+    // so the full asset downloads regardless of the rendered size — upload
+    // sensibly-sized images.
+    unoptimized: true,
   },
 };
 
