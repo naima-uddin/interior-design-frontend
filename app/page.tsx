@@ -9,21 +9,24 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import ProcessSteps from "@/components/ProcessSteps";
 import Testimonials from "@/components/Testimonials";
 import MadeToBelong from "@/components/MadeToBelong";
+import { getHomepage } from "@/lib/api";
 
-export default function Home() {
+export default async function Home() {
+  const data = await getHomepage();
+
   return (
     <main>
-      <Banner />
+      <Banner slides={data.banners} />
       <ConsideredBand />
-      <ServicesPreview />
-      <FeaturedPieces />
-      <ShopByRoom />
-      <FeatureHotspots />
-      <LatestProjects />
-      <WhyChooseUs />
-      <ProcessSteps />
-      <Testimonials />
-      <MadeToBelong />
+      <ServicesPreview services={data.services} />
+      <FeaturedPieces products={data.featured} />
+      <ShopByRoom rooms={data.rooms} />
+      <FeatureHotspots scene={data.hotspot} />
+      <LatestProjects projects={data.projects} />
+      <WhyChooseUs items={data.whyChoose} company={data.company} />
+      <ProcessSteps steps={data.process} />
+      <Testimonials items={data.testimonials} />
+      <MadeToBelong image={data.spacesImage} />
     </main>
   );
 }

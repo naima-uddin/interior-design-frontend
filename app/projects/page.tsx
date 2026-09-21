@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import ProjectsGrid from "@/components/ProjectsGrid";
+import { getProjects } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Projects — Velor",
@@ -14,6 +15,9 @@ export default async function ProjectsPage({
   const sp = await searchParams;
   const raw = sp.category;
   const category = Array.isArray(raw) ? raw[0] : raw ?? "all";
+  // Fetch the full list — the grid filters client-side, so the URL category is
+  // only the initial selection.
+  const { items, categories } = await getProjects();
 
   return (
     <main className="pb-8">
@@ -26,7 +30,11 @@ export default async function ProjectsPage({
           { label: "Projects", href: "/projects" },
         ]}
       />
-      <ProjectsGrid initialCategory={category} />
+      <ProjectsGrid
+        initialCategory={category}
+        projects={items}
+        categories={categories}
+      />
     </main>
   );
 }

@@ -308,11 +308,15 @@ export function getProduct(slug: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slug);
 }
 
-export function relatedProducts(product: Product, count = 3): Product[] {
-  const same = PRODUCTS.filter(
+export function relatedProducts(
+  product: Product,
+  count = 3,
+  pool: Product[] = PRODUCTS,
+): Product[] {
+  const same = pool.filter(
     (p) => p.category === product.category && p._id !== product._id,
   );
-  const others = PRODUCTS.filter(
+  const others = pool.filter(
     (p) => p.category !== product.category && p._id !== product._id,
   );
   return [...same, ...others].slice(0, count);
@@ -749,11 +753,15 @@ export function projectCategoriesWithCounts(): (ProjectCategory & {
   })).filter((c) => c.count > 0);
 }
 
-export function relatedProjects(project: Project, count = 3): Project[] {
-  const same = PROJECTS.filter(
+export function relatedProjects(
+  project: Project,
+  count = 3,
+  pool: Project[] = PROJECTS,
+): Project[] {
+  const same = pool.filter(
     (p) => p.category === project.category && p._id !== project._id,
   );
-  const others = PROJECTS.filter(
+  const others = pool.filter(
     (p) => p.category !== project.category && p._id !== project._id,
   );
   return [...same, ...others].slice(0, count);

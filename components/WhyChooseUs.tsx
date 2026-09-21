@@ -4,7 +4,15 @@
 import Image from "next/image";
 import { WHY_CHOOSE, COMPANY } from "@/lib/data";
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({
+  items,
+  company,
+}: {
+  items?: { title: string; body: string }[];
+  company?: typeof COMPANY | null;
+}) {
+  const points = items?.length ? items : WHY_CHOOSE;
+  const stats = (company ?? COMPANY).stats;
   return (
     <section className="bg-olive text-cream-100">
       <div className="mx-auto max-w-[1260px] px-5 py-20 sm:px-8 sm:py-24">
@@ -32,7 +40,7 @@ export default function WhyChooseUs() {
             </div>
 
             <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
-              {COMPANY.stats.map((s) => (
+              {stats.map((s) => (
                 <div key={s.label}>
                   <p className="font-serif text-3xl font-medium sm:text-4xl">{s.value}</p>
                   <p className="eyebrow mt-2 !text-cream-100/55 !tracking-[0.14em]">{s.label}</p>
@@ -43,7 +51,7 @@ export default function WhyChooseUs() {
 
           {/* Right: trust factors */}
           <ul className="flex flex-col justify-center divide-y divide-cream-100/12">
-            {WHY_CHOOSE.map((w, i) => (
+            {points.map((w, i) => (
               <li key={w.title} className="flex gap-5 py-5 first:pt-0 last:pb-0">
                 <span className="font-serif text-2xl text-clay/80">
                   0{i + 1}

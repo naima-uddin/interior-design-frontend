@@ -4,20 +4,25 @@
 // instant; reads the static PRODUCTS/CATEGORIES for now.
 
 import { useMemo, useState } from "react";
-import { CATEGORIES, PRODUCTS } from "@/lib/data";
+import { CATEGORIES, PRODUCTS, type Product, type Category } from "@/lib/data";
 import ProductCard from "./ProductCard";
 
-export default function CollectionGrid() {
+export default function CollectionGrid({
+  products: input,
+  categories,
+}: {
+  products?: Product[];
+  categories?: Category[];
+}) {
+  const all = input?.length ? input : PRODUCTS;
+  const cats = categories?.length ? categories : CATEGORIES;
   const [active, setActive] = useState<string>("all");
 
-  const chips = [{ slug: "all", name: "All" }, ...CATEGORIES];
+  const chips = [{ slug: "all", name: "All" }, ...cats];
 
   const products = useMemo(
-    () =>
-      active === "all"
-        ? PRODUCTS
-        : PRODUCTS.filter((p) => p.category === active),
-    [active],
+    () => (active === "all" ? all : all.filter((p) => p.category === active)),
+    [active, all],
   );
 
   return (

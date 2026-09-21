@@ -5,9 +5,12 @@ import { PROCESS } from "@/lib/data";
 
 export default function ProcessSteps({
   className = "bg-cream",
+  steps,
 }: {
   className?: string;
+  steps?: { step: string; title: string; body: string }[];
 }) {
+  const items = steps?.length ? steps : PROCESS;
   return (
     <section className={className}>
       <div className="mx-auto max-w-[1260px] px-5 py-20 sm:px-8 sm:py-24">
@@ -23,7 +26,7 @@ export default function ProcessSteps({
         </div>
 
         <div className="grid gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
-          {PROCESS.map((p) => (
+          {items.map((p) => (
             <div key={p.step} className="bg-cream-100 p-7 transition hover:bg-cream-200">
               <div className="flex items-baseline gap-3">
                 <span className="font-serif text-4xl font-medium text-clay/40">{p.step}</span>

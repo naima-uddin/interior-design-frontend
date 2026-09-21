@@ -5,12 +5,17 @@
 import { useState } from "react";
 import { FAQS } from "@/lib/data";
 
-export default function FaqAccordion() {
+export default function FaqAccordion({
+  faqs,
+}: {
+  faqs?: { q: string; a: string }[];
+}) {
+  const items = faqs?.length ? faqs : FAQS;
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <div className="divide-y divide-ink/10 border-y border-ink/10">
-      {FAQS.map((f, i) => {
+      {items.map((f, i) => {
         const isOpen = open === i;
         return (
           <div key={f.q}>

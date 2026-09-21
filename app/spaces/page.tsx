@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
-import { SPACES } from "@/lib/data";
+import { getSpaces } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Spaces — Velor",
@@ -10,7 +10,8 @@ export const metadata: Metadata = {
     "A lookbook of real homes designed to feel effortless, enduring and entirely yours.",
 };
 
-export default function SpacesPage() {
+export default async function SpacesPage() {
+  const { items: SPACES } = await getSpaces();
   return (
     <main className="pb-24">
       <PageHero

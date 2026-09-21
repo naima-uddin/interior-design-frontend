@@ -3,9 +3,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ROOMS } from "@/lib/data";
+import { ROOMS, type Room } from "@/lib/data";
 
-export default function ShopByRoom() {
+export default function ShopByRoom({ rooms }: { rooms?: Room[] }) {
+  const items = rooms?.length ? rooms : ROOMS;
   return (
     <section className="bg-cream">
       <div className="mx-auto max-w-[1260px] px-5 pb-4 sm:px-8">
@@ -19,7 +20,7 @@ export default function ShopByRoom() {
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-          {ROOMS.map((room) => (
+          {items.map((room) => (
             <Link key={room.name} href={room.href} className="group relative block">
               <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-cream-200">
                 <Image

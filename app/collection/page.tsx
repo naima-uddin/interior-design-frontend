@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import CollectionGrid from "@/components/CollectionGrid";
+import { getProducts } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Collection — Velor",
@@ -8,7 +9,8 @@ export const metadata: Metadata = {
     "Sofas, seating, tables, storage and lighting — considered pieces made to belong in your home.",
 };
 
-export default function CollectionPage() {
+export default async function CollectionPage() {
+  const { items, categories } = await getProducts();
   return (
     <main className="pb-8">
       <PageHero
@@ -20,7 +22,7 @@ export default function CollectionPage() {
           { label: "Collection", href: "/collection" },
         ]}
       />
-      <CollectionGrid />
+      <CollectionGrid products={items} categories={categories} />
     </main>
   );
 }

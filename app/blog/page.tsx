@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
-import { POSTS } from "@/lib/data";
+import { getPosts } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Journal — Velor",
@@ -17,8 +17,9 @@ const fmtDate = (d: string) =>
     year: "numeric",
   });
 
-export default function BlogPage() {
-  const [featured, ...rest] = POSTS;
+export default async function BlogPage() {
+  const posts = await getPosts();
+  const [featured, ...rest] = posts;
 
   return (
     <main className="pb-8">

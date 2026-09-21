@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { SPACES_IMAGE } from "@/lib/data";
 
-export default function MadeToBelong() {
+export default function MadeToBelong({ image }: { image?: { url: string } | null }) {
+  const cover = image?.url ? image : SPACES_IMAGE;
   return (
     <section className="bg-cream-100">
       <div className="mx-auto grid max-w-[1260px] items-stretch gap-0 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
@@ -36,7 +37,7 @@ export default function MadeToBelong() {
         {/* Image */}
         <div className="relative min-h-[340px] overflow-hidden rounded-2xl sm:min-h-[460px] lg:min-h-[540px]">
           <Image
-            src={SPACES_IMAGE.url}
+            src={cover.url}
             alt="A dining space designed to belong"
             fill
             sizes="(min-width:1024px) 700px, 100vw"

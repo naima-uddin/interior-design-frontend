@@ -16,6 +16,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { SLIDES, type Slide } from "@/lib/data";
 
+// slides come from the API (homepage payload); fall back to static SLIDES.
+
 // The centred sharp window. Horizontal inset caps it and centres it on wide
 // screens; vertical insets leave room for the fixed navbar (top) and the
 // title / thumbnail band (bottom).
@@ -37,8 +39,8 @@ const renderHighlight = (text: string) =>
       ),
     );
 
-export default function Banner() {
-  const slides: Slide[] = SLIDES;
+export default function Banner({ slides: input }: { slides?: Slide[] }) {
+  const slides: Slide[] = input?.length ? input : SLIDES;
   const [current, setCurrent] = useState(0);
   const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const total = slides.length;

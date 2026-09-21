@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import FaqAccordion from "@/components/FaqAccordion";
+import { getFaqs } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "FAQs — Velor",
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
     "Answers to common questions about our interior design process, timelines, pricing and service areas.",
 };
 
-export default function FaqsPage() {
+export default async function FaqsPage() {
+  const faqs = await getFaqs();
   return (
     <main className="pb-8">
       <PageHero
@@ -24,7 +26,7 @@ export default function FaqsPage() {
 
       <section className="bg-cream">
         <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8">
-          <FaqAccordion />
+          <FaqAccordion faqs={faqs} />
 
           <div className="mt-14 rounded-3xl border border-ink/10 bg-cream-100 p-8 text-center sm:p-10">
             <h2 className="font-serif text-2xl font-medium text-ink">Still have a question?</h2>

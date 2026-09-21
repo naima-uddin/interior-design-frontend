@@ -2,12 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import {
-  PROJECTS,
-  getProjectBySlug,
-  relatedProjects,
-  projectCategoryName,
-} from "@/lib/data";
+import { PROJECTS, relatedProjects, projectCategoryName } from "@/lib/data";
+import { getProject, getProjects } from "@/lib/api";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.slug }));
@@ -17,7 +13,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/projects/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProject(slug);
   if (!project) return { title: "Not found — Velor" };
   return { title: `${project.title} — Velor`, description: project.overview };
 }
@@ -33,10 +29,11 @@ export default async function ProjectPage({
   params,
 }: PageProps<"/projects/[slug]">) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProject(slug);
   if (!project) notFound();
 
-  const related = relatedProjects(project);
+  const { items: allProjects } = await getProjects();
+  const related = relatedProjects(project, 3, allProjects);
 
   return (
     <main>

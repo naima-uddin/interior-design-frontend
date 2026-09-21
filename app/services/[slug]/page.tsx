@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { SERVICES, getServiceBySlug } from "@/lib/data";
+import { SERVICES } from "@/lib/data";
+import { getService, getServices } from "@/lib/api";
 import ProcessSteps from "@/components/ProcessSteps";
 
 export function generateStaticParams() {
@@ -13,7 +14,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/services/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const service = await getService(slug);
   if (!service) return { title: "Not found — Velor" };
   return { title: `${service.name} — Velor`, description: service.summary };
 }
@@ -22,10 +23,11 @@ export default async function ServicePage({
   params,
 }: PageProps<"/services/[slug]">) {
   const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const service = await getService(slug);
   if (!service) notFound();
 
-  const others = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 4);
+  const all = await getServices();
+  const others = all.filter((s) => s.slug !== service.slug).slice(0, 4);
 
   return (
     <main>

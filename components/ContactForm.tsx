@@ -4,9 +4,10 @@
 // a confirmed state. Wires to /api/contact later.
 
 import { useState } from "react";
-import { SERVICES } from "@/lib/data";
+import { SERVICES, type Service } from "@/lib/data";
 
-export default function ContactForm() {
+export default function ContactForm({ services }: { services?: Service[] }) {
+  const options = services?.length ? services : SERVICES;
   const [sent, setSent] = useState(false);
 
   if (sent) {
@@ -56,7 +57,7 @@ export default function ContactForm() {
             <option value="" disabled>
               Select a service
             </option>
-            {SERVICES.map((s) => (
+            {options.map((s) => (
               <option key={s.slug} value={s.slug}>
                 {s.name}
               </option>

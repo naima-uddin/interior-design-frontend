@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { POSTS, getPostBySlug } from "@/lib/data";
+import { POSTS } from "@/lib/data";
+import { getPost, getPosts } from "@/lib/api";
 
 export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }));
@@ -12,7 +13,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPost(slug);
   if (!post) return { title: "Not found — Velor" };
   return { title: `${post.title} — Velor`, description: post.excerpt };
 }
@@ -26,10 +27,11 @@ const fmtDate = (d: string) =>
 
 export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPost(slug);
   if (!post) notFound();
 
-  const more = POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const all = await getPosts();
+  const more = all.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <main className="bg-cream pb-20">

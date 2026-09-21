@@ -3,10 +3,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { SERVICES } from "@/lib/data";
+import { SERVICES, type Service } from "@/lib/data";
 
-export default function ServicesPreview() {
-  const services = SERVICES.slice(0, 6);
+export default function ServicesPreview({ services: input }: { services?: Service[] }) {
+  const services = (input?.length ? input : SERVICES).slice(0, 6);
 
   return (
     <section className="bg-cream">

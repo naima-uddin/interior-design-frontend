@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PRODUCTS, getProduct, relatedProducts, CATEGORIES } from "@/lib/data";
+import { PRODUCTS, relatedProducts, CATEGORIES } from "@/lib/data";
+import { getProduct, getProducts } from "@/lib/api";
 import { fmtPrice } from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
 import ProductCard from "@/components/ProductCard";
@@ -35,12 +36,13 @@ export default async function ProductPage({
   params,
 }: PageProps<"/product/[slug]">) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProduct(slug);
   if (!product) notFound();
 
   const catName =
     CATEGORIES.find((c) => c.slug === product.category)?.name ?? "Collection";
-  const related = relatedProducts(product);
+  const { items: allProducts } = await getProducts();
+  const related = relatedProducts(product, 3, allProducts);
 
   return (
     <main className="bg-cream pb-20 pt-28 sm:pt-36">

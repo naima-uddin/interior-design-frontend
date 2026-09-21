@@ -6,7 +6,17 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { projectCategoriesWithCounts, SERVICES } from "@/lib/data";
+import {
+  projectCategoriesWithCounts,
+  SERVICES,
+  type Service,
+  type Category,
+} from "@/lib/data";
+
+type NavProps = {
+  projectCategories?: (Category & { count: number })[];
+  services?: Service[];
+};
 
 const LINKS = [
   { label: "Collection", href: "/collection" },
@@ -86,18 +96,23 @@ function NavDropdown({
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ projectCategories, services }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false); // mobile menu
   const [anyDropdown, setAnyDropdown] = useState(0); // count of open desktop dropdowns
   const [mobileSub, setMobileSub] = useState<string | null>(null);
 
-  const projectItems: Item[] = projectCategoriesWithCounts().map((c) => ({
+  const cats = projectCategories?.length
+    ? projectCategories
+    : projectCategoriesWithCounts();
+  const svcs = services?.length ? services : SERVICES;
+
+  const projectItems: Item[] = cats.map((c) => ({
     name: c.name,
     href: `/projects?category=${c.slug}`,
     count: c.count,
   }));
-  const serviceItems: Item[] = SERVICES.map((s) => ({
+  const serviceItems: Item[] = svcs.map((s) => ({
     name: s.name,
     href: `/services/${s.slug}`,
   }));

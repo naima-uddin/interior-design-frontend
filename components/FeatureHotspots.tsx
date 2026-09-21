@@ -8,8 +8,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { HOTSPOT_SCENE } from "@/lib/data";
 
-export default function FeatureHotspots() {
-  const { eyebrow, title, intro, image, points } = HOTSPOT_SCENE;
+type Scene = typeof HOTSPOT_SCENE;
+
+export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
+  const { eyebrow, title, intro, image, points } = scene ?? HOTSPOT_SCENE;
   const [active, setActive] = useState<number | null>(0);
 
   return (

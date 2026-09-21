@@ -1,9 +1,10 @@
 // Client testimonials — three quote cards with avatar, name and project.
 
 import Image from "next/image";
-import { TESTIMONIALS } from "@/lib/data";
+import { TESTIMONIALS, type Testimonial } from "@/lib/data";
 
-export default function Testimonials() {
+export default function Testimonials({ items }: { items?: Testimonial[] }) {
+  const list = items?.length ? items : TESTIMONIALS;
   return (
     <section className="bg-cream-100">
       <div className="mx-auto max-w-[1260px] px-5 py-20 sm:px-8 sm:py-24">
@@ -15,7 +16,7 @@ export default function Testimonials() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t) => (
+          {list.map((t) => (
             <figure
               key={t.name}
               className="flex flex-col rounded-2xl border border-ink/10 bg-cream p-7"

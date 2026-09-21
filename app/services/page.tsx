@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import ProcessSteps from "@/components/ProcessSteps";
-import { SERVICES } from "@/lib/data";
+import { getServices } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Services — Velor",
@@ -11,7 +11,8 @@ export const metadata: Metadata = {
     "Full-service interior design — home, bedroom, living, kitchen, bathroom, custom furniture and more, from concept to handover.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServices();
   return (
     <main className="pb-8">
       <PageHero
@@ -27,7 +28,7 @@ export default function ServicesPage() {
       <section className="bg-cream">
         <div className="mx-auto max-w-[1260px] px-5 py-14 sm:px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((s) => (
+            {services.map((s) => (
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}

@@ -1,10 +1,11 @@
 // Featured Pieces — three editorial product cards, mirroring the reference.
 
 import Link from "next/link";
-import { FEATURED } from "@/lib/data";
+import { FEATURED, type Product } from "@/lib/data";
 import ProductCard from "./ProductCard";
 
-export default function FeaturedPieces() {
+export default function FeaturedPieces({ products }: { products?: Product[] }) {
+  const items = products?.length ? products : FEATURED;
   return (
     <section className="bg-cream">
       <div className="mx-auto max-w-[1260px] px-5 py-16 sm:px-8 sm:py-24">
@@ -22,7 +23,7 @@ export default function FeaturedPieces() {
         </div>
 
         <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURED.map((p) => (
+          {items.map((p) => (
             <ProductCard key={p._id} product={p} />
           ))}
         </div>

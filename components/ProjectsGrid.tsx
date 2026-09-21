@@ -6,27 +6,32 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { PROJECTS, projectCategoriesWithCounts } from "@/lib/data";
+import {
+  PROJECTS,
+  projectCategoriesWithCounts,
+  type Project,
+  type Category,
+} from "@/lib/data";
 
 export default function ProjectsGrid({
   initialCategory = "all",
+  projects: input,
+  categories,
 }: {
   initialCategory?: string;
+  projects?: Project[];
+  categories?: (Category & { count: number })[];
 }) {
-  const cats = projectCategoriesWithCounts();
+  const all = input?.length ? input : PROJECTS;
+  const cats = categories?.length ? categories : projectCategoriesWithCounts();
   const valid = cats.some((c) => c.slug === initialCategory)
     ? initialCategory
     : "all";
   const [active, setActive] = useState<string>(valid);
 
-  const chips = [
-    { slug: "all", name: "All", count: PROJECTS.length },
-    ...cats,
-  ];
+  const chips = [{ slug: "all", name: "All", count: all.length }, ...cats];
   const projects =
-    active === "all"
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.category === active);
+    active === "all" ? all : all.filter((p) => p.category === active);
 
   return (
     <section className="bg-cream">

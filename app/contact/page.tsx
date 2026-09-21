@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
-import { COMPANY } from "@/lib/data";
+import { getServices, getSettings } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Contact — Velor",
   description:
     "Book a free interior design consultation. Visit our Dhaka studio or reach us by phone and email.",
 };
-
-const { contact } = COMPANY;
 
 function InfoRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -20,7 +18,12 @@ function InfoRow({ label, children }: { label: string; children: React.ReactNode
   );
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [{ company }, services] = await Promise.all([
+    getSettings(),
+    getServices(),
+  ]);
+  const contact = company.contact;
   return (
     <main className="pb-20">
       <PageHero
@@ -84,7 +87,7 @@ export default function ContactPage() {
               Fields marked required help us prepare for your call.
             </p>
             <div className="mt-7">
-              <ContactForm />
+              <ContactForm services={services} />
             </div>
           </div>
         </div>

@@ -4,10 +4,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { PROJECTS } from "@/lib/data";
+import { PROJECTS, type Project } from "@/lib/data";
 
-export default function LatestProjects() {
-  const projects = PROJECTS.slice(0, 8);
+export default function LatestProjects({ projects: input }: { projects?: Project[] }) {
+  const projects = (input?.length ? input : PROJECTS).slice(0, 8);
 
   return (
     <section className="bg-cream-100">
