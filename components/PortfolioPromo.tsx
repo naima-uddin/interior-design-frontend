@@ -19,11 +19,10 @@ export default function PortfolioPromo() {
 
   return (
     <div
-      className={`fixed bottom-6 right-6 z-40 w-[280px] max-w-[calc(100vw-3rem)] transition-all duration-500 ${
-        visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-      }`}
+      className={`fixed bottom-24 right-5 z-40 w-70 max-w-[calc(100vw-3rem)] transition-all duration-500 sm:bottom-28 sm:right-8 ${visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+        }`}
     >
-      <div className="relative rounded-2xl border border-cream-100/10 bg-[#2b2c19] p-5 text-cream-100 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
+      <div className="relative rounded-2xl border border-cream-100/10 bg-[#2b2c19] px-5 py-2 text-cream-100 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
         <button
           aria-label="Dismiss"
           onClick={() => setDismissed(true)}
@@ -34,10 +33,6 @@ export default function PortfolioPromo() {
           </svg>
         </button>
 
-        <span className="eyebrow inline-flex items-center gap-1.5 rounded-full bg-clay/20 px-3 py-1 !text-[9px] !text-clay">
-          <span className="h-1.5 w-1.5 rounded-full bg-clay" />
-          Real Projects, Real Homes
-        </span>
 
         <h3 className="font-serif mt-3 text-lg leading-snug text-cream-100">
           See our full <span className="text-clay">portfolio</span>
@@ -49,7 +44,7 @@ export default function PortfolioPromo() {
 
         <Link
           href="/projects"
-          className="eyebrow group mt-4 inline-flex items-center gap-2 rounded-full bg-cream-100 px-4 py-2.5 !text-ink"
+          className="eyebrow group mt-4 inline-flex items-center gap-2 rounded-full bg-cream-100 px-4 py-1.5 !text-ink"
         >
           View Portfolio
           <svg className="h-3 w-3 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

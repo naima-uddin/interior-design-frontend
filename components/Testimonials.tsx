@@ -8,9 +8,9 @@ export default function Testimonials({ items }: { items?: Testimonial[] }) {
   return (
     <section className="bg-cream-100">
       <div className="mx-auto max-w-[1260px] px-5 py-12 sm:px-8 sm:py-16">
-        <div className="mb-12 text-center">
+        <div className="mb-4 text-center">
           <span className="eyebrow">Kind words</span>
-          <h2 className="font-serif mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+          <h2 className="font-serif mt-1 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             Homes we&apos;re proud of.
           </h2>
         </div>
