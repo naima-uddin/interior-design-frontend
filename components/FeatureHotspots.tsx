@@ -104,12 +104,12 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
         )}
 
         {/* Legend / quick jump chips */}
-        <div className="mt-2 flex flex-wrap gap-2.5">
+        <div className="mt-2 flex gap-2.5 overflow-x-auto scrollbar-none pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
           {points.map((pt, i) => (
             <button
               key={pt.title}
               onClick={() => setActive(i)}
-              className={`eyebrow flex items-center gap-2 rounded-full border px-4 py-2.5 !tracking-[0.14em] transition ${active === i
+              className={`eyebrow flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 !tracking-[0.14em] transition ${active === i
                 ? "border-clay bg-clay !text-cream-100"
                 : "border-ink/15 text-ink/70 hover:border-ink/40 hover:text-ink"
                 }`}
