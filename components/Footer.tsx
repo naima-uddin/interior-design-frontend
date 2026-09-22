@@ -159,25 +159,27 @@ function FooterCol({
     <div>
       <p className="eyebrow !text-cream-100/45">{title}</p>
       <ul className="mt-3 space-y-2.5">
-        {visible.map((l) => (
-          <li key={l.label}>
-            <Link href={l.href} className="text-[13px] font-light text-cream-100/75 transition hover:text-cream-100">
-              {l.label}
-            </Link>
-          </li>
-        ))}
-        {collapsible && !expanded && (
-          <li>
+        {visible.map((l, i) => {
+          const isLast = i === visible.length - 1;
+          const toggle = collapsible && isLast && (
             <button
               type="button"
-              onClick={() => setExpanded(true)}
-              aria-label="Show more links"
-              className="grid h-6 w-6 place-items-center rounded-full border border-cream-100/25 text-[13px] leading-none text-cream-100/75 transition hover:border-cream-100 hover:text-cream-100"
+              onClick={() => setExpanded((v) => !v)}
+              aria-label={expanded ? "Show fewer links" : "Show more links"}
+              className="grid h-5 w-5 shrink-0 place-items-center rounded-full border border-cream-100/25 text-[12px] leading-none text-cream-100/75 transition hover:border-cream-100 hover:text-cream-100"
             >
-              +
+              {expanded ? "−" : "+"}
             </button>
-          </li>
-        )}
+          );
+          return (
+            <li key={l.label} className="flex items-center gap-2">
+              <Link href={l.href} className="text-[13px] font-light text-cream-100/75 transition hover:text-cream-100">
+                {l.label}
+              </Link>
+              {toggle}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
