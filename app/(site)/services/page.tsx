@@ -48,6 +48,9 @@ export default async function ServicesPage() {
                   <p className="mt-2.5 text-sm font-light leading-relaxed text-stone">
                     {s.summary}
                   </p>
+                  <p className="mt-3 text-sm font-medium text-clay">
+                    {s.startingPrice}
+                  </p>
                   <span className="eyebrow mt-4 inline-flex items-center gap-2 text-ink/70 transition group-hover:text-clay">
                     Learn more
                     <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">

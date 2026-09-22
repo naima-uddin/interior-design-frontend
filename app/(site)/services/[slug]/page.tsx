@@ -53,6 +53,9 @@ export default async function ServicePage({
               <p className="mt-6 max-w-md text-[15px] font-light leading-relaxed text-stone">
                 {service.intro}
               </p>
+              <p className="mt-4 text-base font-medium text-clay">
+                {service.startingPrice}
+              </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/contact"

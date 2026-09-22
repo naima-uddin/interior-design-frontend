@@ -13,6 +13,7 @@ import {
   PROJECTS,
   SERVICES,
   POSTS,
+  PAGES,
   TESTIMONIALS,
   FAQS,
   ROOMS,
@@ -30,6 +31,7 @@ import {
   type Project,
   type Service,
   type Post,
+  type Page,
   type Testimonial,
   type Room,
   type Space,
@@ -170,6 +172,18 @@ export async function getPosts(): Promise<Post[]> {
 export async function getPost(slug: string): Promise<Post | null> {
   const data = await getJSON<{ item: Post | null }>(`/api/posts/${slug}`, {
     item: POSTS.find((p) => p.slug === slug) || null,
+  });
+  return data.item;
+}
+
+export async function getPages(): Promise<Page[]> {
+  const data = await getJSON<{ items: Page[] }>("/api/pages", { items: PAGES });
+  return data.items;
+}
+
+export async function getPage(slug: string): Promise<Page | null> {
+  const data = await getJSON<{ item: Page | null }>(`/api/pages/${slug}`, {
+    item: PAGES.find((p) => p.slug === slug) || null,
   });
   return data.item;
 }

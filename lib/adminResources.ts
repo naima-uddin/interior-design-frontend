@@ -117,6 +117,7 @@ export const RESOURCES: ResourceConfig[] = [
       { key: "intro", label: "Intro (detail page)", type: "textarea" },
       { key: "image", label: "Image", type: "image", required: true },
       { key: "includes", label: "What's included", type: "stringArray" },
+      { key: "startingPrice", label: "Starting price", type: "text", placeholder: "Starting from ৳45,000" },
     ],
   },
   {
@@ -135,6 +136,20 @@ export const RESOURCES: ResourceConfig[] = [
       { key: "author", label: "Author", type: "text" },
       { key: "readingTime", label: "Reading time", type: "text", placeholder: "5 min read" },
       { key: "cover", label: "Cover image", type: "image", required: true },
+      { key: "body", label: "Body paragraphs", type: "stringArray" },
+    ],
+  },
+  {
+    key: "pages",
+    label: "Pages",
+    singular: "Page",
+    uploadFolder: "pages",
+    titleField: "title",
+    subtitleField: "slug",
+    fields: [
+      { key: "slug", label: "Slug", type: "text", required: true, placeholder: "privacy-policy" },
+      { key: "title", label: "Title", type: "text", required: true },
+      { key: "intro", label: "Intro (shown under the title)", type: "textarea" },
       { key: "body", label: "Body paragraphs", type: "stringArray" },
     ],
   },

@@ -34,11 +34,13 @@ function NavDropdown({
   href,
   items,
   onToggle,
+  solid,
 }: {
   label: string;
   href: string;
   items: Item[];
   onToggle: (open: boolean) => void;
+  solid: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const set = (v: boolean) => {
@@ -53,7 +55,8 @@ function NavDropdown({
     >
       <Link
         href={href}
-        className="eyebrow flex items-center gap-1.5 !tracking-[0.18em] text-ink/80 transition-colors hover:text-ink"
+        className={`eyebrow flex items-center gap-1.5 !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-white/90! hover:text-white!"
+          }`}
       >
         {label}
         <svg
@@ -142,7 +145,8 @@ export default function Navbar({ projectCategories, services }: NavProps) {
         {/* Left: wordmark */}
         <Link
           href="/"
-          className="font-serif text-lg font-medium uppercase text-ink sm:text-2xl md:text-[1.7rem]"
+          className={`font-serif text-lg font-medium uppercase transition-colors sm:text-2xl md:text-[1.7rem] ${solid ? "text-ink" : "text-white"
+            }`}
           style={{ letterSpacing: "0.42em" }}
         >
           <span className="pl-[0.42em]">Velor</span>
@@ -150,13 +154,14 @@ export default function Navbar({ projectCategories, services }: NavProps) {
 
         {/* Center: primary links + dropdowns (desktop) */}
         <div className="hidden items-center justify-center gap-7 lg:flex">
-          <NavDropdown label="Projects" href="/projects" items={projectItems} onToggle={track} />
-          <NavDropdown label="Services" href="/services" items={serviceItems} onToggle={track} />
+          <NavDropdown label="Projects" href="/projects" items={projectItems} onToggle={track} solid={solid} />
+          <NavDropdown label="Services" href="/services" items={serviceItems} onToggle={track} solid={solid} />
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="eyebrow !tracking-[0.18em] text-ink/80 transition-colors hover:text-ink"
+              className={`eyebrow !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-white/90! hover:text-white!"
+                }`}
             >
               {l.label}
             </Link>
@@ -168,7 +173,8 @@ export default function Navbar({ projectCategories, services }: NavProps) {
           <button
             aria-label="Search"
             onClick={() => setSearchOpen(true)}
-            className="grid h-10 w-10 place-items-center text-ink/80 transition hover:text-ink"
+            className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-white/90 hover:text-white"
+              }`}
           >
             <SearchIcon />
           </button>
@@ -176,7 +182,8 @@ export default function Navbar({ projectCategories, services }: NavProps) {
           <button
             aria-label="Open menu"
             onClick={() => setOpen(true)}
-            className="grid h-10 w-10 place-items-center text-ink/80 transition hover:text-ink"
+            className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-white/90 hover:text-white"
+              }`}
           >
             <MenuIcon />
           </button>

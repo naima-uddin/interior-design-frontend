@@ -865,6 +865,7 @@ export type Service = {
   intro: string; // detail page lead
   image: { url: string };
   includes: string[];
+  startingPrice: string; // e.g. "Starting from ৳1,85,000"
 };
 
 export const SERVICES: Service[] = [
@@ -884,6 +885,7 @@ export const SERVICES: Service[] = [
       "Lighting & electrical layout",
       "Furnishing, styling & handover",
     ],
+    startingPrice: "Starting from ৳1,85,000",
   },
   {
     slug: "bedroom-interior-design",
@@ -901,6 +903,7 @@ export const SERVICES: Service[] = [
       "Ambient & task lighting",
       "Drapery & soft furnishings",
     ],
+    startingPrice: "Starting from ৳45,000",
   },
   {
     slug: "living-room-design",
@@ -918,6 +921,7 @@ export const SERVICES: Service[] = [
       "False ceiling & cove lighting",
       "Rug, art & styling",
     ],
+    startingPrice: "Starting from ৳60,000",
   },
   {
     slug: "dining-room-design",
@@ -935,6 +939,7 @@ export const SERVICES: Service[] = [
       "Seating configuration",
       "Ceiling detailing",
     ],
+    startingPrice: "Starting from ৳35,000",
   },
   {
     slug: "modular-kitchen-design",
@@ -952,6 +957,7 @@ export const SERVICES: Service[] = [
       "Quartz / stone worktops",
       "Task & under-cabinet lighting",
     ],
+    startingPrice: "Starting from ৳1,400/sq.ft",
   },
   {
     slug: "open-kitchen-design",
@@ -969,6 +975,7 @@ export const SERVICES: Service[] = [
       "Concealed storage",
       "Layered lighting",
     ],
+    startingPrice: "Starting from ৳1,600/sq.ft",
   },
   {
     slug: "traditional-kitchen-design",
@@ -986,6 +993,7 @@ export const SERVICES: Service[] = [
       "Larder & pantry storage",
       "Warm ambient lighting",
     ],
+    startingPrice: "Starting from ৳1,300/sq.ft",
   },
   {
     slug: "bathroom-design",
@@ -1003,6 +1011,7 @@ export const SERVICES: Service[] = [
       "Waterproofing & MEP coordination",
       "Lighting & mirror design",
     ],
+    startingPrice: "Starting from ৳55,000",
   },
   {
     slug: "common-space-design",
@@ -1020,6 +1029,7 @@ export const SERVICES: Service[] = [
       "Layered lighting",
       "Custom joinery & styling",
     ],
+    startingPrice: "Starting from ৳40,000",
   },
   {
     slug: "custom-furniture-design",
@@ -1037,6 +1047,7 @@ export const SERVICES: Service[] = [
       "In-house manufacturing",
       "Precise on-site fitting",
     ],
+    startingPrice: "Starting from ৳850/sq.ft",
   },
   {
     slug: "landscape-design",
@@ -1054,6 +1065,7 @@ export const SERVICES: Service[] = [
       "Outdoor lighting",
       "Weatherproof materials",
     ],
+    startingPrice: "Starting from ৳30,000",
   },
 ];
 
@@ -1118,6 +1130,78 @@ export const PROCESS = [
     body: "A final walkthrough, styling and the keys to a space that's ready to live in.",
   },
 ];
+
+/* ── Static content pages (About, Privacy, Terms, Cookies) ───────────────── */
+
+export type Page = {
+  slug: string;
+  title: string;
+  intro: string;
+  body: string[];
+};
+
+export const PAGES: Page[] = [
+  {
+    slug: "about",
+    title: "About Velor",
+    intro:
+      "Velor is a full-service interior design studio — design, custom manufacturing and project management under one roof, for a single room or a whole home.",
+    body: [
+      "Founded in 2014, Velor has grown from a small design practice into a complete interior studio: space planning, materials and lighting design, our own furniture workshop, and the site teams to see a project through to handover.",
+      "We work across Bangladesh — Dhaka, Chattogram, Sylhet, Khulna, Rajshahi, Barishal, Rangpur and Mymensingh — on everything from single rooms to full turnkey apartments and houses.",
+      "Every quotation is itemised and every project is managed by one dedicated point of contact, from the first consultation through to the final walkthrough. Because we manufacture in-house, we control quality and cost at every step rather than relying on outside vendors.",
+      "If you'd like to know more about how we work, see our process on the Services page, or get in touch to book a free consultation.",
+    ],
+  },
+  {
+    slug: "privacy-policy",
+    title: "Privacy Policy",
+    intro:
+      "This policy explains what information Velor collects, how it is used, and the choices you have.",
+    body: [
+      "Information we collect. When you use our contact form, request a consultation, or subscribe to updates, we collect the details you provide — such as your name, phone number, email address and project details. We also collect basic usage data (pages visited, device and browser type) through standard web analytics.",
+      "How we use it. We use this information to respond to enquiries, schedule consultations, prepare quotations, deliver the services you request, and — only with your consent — send occasional updates about our work. We do not sell your personal information to third parties.",
+      "Sharing. We may share information with trusted service providers who help us operate the business (such as hosting, payment or communication tools), bound by confidentiality obligations, or where required by law.",
+      "Cookies. We use cookies and similar technologies to keep the site working properly and to understand how it's used — see our Cookies policy for details.",
+      "Data retention & security. We keep personal information only as long as needed for the purposes described here, and take reasonable technical and organisational measures to protect it against unauthorised access, loss or misuse.",
+      "Your rights. You may ask us to access, correct or delete the personal information we hold about you at any time by contacting us using the details on our Contact page.",
+      "Changes to this policy. We may update this policy from time to time; the latest version will always be available on this page.",
+    ],
+  },
+  {
+    slug: "terms-conditions",
+    title: "Terms & Conditions",
+    intro:
+      "These terms govern your use of the Velor website and the services we provide. By using this site or engaging us for a project, you agree to them.",
+    body: [
+      "Services. Velor provides interior design, custom furniture manufacturing and project management services. The scope, timeline and cost of any project are set out in a written, itemised quotation agreed with you before work begins.",
+      "Quotations & payments. Quotations are valid for the period stated at the time of issue. Projects typically proceed on an agreed payment schedule tied to milestones (consultation, design approval, production, installation and handover). Prices shown on this website are indicative starting prices and may vary based on the specifics of your space and requirements.",
+      "Changes & cancellations. Any changes to an agreed scope of work may affect cost and timeline and will be confirmed in writing before proceeding. Cancellation terms for materials already ordered or work already completed will be set out in your project agreement.",
+      "Intellectual property. Design concepts, drawings and 3D visualisations prepared for your project remain the intellectual property of Velor until the project is paid in full, after which you receive a licence to use them for your own space.",
+      "Website use. Content on this website — including text, images and design — is owned by Velor or its licensors and may not be reproduced without permission. We aim to keep information on this site accurate but do not guarantee it is free of errors at all times.",
+      "Liability. While we take great care in the design and execution of every project, our liability in connection with any project is limited to the value of the services provided, except where liability cannot be excluded by law.",
+      "Governing law. These terms are governed by the laws of Bangladesh.",
+    ],
+  },
+  {
+    slug: "cookies",
+    title: "Cookies Policy",
+    intro:
+      "This page explains what cookies are, which ones we use, and how you can control them.",
+    body: [
+      "What are cookies? Cookies are small text files placed on your device when you visit a website. They help the site function correctly and let us understand how it's being used.",
+      "Essential cookies. Some cookies are necessary for the website to work — for example, keeping you signed in to the admin dashboard or remembering items in a saved list. These cannot be switched off.",
+      "Analytics cookies. We use analytics cookies to understand how visitors use the site (which pages are popular, how people navigate) so we can improve it. This information is collected in aggregate and is not used to personally identify you.",
+      "Third-party cookies. Some pages may load content — such as maps or embedded media — from third-party providers who may set their own cookies, governed by their own privacy policies.",
+      "Managing cookies. Most browsers let you view, delete and block cookies through their settings. Blocking essential cookies may affect how parts of the site work.",
+      "Changes to this policy. We may update this cookies policy from time to time; the latest version will always be available on this page.",
+    ],
+  },
+];
+
+export function getPageBySlug(slug: string): Page | undefined {
+  return PAGES.find((p) => p.slug === slug);
+}
 
 /* ── Testimonials ──────────────────────────────────────────────────────── */
 

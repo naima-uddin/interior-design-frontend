@@ -47,6 +47,9 @@ export default function ServicesPreview({ services: input }: { services?: Servic
               <div className="absolute inset-x-0 bottom-0 p-5">
                 <p className="eyebrow !text-cream-100/70">{s.tagline}</p>
                 <h3 className="font-serif mt-1 text-xl text-cream-100">{s.name}</h3>
+                <p className="mt-1 text-[13px] font-medium text-cream-100/90">
+                  {s.startingPrice}
+                </p>
                 <p className="mt-1.5 max-w-xs text-[13px] font-light leading-relaxed text-cream-100/0 transition-all duration-300 group-hover:text-cream-100/85">
                   {s.summary}
                 </p>

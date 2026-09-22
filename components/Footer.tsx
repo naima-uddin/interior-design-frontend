@@ -24,7 +24,7 @@ const SUPPORT_LINKS = [
 ];
 
 const COMPANY_LINKS = [
-  { label: "About Us", href: "/studio" },
+  { label: "About Us", href: "/about" },
   { label: "Our Story", href: "/studio" },
   { label: "Contact", href: "/contact" },
 ];
@@ -132,9 +132,9 @@ export default function Footer() {
             © 2026 Velor. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs font-light text-cream-100/45">
-            <Link href="#" className="transition hover:text-cream-100">Privacy Policy</Link>
-            <Link href="#" className="transition hover:text-cream-100">Terms &amp; Conditions</Link>
-            <Link href="#" className="transition hover:text-cream-100">Cookies</Link>
+            <Link href="/privacy-policy" className="transition hover:text-cream-100">Privacy Policy</Link>
+            <Link href="/terms-conditions" className="transition hover:text-cream-100">Terms &amp; Conditions</Link>
+            <Link href="/cookies" className="transition hover:text-cream-100">Cookies</Link>
           </div>
         </div>
       </div>
