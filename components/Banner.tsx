@@ -20,10 +20,10 @@ import { SLIDES, type Slide } from "@/lib/data";
 
 // The centred sharp window. Horizontal inset caps it and centres it on wide
 // screens; vertical insets leave room for the fixed navbar (top) and the
-// title / thumbnail band (bottom).
-const SIDE = "max(2%, calc((100% - 1320px) / 2))";
-const INSET = { top: "8%", bottom: "13%", left: SIDE, right: SIDE } as const;
-const WINDOW_CLIP = `inset(8% ${SIDE} 13% ${SIDE} round 28px)`;
+// title / thumbnail band (bottom). On small screens the "window" collapses
+// to a true full-bleed image (no blurred border) so the banner covers the
+// full device width edge to edge.
+const SIDE_DESKTOP = "max(2%, calc((100% - 1320px) / 2))";
 
 // words wrapped in *asterisks* render in a serif italic accent
 const renderHighlight = (text: string) =>
@@ -42,8 +42,25 @@ const renderHighlight = (text: string) =>
 export default function Banner({ slides: input }: { slides?: Slide[] }) {
   const slides: Slide[] = input?.length ? input : SLIDES;
   const [current, setCurrent] = useState(0);
+  const [compact, setCompact] = useState(false);
   const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const total = slides.length;
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = () => setCompact(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const TEXT_SIDE = compact ? "20px" : SIDE_DESKTOP;
+  const INSET = compact
+    ? { top: "56px", bottom: "0px", left: "0px", right: "0px" }
+    : { top: "8%", bottom: "13%", left: SIDE_DESKTOP, right: SIDE_DESKTOP };
+  const WINDOW_CLIP = compact
+    ? "inset(0px round 0px)"
+    : `inset(8% ${SIDE_DESKTOP} 13% ${SIDE_DESKTOP} round 28px)`;
 
   const startAuto = useCallback(() => {
     if (autoRef.current) clearInterval(autoRef.current);
@@ -77,7 +94,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
 
   return (
     <section
-      className="relative h-[85vh] max-h-[880px] min-h-[440px] w-full overflow-hidden bg-cream sm:min-h-[560px]"
+      className="relative h-[42vh] min-h-72 w-full overflow-hidden bg-cream sm:h-[70vh] sm:min-h-120 md:h-[80vh] md:min-h-140 lg:h-[85vh] lg:max-h-220"
       onMouseEnter={stop}
       onMouseLeave={startAuto}
     >
@@ -132,11 +149,13 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
         <div className="absolute inset-0 bg-gradient-to-l from-olive-800/35 via-transparent to-transparent" />
       </div>
 
-      {/* ── Window frame: hairline border + soft shadow onto the paper ── */}
-      <div
-        className="pointer-events-none absolute rounded-[28px] border border-white/50 shadow-[0_50px_110px_-40px_rgba(42,38,34,0.55)]"
-        style={INSET}
-      />
+      {/* ── Window frame: hairline border + soft shadow onto the paper (desktop/tablet only) ── */}
+      {!compact && (
+        <div
+          className="pointer-events-none absolute rounded-[28px] border border-white/50 shadow-[0_50px_110px_-40px_rgba(42,38,34,0.55)]"
+          style={INSET}
+        />
+      )}
 
       {/* ── Content anchored to the window ── */}
       <div className="absolute" style={INSET}>
@@ -149,7 +168,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
 
         {/* description card — top-right */}
         {(slide.subtitle || slide.buttonText) && (
-          <div className="absolute right-5 top-16 max-w-42 rounded-3xl border border-white/20 bg-[#383927]-800/20 px-3 py-4 text-right backdrop-blur-xl sm:right-7 sm:top-7 sm:max-w-xs sm:px-2 sm:py-4">
+          <div className="absolute right-5 top-16 hidden max-w-42 rounded-3xl border border-white/20 bg-[#383927]-800/20 px-3 py-4 text-right backdrop-blur-xl sm:right-7 sm:top-7 sm:block sm:max-w-xs sm:px-2 sm:py-4">
             {slide.subtitle && (
               <p className="text-[13px] font-light leading-relaxed text-white/95">
                 {slide.subtitle}
@@ -189,7 +208,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
 
       {/* ── Big title — bottom-left, over the blurred paper ── */}
       <h1
-        style={{ left: SIDE }}
+        style={{ left: TEXT_SIDE }}
         className="font-serif absolute bottom-[3%] max-w-[62%] text-balance text-[2rem] font-semibold leading-[1.03] tracking-tight text-ink sm:text-5xl lg:text-[3.6rem] "
       >
         {renderHighlight(slide.title)}
@@ -198,7 +217,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
       {/* ── Thumbnails — bottom-right, over the blurred paper ── */}
       {thumbs.length > 0 && (
         <div
-          style={{ right: SIDE }}
+          style={{ right: TEXT_SIDE }}
           className="absolute bottom-[3%] hidden items-center gap-2.5 sm:flex"
         >
           {thumbs.map(({ s, i }) => (
