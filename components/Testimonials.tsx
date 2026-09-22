@@ -15,11 +15,11 @@ export default function Testimonials({ items }: { items?: Testimonial[] }) {
           </h2>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 scrollbar-none sm:-mx-8 sm:px-8 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
           {list.map((t) => (
             <figure
               key={t.name}
-              className="flex flex-col rounded-2xl border border-ink/10 bg-cream p-7"
+              className="flex w-[82%] shrink-0 snap-center flex-col rounded-2xl border border-ink/10 bg-cream p-7 sm:w-[45%] md:w-auto md:shrink"
             >
               <div className="flex gap-1 text-clay">
                 {Array.from({ length: 5 }).map((_, i) => (
