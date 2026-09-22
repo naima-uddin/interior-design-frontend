@@ -32,25 +32,25 @@ const COMPANY_LINKS = [
 export default function Footer() {
   return (
     <footer className="bg-olive-800 text-cream-100">
-      <div className="mx-auto max-w-[1260px] px-5 py-10 sm:px-8 sm:py-12">
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.3fr]">
+      <div className="mx-auto max-w-[1260px] px-5 py-6 sm:px-8 sm:py-8">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr]">
           {/* Brand + CTA */}
           <div>
             <p className="font-serif text-2xl font-medium uppercase tracking-[0.3em]">
               Velor
             </p>
-            <p className="mt-4 max-w-xs text-sm font-light leading-relaxed text-cream-100/60">
+            <p className="mt-3 max-w-xs text-sm font-light leading-relaxed text-cream-100/60">
               Supporting modern living through thoughtfully designed
               interiors, furniture and timeless spaces for every home.
             </p>
             <Link
               href="/collection"
-              className="eyebrow mt-7 inline-flex w-fit items-center rounded-full bg-cream-100 px-7 py-3.5 !text-ink transition hover:bg-cream-100/90"
+              className="eyebrow mt-5 inline-flex w-fit items-center rounded-full bg-cream-100 px-7 py-3.5 !text-ink transition hover:bg-cream-100/90"
             >
               Explore Collection
             </Link>
 
-            <div className="mt-8 grid grid-cols-3 gap-6 sm:grid-cols-3">
+            <div className="mt-6 grid grid-cols-3 gap-6 sm:grid-cols-3">
               <FooterCol title="Quick Links" links={QUICK_LINKS} collapseAt={3} />
               <FooterCol title="Support" links={SUPPORT_LINKS} />
               <FooterCol title="Company" links={COMPANY_LINKS} />
@@ -63,7 +63,7 @@ export default function Footer() {
               Designing Homes For Inspired Living
             </h2>
 
-            <div className="mt-6 space-y-1.5">
+            <div className="mt-4 space-y-1.5">
               <p className="text-lg font-light text-cream-100">{COMPANY.contact.phones[0]}</p>
               <a
                 href={`mailto:${COMPANY.contact.email}`}
@@ -73,7 +73,7 @@ export default function Footer() {
               </a>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <p className="eyebrow !text-cream-100/45">Office</p>
                 <p className="mt-2 text-sm font-light leading-relaxed text-cream-100/75">
@@ -88,7 +88,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-8">
+            <div className="mt-6 flex flex-wrap items-center gap-8">
               <div>
                 <p className="eyebrow !text-cream-100/45">Follow Us</p>
                 <div className="mt-3 flex items-center gap-3">
@@ -127,7 +127,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-cream-100/12 pt-6 sm:flex-row sm:items-center">
+        <div className="mt-8 flex flex-col items-start justify-between gap-3 border-t border-cream-100/12 pt-5 sm:flex-row sm:items-center">
           <p className="text-xs font-light text-cream-100/45">
             © 2026 Velor. All rights reserved.
           </p>
