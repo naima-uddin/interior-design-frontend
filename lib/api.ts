@@ -79,7 +79,7 @@ export function getHomepage(): Promise<HomeData> {
   return getJSON<HomeData>("/api/homepage", {
     banners: SLIDES,
     services: SERVICES.slice(0, 6),
-    featured: PRODUCTS.slice(0, 5),
+    featured: PRODUCTS.slice(0, 6),
     rooms: ROOMS,
     hotspot: HOTSPOT_SCENE,
     projects: PROJECTS.slice(0, 8),

@@ -22,7 +22,7 @@ export default function FeaturedPieces({ products }: { products?: Product[] }) {
           </Link>
         </div>
 
-        <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-3 gap-x-6 gap-y-6 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
           {items.map((p) => (
             <ProductCard key={p._id} product={p} />
           ))}
