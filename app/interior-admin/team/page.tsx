@@ -152,8 +152,8 @@ export default function TeamPage() {
       </form>
 
       {/* Member list */}
-      <div className="mt-8 overflow-hidden rounded-2xl border border-ink/10">
-        <table className="w-full text-left text-sm">
+      <div className="mt-8 overflow-x-auto rounded-2xl border border-ink/10">
+        <table className="w-full min-w-125 text-left text-sm">
           <thead className="bg-cream-200 text-ink/60">
             <tr>
               <th className="px-4 py-3 font-normal"><span className="eyebrow">Member</span></th>

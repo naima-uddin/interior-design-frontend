@@ -17,16 +17,16 @@ export default function ResourceListPage({
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="font-serif text-3xl font-medium text-ink">{resource.label}</h1>
+          <h1 className="font-serif text-2xl font-medium text-ink sm:text-3xl">{resource.label}</h1>
           <p className="mt-1.5 text-sm font-light text-stone">
             {resource.singular} entries shown on the storefront.
           </p>
         </div>
         <Link
           href={`/interior-admin/${resource.key}/new`}
-          className="eyebrow rounded-full bg-olive px-6 py-3 !tracking-[0.16em] !text-cream-100 transition hover:bg-olive-800"
+          className="eyebrow inline-flex w-fit items-center rounded-full bg-olive px-6 py-3 !tracking-[0.16em] !text-cream-100 transition hover:bg-olive-800"
         >
           + New {resource.singular}
         </Link>

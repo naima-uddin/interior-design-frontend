@@ -9,8 +9,8 @@ export default function FeaturedPieces({ products }: { products?: Product[] }) {
   return (
     <section className="bg-cream">
       <div className="mx-auto max-w-[1260px] px-5 pb-8 sm:px-8 sm:pb-10">
-        <div className="mb-10 flex items-end justify-between">
-          <span className="font-serif mt-2 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl -mb-2">Featured Pieces</span>
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+          <span className="font-serif mt-2 text-2xl font-semibold leading-tight tracking-tight text-ink sm:text-3xl lg:text-4xl -mb-2">Featured Pieces</span>
           <Link
             href="/collection"
             className="eyebrow inline-flex items-center gap-2 text-ink/80 transition hover:text-ink"
@@ -22,7 +22,7 @@ export default function FeaturedPieces({ products }: { products?: Product[] }) {
           </Link>
         </div>
 
-        <div className="grid grid-cols-3 gap-x-6 gap-y-6 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-6">
           {items.map((p) => (
             <ProductCard key={p._id} product={p} />
           ))}

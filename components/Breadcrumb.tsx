@@ -26,7 +26,7 @@ export default function Breadcrumb({
       <Link
         href="/"
         aria-label="Home"
-        className={`grid h-6 w-6 place-items-center rounded-full transition ${
+        className={`grid h-8 w-8 place-items-center rounded-full transition ${
           dark
             ? "text-cream-100/70 hover:bg-cream-100/15 hover:text-cream-100"
             : "text-stone/70 hover:bg-cream-200 hover:text-ink"

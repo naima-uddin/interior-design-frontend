@@ -77,7 +77,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
 
   return (
     <section
-      className="relative h-[80vh] max-h-[880px] min-h-[560px] w-full overflow-hidden bg-cream"
+      className="relative h-[85vh] max-h-[880px] min-h-[440px] w-full overflow-hidden bg-cream sm:min-h-[560px]"
       onMouseEnter={stop}
       onMouseLeave={startAuto}
     >
@@ -149,7 +149,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
 
         {/* description card — top-right */}
         {(slide.subtitle || slide.buttonText) && (
-          <div className="absolute right-5 top-5 max-w-[15rem] rounded-3xl border border-white/20 bg-[#383927]-800/20 px-3 py-4 text-right backdrop-blur-xl sm:right-7 sm:top-7 sm:max-w-xs sm:px-2 sm:py-4">
+          <div className="absolute right-5 top-16 max-w-42 rounded-3xl border border-white/20 bg-[#383927]-800/20 px-3 py-4 text-right backdrop-blur-xl sm:right-7 sm:top-7 sm:max-w-xs sm:px-2 sm:py-4">
             {slide.subtitle && (
               <p className="text-[13px] font-light leading-relaxed text-white/95">
                 {slide.subtitle}

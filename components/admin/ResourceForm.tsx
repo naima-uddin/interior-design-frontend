@@ -158,7 +158,7 @@ export default function ResourceForm({
       ))}
 
       {/* Implicit fields every resource has */}
-      <div className="grid grid-cols-2 gap-6 border-t border-ink/10 pt-6">
+      <div className="grid grid-cols-1 gap-6 border-t border-ink/10 pt-6 sm:grid-cols-2">
         <div>
           <label className="eyebrow mb-2 block">Sort order</label>
           <input

@@ -71,10 +71,10 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
                   </span>
                 </button>
 
-                {/* Popover */}
+                {/* Popover (desktop/tablet only — mobile shows the caption card below the image) */}
                 {isActive && (
                   <div
-                    className={`absolute top-1/2 z-10 w-56 -translate-y-1/2 rounded-2xl border border-white/40 bg-cream-100/95 p-3 shadow-[0_24px_50px_-20px_rgba(42,38,34,0.6)] backdrop-blur-md ${flip ? "right-6" : "left-6"
+                    className={`absolute top-1/2 z-10 hidden w-48 -translate-y-1/2 rounded-2xl border border-white/40 bg-cream-100/95 p-3 shadow-[0_24px_50px_-20px_rgba(42,38,34,0.6)] backdrop-blur-md sm:block sm:w-56 ${flip ? "right-6" : "left-6"
                       }`}
                   >
 
@@ -90,6 +90,18 @@ export default function FeatureHotspots({ scene }: { scene?: Scene | null }) {
             );
           })}
         </div>
+
+        {/* Caption card — mirrors the active hotspot below the image on mobile */}
+        {active != null && points[active] && (
+          <div className="mt-3 rounded-2xl border border-ink/10 bg-cream-100 p-4 sm:hidden">
+            <h3 className="font-serif text-lg font-medium text-ink">
+              {points[active].title}
+            </h3>
+            <p className="mt-1.5 text-[13px] font-light leading-relaxed text-stone">
+              {points[active].body}
+            </p>
+          </div>
+        )}
 
         {/* Legend / quick jump chips */}
         <div className="mt-2 flex flex-wrap gap-2.5">

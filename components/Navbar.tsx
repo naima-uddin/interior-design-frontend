@@ -137,12 +137,12 @@ export default function Navbar({ projectCategories, services }: NavProps) {
           : "border-b border-transparent bg-transparent"
           }`}
       >
-        <nav className="mx-auto grid h-12 max-w-[1280px] grid-cols-[auto_1fr_auto] items-center px-2 md:h-16 sm:px-2">
+        <nav className="mx-auto grid h-14 max-w-[1280px] grid-cols-[auto_1fr_auto] items-center px-4 sm:px-6 md:h-16 lg:px-8">
 
         {/* Left: wordmark */}
         <Link
           href="/"
-          className="font-serif text-2xl font-medium uppercase text-ink sm:text-[1.7rem]"
+          className="font-serif text-lg font-medium uppercase text-ink sm:text-2xl md:text-[1.7rem]"
           style={{ letterSpacing: "0.42em" }}
         >
           <span className="pl-[0.42em]">Velor</span>
@@ -168,7 +168,7 @@ export default function Navbar({ projectCategories, services }: NavProps) {
           <button
             aria-label="Search"
             onClick={() => setSearchOpen(true)}
-            className="text-ink/80 transition hover:text-ink"
+            className="grid h-10 w-10 place-items-center text-ink/80 transition hover:text-ink"
           >
             <SearchIcon />
           </button>
@@ -176,7 +176,7 @@ export default function Navbar({ projectCategories, services }: NavProps) {
           <button
             aria-label="Open menu"
             onClick={() => setOpen(true)}
-            className="text-ink/80 transition hover:text-ink"
+            className="grid h-10 w-10 place-items-center text-ink/80 transition hover:text-ink"
           >
             <MenuIcon />
           </button>

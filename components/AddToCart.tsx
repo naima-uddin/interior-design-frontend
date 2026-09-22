@@ -27,7 +27,7 @@ export default function AddToCart({ colours }: { colours: string[] }) {
               key={c}
               onClick={() => setColour(i)}
               aria-label={`Finish ${i + 1}`}
-              className={`h-8 w-8 rounded-full ring-1 ring-ink/15 transition ${
+              className={`h-9 w-9 rounded-full ring-1 ring-ink/15 transition ${
                 i === colour
                   ? "ring-2 ring-offset-2 ring-offset-cream ring-olive"
                   : "hover:scale-110"

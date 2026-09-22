@@ -54,7 +54,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <Link
           href={`/product/${product.slug}`}
           aria-label={`View ${product.title}`}
-          className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink/15 text-ink transition hover:border-olive hover:bg-[#383927] hover:text-cream-100"
+          className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/15 text-ink transition hover:border-olive hover:bg-[#383927] hover:text-cream-100"
         >
           <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
             <path strokeLinecap="round" d="M12 5v14M5 12h14" />

@@ -32,7 +32,7 @@ const COMPANY_LINKS = [
 export default function Footer() {
   return (
     <footer className="bg-olive-800 text-cream-100">
-      <div className="mx-auto max-w-[1260px] px-5 py-6 sm:px-8 sm:py-8">
+      <div className="mx-auto max-w-[1260px] px-5 py-8 sm:px-8 lg:py-12">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr]">
           {/* Brand + CTA */}
           <div>
@@ -50,7 +50,7 @@ export default function Footer() {
               Explore Collection
             </Link>
 
-            <div className="mt-6 grid grid-cols-3 gap-6 sm:grid-cols-3">
+            <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3">
               <FooterCol title="Quick Links" links={QUICK_LINKS} collapseAt={3} />
               <FooterCol title="Support" links={SUPPORT_LINKS} />
               <FooterCol title="Company" links={COMPANY_LINKS} />
@@ -59,7 +59,7 @@ export default function Footer() {
 
           {/* Heading + contact */}
           <div className="lg:border-l lg:border-cream-100/10 lg:pl-14">
-            <h2 className="font-serif max-w-sm text-3xl font-medium leading-tight tracking-tight sm:text-4xl">
+            <h2 className="font-serif max-w-sm text-2xl font-medium leading-tight tracking-tight sm:text-3xl lg:text-4xl">
               Designing Homes For Inspired Living
             </h2>
 

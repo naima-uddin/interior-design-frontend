@@ -87,8 +87,8 @@ export default function ResourceTable({ resource }: { resource: ResourceConfig }
   if (!items) return <p className="text-sm text-stone-400">Loading…</p>;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-ink/10">
-      <table className="w-full text-left text-sm">
+    <div className="overflow-x-auto rounded-2xl border border-ink/10">
+      <table className="w-full min-w-160 text-left text-sm">
         <thead className="bg-cream-200 text-ink/60">
           <tr>
             <th className="w-14 px-3 py-3"></th>

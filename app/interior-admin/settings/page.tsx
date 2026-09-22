@@ -115,9 +115,9 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-4xl space-y-6 pb-20">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="font-serif text-3xl font-medium text-ink">Site Settings</h1>
+          <h1 className="font-serif text-2xl font-medium text-ink sm:text-3xl">Site Settings</h1>
           <p className="mt-1.5 text-sm font-light text-stone">
             Company info, categories, and the homepage&apos;s why-choose / process / hotspot content.
           </p>
@@ -125,7 +125,7 @@ export default function SettingsPage() {
         <button
           onClick={save}
           disabled={saving}
-          className="eyebrow rounded-full bg-olive px-7 py-3.5 !tracking-[0.16em] !text-cream-100 transition hover:bg-olive-800 disabled:opacity-50"
+          className="eyebrow w-fit rounded-full bg-olive px-7 py-3.5 !tracking-[0.16em] !text-cream-100 transition hover:bg-olive-800 disabled:opacity-50"
         >
           {saving ? "Saving…" : saved ? "Saved ✓" : "Save all"}
         </button>
