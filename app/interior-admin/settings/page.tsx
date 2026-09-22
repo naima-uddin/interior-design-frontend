@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
 import { getSettingsAdmin, updateSettings, ApiError } from "@/lib/adminApi";
 import ObjectListEditor from "@/components/admin/ObjectListEditor";
 import StringListEditor from "@/components/admin/StringListEditor";
-import ImageUploader from "@/components/admin/ImageUploader";
-import HotspotPositionEditor from "@/components/admin/HotspotPositionEditor";
 
 type Settings = {
   company?: {
@@ -28,13 +26,6 @@ type Settings = {
   projectCategories?: Record<string, unknown>[];
   whyChoose?: Record<string, unknown>[];
   process?: Record<string, unknown>[];
-  hotspot?: {
-    eyebrow?: string;
-    title?: string;
-    intro?: string;
-    image?: { url: string };
-    points?: { x: number; y: number; title: string; body: string }[];
-  };
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -119,7 +110,7 @@ export default function SettingsPage() {
         <div>
           <h1 className="font-serif text-2xl font-medium text-ink sm:text-3xl">Site Settings</h1>
           <p className="mt-1.5 text-sm font-light text-stone">
-            Company info, categories, and the homepage&apos;s why-choose / process / hotspot content.
+            Company info, categories, and the homepage&apos;s why-choose / process content.
           </p>
         </div>
         <button
@@ -229,39 +220,6 @@ export default function SettingsPage() {
             { key: "title", label: "Title", type: "text" },
             { key: "body", label: "Body", type: "textarea" },
           ]}
-        />
-      </Section>
-
-      <Section title="Homepage hotspot scene">
-        <TextField
-          label="Eyebrow"
-          value={data.hotspot?.eyebrow}
-          onChange={(v) => set("hotspot.eyebrow", v)}
-        />
-        <TextField
-          label="Title"
-          value={data.hotspot?.title}
-          onChange={(v) => set("hotspot.title", v)}
-        />
-        <div>
-          <label className="eyebrow mb-2 block">Intro</label>
-          <textarea
-            value={data.hotspot?.intro ?? ""}
-            onChange={(e) => set("hotspot.intro", e.target.value)}
-            rows={3}
-            className="w-full rounded-xl border border-ink/15 bg-cream-100 px-4 py-3 text-sm text-ink focus:border-olive focus:outline-none"
-          />
-        </div>
-        <ImageUploader
-          label="Scene image"
-          value={data.hotspot?.image}
-          onChange={(img) => set("hotspot.image", img)}
-          folder="misc"
-        />
-        <HotspotPositionEditor
-          image={data.hotspot?.image}
-          points={data.hotspot?.points ?? []}
-          onChange={(v) => set("hotspot.points", v)}
         />
       </Section>
     </div>
