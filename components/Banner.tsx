@@ -73,10 +73,7 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
   const slide = slides[current] ?? slides[0];
   if (!slide) return <section className="h-[70vh] bg-cream" />;
 
-  const thumbs = slides
-    .map((s, i) => ({ s, i }))
-    .filter((x) => x.i !== current)
-    .slice(0, 3);
+  const thumbs = slides.map((s, i) => ({ s, i }));
 
   return (
     <section
@@ -209,7 +206,10 @@ export default function Banner({ slides: input }: { slides?: Slide[] }) {
               key={s._id}
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className="group relative h-12 w-12 overflow-hidden rounded-xl border border-white/70 bg-white shadow-lg ring-1 ring-ink/5 transition hover:scale-105 lg:h-14 lg:w-14"
+              className={`group relative h-12 w-12 overflow-hidden rounded-xl border bg-white shadow-lg transition hover:scale-105 lg:h-14 lg:w-14 ${i === current
+                ? "border-[#383927] ring-2 ring-[#383927]/30"
+                : "border-white/70 ring-1 ring-ink/5"
+                }`}
             >
               <Image
                 src={s.image.url}

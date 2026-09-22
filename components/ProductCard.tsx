@@ -12,13 +12,13 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group">
       <Link href={`/product/${product.slug}`} className="block">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cream-200">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
           <Image
             src={product.images[0].url}
             alt={product.title}
             fill
             sizes="(min-width:1024px) 380px, (min-width:640px) 45vw, 100vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            className="object-contain p-6 transition-transform duration-700 ease-out group-hover:scale-[1.04] sm:p-8"
           />
           {product.isNew && (
             <span className="eyebrow absolute left-4 top-4 rounded-full bg-cream-100/85 px-3 py-1.5 !text-[9px] backdrop-blur-md">

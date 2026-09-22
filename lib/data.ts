@@ -303,7 +303,7 @@ export const PRODUCTS: Product[] = [
 
 
 export const FEATURED = PRODUCTS.filter((p) =>
-  ["p1", "p2", "p3"].includes(p._id),
+  ["p1", "p2", "p3", "p4", "p5"].includes(p._id),
 );
 
 export function getProduct(slug: string): Product | undefined {
