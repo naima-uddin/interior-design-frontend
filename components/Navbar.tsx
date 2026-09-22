@@ -13,6 +13,7 @@ import {
   type Category,
 } from "@/lib/data";
 import NavDrawer from "@/components/NavDrawer";
+import SearchOverlay from "@/components/SearchOverlay";
 
 type NavProps = {
   projectCategories?: (Category & { count: number })[];
@@ -100,6 +101,7 @@ function NavDropdown({
 export default function Navbar({ projectCategories, services }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false); // mobile menu
+  const [searchOpen, setSearchOpen] = useState(false);
   const [anyDropdown, setAnyDropdown] = useState(0); // count of open desktop dropdowns
 
   const cats = projectCategories?.length
@@ -124,7 +126,7 @@ export default function Navbar({ projectCategories, services }: NavProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const solid = scrolled || anyDropdown > 0;
+  const solid = scrolled || anyDropdown > 0 || searchOpen;
   const track = (v: boolean) => setAnyDropdown((n) => Math.max(0, n + (v ? 1 : -1)));
 
   return (
@@ -163,7 +165,11 @@ export default function Navbar({ projectCategories, services }: NavProps) {
 
         {/* Right: icons */}
         <div className="flex items-center justify-end gap-4 sm:gap-5">
-          <button aria-label="Search" className="text-ink/80 transition hover:text-ink">
+          <button
+            aria-label="Search"
+            onClick={() => setSearchOpen(true)}
+            className="text-ink/80 transition hover:text-ink"
+          >
             <SearchIcon />
           </button>
 
@@ -179,6 +185,7 @@ export default function Navbar({ projectCategories, services }: NavProps) {
       </header>
 
       <NavDrawer open={open} onClose={() => setOpen(false)} />
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }
