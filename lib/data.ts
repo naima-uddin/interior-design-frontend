@@ -300,6 +300,8 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
+
+
 export const FEATURED = PRODUCTS.filter((p) =>
   ["p1", "p2", "p3"].includes(p._id),
 );

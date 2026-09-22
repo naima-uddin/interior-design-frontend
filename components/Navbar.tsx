@@ -128,13 +128,14 @@ export default function Navbar({ projectCategories, services }: NavProps) {
   const track = (v: boolean) => setAnyDropdown((n) => Math.max(0, n + (v ? 1 : -1)));
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${solid
-        ? "border-b border-[#383927]/60 bg-cream/85 backdrop-blur-xl"
-        : "border-b border-transparent bg-transparent"
-        }`}
-    >
-      <nav className="mx-auto grid h-12 max-w-[1280px] grid-cols-[auto_1fr_auto] items-center px-2 md:h-16 sm:px-2">
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${solid
+          ? "border-b border-[#383927]/60 bg-cream/85 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
+          }`}
+      >
+        <nav className="mx-auto grid h-12 max-w-[1280px] grid-cols-[auto_1fr_auto] items-center px-2 md:h-16 sm:px-2">
 
         {/* Left: wordmark */}
         <Link
@@ -175,9 +176,10 @@ export default function Navbar({ projectCategories, services }: NavProps) {
           </button>
         </div>
       </nav>
+      </header>
 
       <NavDrawer open={open} onClose={() => setOpen(false)} />
-    </header>
+    </>
   );
 }
 

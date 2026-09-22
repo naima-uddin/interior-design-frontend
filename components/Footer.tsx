@@ -2,7 +2,10 @@
 // details and two address columns on the right, then a legal strip —
 // mirroring the reference layout.
 
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { COMPANY } from "@/lib/data";
 
 const QUICK_LINKS = [
@@ -28,8 +31,8 @@ const COMPANY_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-cream-100">
-      <div className="mx-auto max-w-[1260px] px-5 py-16 sm:px-8 sm:py-20">
+    <footer className="bg-olive-800 text-cream-100">
+      <div className="mx-auto max-w-[1260px] px-5 py-10 sm:px-8 sm:py-12">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.3fr]">
           {/* Brand + CTA */}
           <div>
@@ -47,8 +50,8 @@ export default function Footer() {
               Explore Collection
             </Link>
 
-            <div className="mt-10 grid grid-cols-3 gap-6 sm:grid-cols-3">
-              <FooterCol title="Quick Links" links={QUICK_LINKS} />
+            <div className="mt-8 grid grid-cols-3 gap-6 sm:grid-cols-3">
+              <FooterCol title="Quick Links" links={QUICK_LINKS} collapseAt={3} />
               <FooterCol title="Support" links={SUPPORT_LINKS} />
               <FooterCol title="Company" links={COMPANY_LINKS} />
             </div>
@@ -139,18 +142,42 @@ export default function Footer() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+function FooterCol({
+  title,
+  links,
+  collapseAt,
+}: {
+  title: string;
+  links: { label: string; href: string }[];
+  collapseAt?: number;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const collapsible = !!collapseAt && links.length > collapseAt;
+  const visible = collapsible && !expanded ? links.slice(0, collapseAt) : links;
+
   return (
     <div>
       <p className="eyebrow !text-cream-100/45">{title}</p>
       <ul className="mt-3 space-y-2.5">
-        {links.map((l) => (
+        {visible.map((l) => (
           <li key={l.label}>
             <Link href={l.href} className="text-[13px] font-light text-cream-100/75 transition hover:text-cream-100">
               {l.label}
             </Link>
           </li>
         ))}
+        {collapsible && !expanded && (
+          <li>
+            <button
+              type="button"
+              onClick={() => setExpanded(true)}
+              aria-label="Show more links"
+              className="grid h-6 w-6 place-items-center rounded-full border border-cream-100/25 text-[13px] leading-none text-cream-100/75 transition hover:border-cream-100 hover:text-cream-100"
+            >
+              +
+            </button>
+          </li>
+        )}
       </ul>
     </div>
   );
