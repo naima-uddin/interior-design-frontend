@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
+import ContactMap from "@/components/ContactMap";
 import { getServices, getSettings } from "@/lib/api";
 
 export const metadata: Metadata = {
@@ -90,19 +91,10 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* Map placeholder band */}
+      {/* Map band */}
       <section className="bg-cream">
         <div className="mx-auto max-w-[1260px] px-5 sm:px-8">
-          <div className="relative flex aspect-[21/9] items-center justify-center overflow-hidden rounded-2xl border border-ink/10 bg-[#383927]/5">
-            <div className="text-center">
-              <svg className="mx-auto h-8 w-8 text-olive/50" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s-7-6.5-7-11a7 7 0 1114 0c0 4.5-7 11-7 11z" />
-                <circle cx="12" cy="10" r="2.5" />
-              </svg>
-              <p className="eyebrow mt-3">Mohakhali New DOHS, Dhaka</p>
-              <p className="mt-1 text-sm font-light text-stone">Interactive map connects when the site goes live.</p>
-            </div>
-          </div>
+          <ContactMap />
         </div>
       </section>
     </main>
