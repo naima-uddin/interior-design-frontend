@@ -65,6 +65,9 @@ export default function AdminSidebar() {
         <Link href="/interior-admin/settings" className={linkClass("/interior-admin/settings")}>
           Settings
         </Link>
+        <Link href="/interior-admin/before-after" className={linkClass("/interior-admin/before-after")}>
+          Before / After
+        </Link>
         {admin?.role === "admin" && (
           <Link href="/interior-admin/team" className={linkClass("/interior-admin/team")}>
             Team

@@ -24,7 +24,7 @@ export default async function Home() {
       <ShopByRoom rooms={data.rooms} />
       <FeatureHotspots scene={data.hotspot} />
       <LatestProjects projects={data.projects} />
-      <BeforeAfterTransform />
+      <BeforeAfterTransform data={data.beforeAfter} />
       {/* <WhyChooseUs items={data.whyChoose} company={data.company} /> */}
       <ProcessSteps steps={data.process} />
       <Testimonials items={data.testimonials} />

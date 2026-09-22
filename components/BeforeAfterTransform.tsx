@@ -6,11 +6,24 @@
 
 import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
+import { BEFORE_AFTER } from "@/lib/data";
 
-const BEFORE = "https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1400&q=80";
-const AFTER = "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80";
+type BeforeAfterData = {
+  title?: string;
+  intro?: string;
+  beforeImage?: { url: string };
+  afterImage?: { url: string };
+  points?: { text: string }[];
+};
 
-export default function BeforeAfterTransform() {
+export default function BeforeAfterTransform({ data }: { data?: BeforeAfterData | null }) {
+  const d = {
+    title: data?.title || BEFORE_AFTER.title,
+    intro: data?.intro || BEFORE_AFTER.intro,
+    beforeImage: data?.beforeImage?.url ? data.beforeImage : BEFORE_AFTER.beforeImage,
+    afterImage: data?.afterImage?.url ? data.afterImage : BEFORE_AFTER.afterImage,
+    points: data?.points?.length ? data.points : BEFORE_AFTER.points,
+  };
   const [pos, setPos] = useState(30);
   const trackRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
@@ -41,13 +54,10 @@ export default function BeforeAfterTransform() {
       <div className="mx-auto max-w-[1100px] px-5 py-6 text-center sm:px-8 sm:py-8">
 
         <h2 className="font-serif mt-2 text-3xl font-semibold uppercase tracking-tight sm:text-4xl">
-          Drag to experience the transformation
+          {d.title}
         </h2>
         <p className="mx-auto mt-2 max-w-4xl text-[15px] font-light leading-relaxed text-cream-100/70">
-          See how intelligent planning, custom detailing, layered
-          lighting, and carefully selected materials can transform an
-          ordinary room into a polished and highly functional luxury
-          interior.
+          {d.intro}
         </p>
 
         <div
@@ -59,7 +69,7 @@ export default function BeforeAfterTransform() {
           className="relative mt-2 aspect-21/9 w-full touch-none select-none overflow-hidden rounded-2xl"
         >
           {/* After (base layer) */}
-          <Image src={AFTER} alt="After the transformation" fill sizes="1100px" className="object-cover" draggable={false} />
+          <Image src={d.afterImage.url} alt="After the transformation" fill sizes="1100px" className="object-cover" draggable={false} />
           <span className="absolute right-4 top-4 rounded-full bg-ink/70 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-cream-100">
             After
           </span>
@@ -69,7 +79,7 @@ export default function BeforeAfterTransform() {
             className="absolute inset-0"
             style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
           >
-            <Image src={BEFORE} alt="Before the transformation" fill sizes="1100px" className="object-cover" draggable={false} />
+            <Image src={d.beforeImage.url} alt="Before the transformation" fill sizes="1100px" className="object-cover" draggable={false} />
             <span className="absolute left-4 top-4 rounded-full bg-ink/70 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-cream-100">
               Before
             </span>
@@ -89,13 +99,10 @@ export default function BeforeAfterTransform() {
         </div>
 
         <div className="mt-4 grid gap-6 text-left sm:grid-cols-2">
-          {[
-            "A personalized concept developed around the client's lifestyle, room dimensions, and aesthetic preferences.",
-            "A finished space executed according to the approved layout, materials, furniture details, and functional requirements.",
-          ].map((t) => (
-            <div key={t} className="flex items-start gap-3 rounded-2xl border border-cream-100/15 px-5 py-4">
+          {d.points.map((p) => (
+            <div key={p.text} className="flex items-start gap-3 rounded-2xl border border-cream-100/15 px-5 py-4">
               <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-clay text-[11px] text-cream-100">✓</span>
-              <p className="text-sm font-light leading-relaxed text-cream-100/80">{t}</p>
+              <p className="text-sm font-light leading-relaxed text-cream-100/80">{p.text}</p>
             </div>
           ))}
         </div>

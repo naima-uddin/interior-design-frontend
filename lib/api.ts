@@ -19,6 +19,7 @@ import {
   SPACES,
   SPACES_IMAGE,
   HOTSPOT_SCENE,
+  BEFORE_AFTER,
   WHY_CHOOSE,
   PROCESS,
   COMPANY,
@@ -66,6 +67,7 @@ export type HomeData = {
   testimonials: Testimonial[];
   company: typeof COMPANY | null;
   spacesImage: { url: string } | null;
+  beforeAfter: typeof BEFORE_AFTER | null;
 };
 
 export type NavData = {
@@ -88,6 +90,7 @@ export function getHomepage(): Promise<HomeData> {
     testimonials: TESTIMONIALS,
     company: COMPANY,
     spacesImage: SPACES_IMAGE,
+    beforeAfter: BEFORE_AFTER,
   });
 }
 

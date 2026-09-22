@@ -812,6 +812,20 @@ export const HOTSPOT_SCENE = {
   ] as Hotspot[],
 };
 
+/* ── Before / after transformation band ───────────────────────────────── */
+
+export const BEFORE_AFTER = {
+  title: "Drag to experience the transformation",
+  intro:
+    "See how intelligent planning, custom detailing, layered lighting, and carefully selected materials can transform an ordinary room into a polished and highly functional luxury interior.",
+  beforeImage: { url: U("photo-1554995207-c18c203602cb", 1400) },
+  afterImage: { url: U("photo-1618221195710-dd6b41faaea6", 1400) },
+  points: [
+    { text: "A personalized concept developed around the client's lifestyle, room dimensions, and aesthetic preferences." },
+    { text: "A finished space executed according to the approved layout, materials, furniture details, and functional requirements." },
+  ],
+};
+
 /* ── Company / contact ─────────────────────────────────────────────────── */
 
 export const COMPANY = {
