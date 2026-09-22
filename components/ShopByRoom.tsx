@@ -13,7 +13,7 @@ export default function ShopByRoom({ rooms }: { rooms?: Room[] }) {
         <div className="mb-10 flex items-end justify-between">
           <div>
             <span className="eyebrow">Shop by Room</span>
-            <h2 className="font-serif mt-2 text-3xl font-medium tracking-tight text-ink sm:text-4xl -mb-2">
+            <h2 className="font-serif text-3xl font-medium tracking-tight text-ink sm:text-4xl -mb-2">
               Every corner, considered.
             </h2>
           </div>
