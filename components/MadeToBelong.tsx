@@ -37,7 +37,7 @@ export default function MadeToBelong({ image }: { image?: { url: string } | null
       />
       <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/40" />
 
-      <div className="relative mx-auto grid max-w-[1260px] gap-12 px-5 py-14 sm:px-8 sm:py-18 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <div className="relative mx-auto grid max-w-[1260px] gap-6 px-5 py-14 sm:gap-8 sm:px-8 sm:py-18 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         {/* Text panel */}
         <div className="flex flex-col justify-center">
           <span className="eyebrow !text-cream-100/60">Making a functional home</span>
@@ -65,7 +65,7 @@ export default function MadeToBelong({ image }: { image?: { url: string } | null
         {/* Feature points */}
         <ul className="flex flex-col justify-center divide-y divide-cream-100/15">
           {POINTS.map((p) => (
-            <li key={p.title} className="flex items-start gap-5 py-6 first:pt-0 last:pb-0">
+            <li key={p.title} className="flex items-start gap-5 py-4 first:pt-0 last:pb-0 sm:py-6">
               <span className="mt-1 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-cream-100/25 text-cream-100">
                 {p.icon}
               </span>
