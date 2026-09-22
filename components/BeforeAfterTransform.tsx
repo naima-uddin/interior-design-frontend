@@ -11,7 +11,7 @@ const BEFORE = "https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=f
 const AFTER = "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80";
 
 export default function BeforeAfterTransform() {
-  const [pos, setPos] = useState(50);
+  const [pos, setPos] = useState(30);
   const trackRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
 
@@ -37,18 +37,14 @@ export default function BeforeAfterTransform() {
   };
 
   return (
-    <section className="bg-ink text-cream-100">
-      <div className="mx-auto max-w-[1100px] px-5 py-12 text-center sm:px-8 sm:py-16">
-        <span className="eyebrow inline-flex items-center gap-2 rounded-full bg-clay/15 px-4 py-1.5 !text-clay">
-          <span className="h-1.5 w-1.5 rounded-full bg-clay" />
-          Real-Life Transformations
-        </span>
-        <h2 className="font-serif mt-5 text-3xl font-semibold uppercase tracking-tight sm:text-4xl">
+    <section className="bg-olive-800 text-cream-100">
+      <div className="mx-auto max-w-[1100px] px-5 py-6 text-center sm:px-8 sm:py-8">
+
+        <h2 className="font-serif mt-2 text-3xl font-semibold uppercase tracking-tight sm:text-4xl">
           Drag to experience the transformation
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-[15px] font-light leading-relaxed text-cream-100/70">
-          Move the slider to compare the original space with the completed
-          interior. See how intelligent planning, custom detailing, layered
+        <p className="mx-auto mt-2 max-w-4xl text-[15px] font-light leading-relaxed text-cream-100/70">
+          See how intelligent planning, custom detailing, layered
           lighting, and carefully selected materials can transform an
           ordinary room into a polished and highly functional luxury
           interior.
@@ -60,7 +56,7 @@ export default function BeforeAfterTransform() {
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerLeave={onPointerUp}
-          className="relative mt-12 aspect-[16/9] w-full touch-none select-none overflow-hidden rounded-2xl"
+          className="relative mt-2 aspect-21/9 w-full touch-none select-none overflow-hidden rounded-2xl"
         >
           {/* After (base layer) */}
           <Image src={AFTER} alt="After the transformation" fill sizes="1100px" className="object-cover" draggable={false} />
@@ -92,7 +88,7 @@ export default function BeforeAfterTransform() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-6 text-left sm:grid-cols-2">
+        <div className="mt-4 grid gap-6 text-left sm:grid-cols-2">
           {[
             "A personalized concept developed around the client's lifestyle, room dimensions, and aesthetic preferences.",
             "A finished space executed according to the approved layout, materials, furniture details, and functional requirements.",

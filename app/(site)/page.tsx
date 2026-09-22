@@ -25,7 +25,7 @@ export default async function Home() {
       <FeatureHotspots scene={data.hotspot} />
       <LatestProjects projects={data.projects} />
       <BeforeAfterTransform />
-      <WhyChooseUs items={data.whyChoose} company={data.company} />
+      {/* <WhyChooseUs items={data.whyChoose} company={data.company} /> */}
       <ProcessSteps steps={data.process} />
       <Testimonials items={data.testimonials} />
       <MadeToBelong image={data.spacesImage} />
