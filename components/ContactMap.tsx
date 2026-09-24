@@ -45,7 +45,7 @@ export default function ContactMap() {
           <button
             type="button"
             onClick={resetToOffice}
-            className="eyebrow shrink-0 rounded-full border border-ink/15 px-5 py-2.5 text-white! transition hover:border-clay hover:text-clay"
+            className="eyebrow shrink-0 rounded-full border border-ink/15 px-5 py-2.5 text-cream-500 transition hover:border-clay hover:text-clay"
           >
             Our studio
           </button>
