@@ -20,6 +20,16 @@ const jost = Jost({
   display: "swap",
 });
 
+// Browsers only render a handful of favicon formats — notably NOT avif/webp,
+// which is what Cloudinary often stores an upload as. For Cloudinary delivery
+// URLs we inject an `f_png` transformation so the tab icon is always served as
+// a PNG regardless of the uploaded format.
+function faviconDeliveryUrl(url: string): string {
+  const marker = "/upload/";
+  if (!url.includes("res.cloudinary.com") || !url.includes(marker)) return url;
+  return url.replace(marker, `${marker}f_png/`);
+}
+
 // Title/description come from Info Control's site identity; the browser tab
 // icon uses the uploaded favicon when set, otherwise the bundled favicon.ico.
 export async function generateMetadata(): Promise<Metadata> {
@@ -30,7 +40,9 @@ export async function generateMetadata(): Promise<Metadata> {
       ? `${siteInfo.name} — ${siteInfo.tagline}`
       : "Velor — A more human home",
     description: siteInfo.description,
-    ...(faviconUrl ? { icons: { icon: faviconUrl } } : {}),
+    ...(faviconUrl
+      ? { icons: { icon: { url: faviconDeliveryUrl(faviconUrl), type: "image/png" } } }
+      : {}),
   };
 }
 

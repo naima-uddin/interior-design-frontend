@@ -6,7 +6,7 @@
 // edits its own slice, and saves the whole thing back (so the pages don't
 // clobber each other's fields).
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getSettingsAdmin, updateSettings, ApiError } from "@/lib/adminApi";
 import { Section, TextField, TextArea, setPath } from "@/components/admin/SettingsFields";
 import ObjectListEditor from "@/components/admin/ObjectListEditor";
@@ -43,6 +43,11 @@ export default function InfoControlPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
+  // Always-current mirror of `data` so back-to-back branding uploads merge onto
+  // the latest doc instead of a stale render closure (which would let one save
+  // clobber the other).
+  const dataRef = useRef<Info | null>(null);
+  dataRef.current = data;
 
   useEffect(() => {
     getSettingsAdmin<Info>()
@@ -64,7 +69,8 @@ export default function InfoControlPage() {
   // reload always keeps them. We save the freshly-computed doc (not the async
   // state) to avoid a stale write.
   const setBranding = async (key: "logo" | "favicon", img: { url: string }) => {
-    const next = setPath(data, `branding.${key}`, img);
+    const next = setPath(dataRef.current, `branding.${key}`, img);
+    dataRef.current = next;
     setData(next);
     setError("");
     try {
