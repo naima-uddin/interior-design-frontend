@@ -25,6 +25,7 @@ import {
   PROCESS,
   COMPANY,
   FOOTER,
+  SITE_INFO,
   PROJECT_CATEGORIES,
   projectCategoriesWithCounts,
   type Slide,
@@ -38,6 +39,7 @@ import {
   type Space,
   type Category,
   type FooterConfig,
+  type SiteInfo,
 } from "./data";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
@@ -215,26 +217,33 @@ export async function getSpaces(): Promise<{
 export async function getSettings(): Promise<{
   company: typeof COMPANY;
   projectCategories: Category[];
+  siteInfo: SiteInfo;
   footer: FooterConfig;
 }> {
   const data = await getJSON<{
     company?: typeof COMPANY;
     projectCategories?: Category[];
+    siteInfo?: Partial<SiteInfo>;
     footer?: Partial<FooterConfig>;
   }>("/api/settings", {
     company: COMPANY,
     projectCategories: PROJECT_CATEGORIES,
+    siteInfo: SITE_INFO,
     footer: FOOTER,
   });
   const f = data.footer ?? {};
+  const site = { ...SITE_INFO, ...(data.siteInfo ?? {}) };
   return {
     company: data.company ?? COMPANY,
     projectCategories: data.projectCategories ?? PROJECT_CATEGORIES,
+    siteInfo: site,
     // Merge stored footer over defaults so partial/empty backend data still
-    // renders a complete footer (empty link arrays fall back to defaults).
+    // renders a complete footer (empty link arrays fall back to defaults;
+    // the wordmark defaults to the site name).
     footer: {
       ...FOOTER,
       ...f,
+      brand: f.brand || site.name,
       navLinks: f.navLinks?.length ? f.navLinks : FOOTER.navLinks,
       socials: f.socials?.length ? f.socials : FOOTER.socials,
       legalLinks: f.legalLinks?.length ? f.legalLinks : FOOTER.legalLinks,

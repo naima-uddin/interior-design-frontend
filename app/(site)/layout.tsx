@@ -10,7 +10,11 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const [nav, settings] = await Promise.all([getNavData(), getSettings()]);
   return (
     <>
-      <Navbar projectCategories={nav.projectCategories} services={nav.services} />
+      <Navbar
+        projectCategories={nav.projectCategories}
+        services={nav.services}
+        siteName={settings.siteInfo.name}
+      />
       {children}
       <Footer footer={settings.footer} contact={settings.company.contact} />
       <PortfolioPromo />

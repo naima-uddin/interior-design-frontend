@@ -18,6 +18,7 @@ import SearchOverlay from "@/components/SearchOverlay";
 type NavProps = {
   projectCategories?: (Category & { count: number })[];
   services?: Service[];
+  siteName?: string;
 };
 
 const LINKS = [
@@ -101,7 +102,7 @@ function NavDropdown({
   );
 }
 
-export default function Navbar({ projectCategories, services }: NavProps) {
+export default function Navbar({ projectCategories, services, siteName = "Velor" }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false); // mobile menu
   const [searchOpen, setSearchOpen] = useState(false);
@@ -149,7 +150,7 @@ export default function Navbar({ projectCategories, services }: NavProps) {
             }`}
           style={{ letterSpacing: "0.42em" }}
         >
-          <span className="pl-[0.42em]">Velor</span>
+          <span className="pl-[0.42em]">{siteName}</span>
         </Link>
 
         {/* Center: primary links + dropdowns (desktop) */}

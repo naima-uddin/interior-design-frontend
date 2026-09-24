@@ -23,6 +23,7 @@ type IconName =
   | "rooms"
   | "spaces"
   | "settings"
+  | "info"
   | "compare"
   | "target"
   | "team";
@@ -108,6 +109,13 @@ const ICON_PATHS: Record<IconName, React.ReactNode> = {
     <>
       <circle cx="12" cy="12" r="3" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M19.4 13.5a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.04 1.56V19.5a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.96 17.86a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.04H2.5a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.14 6.99a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.09A1.7 1.7 0 0 0 9.63 1.09V1a2 2 0 1 1 4 0v.09c0 .68.4 1.29 1.04 1.56a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.09c.27.64.88 1.05 1.56 1.05H21a2 2 0 1 1 0 4h-.09c-.68 0-1.29.4-1.56 1.05Z" />
+    </>
+  ),
+  info: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 11v5" />
+      <circle cx="12" cy="7.8" r="0.15" fill="currentColor" stroke="none" />
     </>
   ),
   compare: (
@@ -298,6 +306,9 @@ export default function AdminSidebar() {
           </NavLink>
 
           <NavGroup label="Site" />
+          <NavLink href="/interior-admin/info-control" icon="info">
+            Info Control
+          </NavLink>
           <NavLink href="/interior-admin/settings" icon="settings">
             Settings
           </NavLink>

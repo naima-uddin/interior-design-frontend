@@ -855,6 +855,24 @@ export const COMPANY = {
   },
 };
 
+/* ── Site identity ───────────────────────────────────────────────────────
+   Global site name + descriptive lines, editable from Info Control. The name
+   drives the navbar/footer wordmark; description is used as fallback copy.
+   ──────────────────────────────────────────────────────────────────────── */
+
+export type SiteInfo = {
+  name: string;
+  tagline: string;
+  description: string;
+};
+
+export const SITE_INFO: SiteInfo = {
+  name: "Velor",
+  tagline: "Designing Homes For Inspired Living",
+  description:
+    "Supporting modern living through thoughtfully designed interiors, furniture and timeless spaces for every home.",
+};
+
 /* ── Footer ────────────────────────────────────────────────────────────────
    Dashboard-editable footer content. Nav links are stored as one flat list of
    { column, label, href } so the Settings page can edit them with the generic
