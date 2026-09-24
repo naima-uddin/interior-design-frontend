@@ -5,6 +5,7 @@
 // dropdowns for "Projects" (by category) and "Services".
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   projectCategoriesWithCounts,
@@ -19,6 +20,7 @@ type NavProps = {
   projectCategories?: (Category & { count: number })[];
   services?: Service[];
   siteName?: string;
+  logoUrl?: string | null;
 };
 
 const LINKS = [
@@ -102,7 +104,7 @@ function NavDropdown({
   );
 }
 
-export default function Navbar({ projectCategories, services, siteName = "Velor" }: NavProps) {
+export default function Navbar({ projectCategories, services, siteName = "Velor", logoUrl }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false); // mobile menu
   const [searchOpen, setSearchOpen] = useState(false);
@@ -143,14 +145,26 @@ export default function Navbar({ projectCategories, services, siteName = "Velor"
       >
         <nav className="mx-auto grid h-14 max-w-[1280px] grid-cols-[auto_1fr_auto] items-center px-4 sm:px-6 md:h-16 lg:px-8">
 
-        {/* Left: wordmark */}
+        {/* Left: logo image if uploaded, else the text wordmark */}
         <Link
           href="/"
+          aria-label={siteName}
           className={`font-serif text-lg font-medium uppercase transition-colors sm:text-2xl md:text-[1.7rem] ${solid ? "text-ink" : "text-white"
             }`}
           style={{ letterSpacing: "0.42em" }}
         >
-          <span className="pl-[0.42em]">{siteName}</span>
+          {logoUrl ? (
+            <Image
+              src={logoUrl}
+              alt={siteName}
+              width={160}
+              height={40}
+              priority
+              className="h-8 w-auto object-contain sm:h-9 md:h-10"
+            />
+          ) : (
+            <span className="pl-[0.42em]">{siteName}</span>
+          )}
         </Link>
 
         {/* Center: primary links + dropdowns (desktop) */}

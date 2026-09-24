@@ -26,6 +26,7 @@ import {
   COMPANY,
   FOOTER,
   SITE_INFO,
+  BRANDING,
   PROJECT_CATEGORIES,
   projectCategoriesWithCounts,
   type Slide,
@@ -40,6 +41,7 @@ import {
   type Category,
   type FooterConfig,
   type SiteInfo,
+  type Branding,
 } from "./data";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
@@ -219,24 +221,33 @@ export async function getSettings(): Promise<{
   projectCategories: Category[];
   siteInfo: SiteInfo;
   footer: FooterConfig;
+  branding: Branding;
 }> {
   const data = await getJSON<{
     company?: typeof COMPANY;
     projectCategories?: Category[];
     siteInfo?: Partial<SiteInfo>;
     footer?: Partial<FooterConfig>;
+    branding?: Partial<Branding>;
   }>("/api/settings", {
     company: COMPANY,
     projectCategories: PROJECT_CATEGORIES,
     siteInfo: SITE_INFO,
     footer: FOOTER,
+    branding: BRANDING,
   });
   const f = data.footer ?? {};
   const site = { ...SITE_INFO, ...(data.siteInfo ?? {}) };
+  const b = data.branding ?? {};
   return {
     company: data.company ?? COMPANY,
     projectCategories: data.projectCategories ?? PROJECT_CATEGORIES,
     siteInfo: site,
+    // A stored asset with an empty url counts as "not set" → keep the fallback.
+    branding: {
+      logo: b.logo?.url ? b.logo : BRANDING.logo,
+      favicon: b.favicon?.url ? b.favicon : BRANDING.favicon,
+    },
     // Merge stored footer over defaults so partial/empty backend data still
     // renders a complete footer (empty link arrays fall back to defaults;
     // the wordmark defaults to the site name).

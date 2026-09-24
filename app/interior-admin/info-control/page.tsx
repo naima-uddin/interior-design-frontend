@@ -10,9 +10,14 @@ import { useEffect, useState } from "react";
 import { getSettingsAdmin, updateSettings, ApiError } from "@/lib/adminApi";
 import { Section, TextField, TextArea, setPath } from "@/components/admin/SettingsFields";
 import ObjectListEditor from "@/components/admin/ObjectListEditor";
+import ImageUploader from "@/components/admin/ImageUploader";
 import { SITE_INFO, FOOTER } from "@/lib/data";
 
 type Info = {
+  branding?: {
+    logo?: { url: string } | null;
+    favicon?: { url: string } | null;
+  };
   siteInfo?: {
     name?: string;
     tagline?: string;
@@ -54,6 +59,22 @@ export default function InfoControlPage() {
   }, []);
 
   const set = (path: string, value: unknown) => setData((prev) => setPath(prev, path, value));
+
+  // Logo/favicon persist immediately on upload — no "Save all" needed — so a
+  // reload always keeps them. We save the freshly-computed doc (not the async
+  // state) to avoid a stale write.
+  const setBranding = async (key: "logo" | "favicon", img: { url: string }) => {
+    const next = setPath(data, `branding.${key}`, img);
+    setData(next);
+    setError("");
+    try {
+      await updateSettings(next);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2500);
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : "Failed to save image.");
+    }
+  };
 
   const save = async () => {
     if (!data) return;
@@ -97,6 +118,28 @@ export default function InfoControlPage() {
           {error}
         </p>
       )}
+
+      <Section title="Branding">
+        <p className="-mt-1 text-sm font-light text-stone">
+          Upload a logo and favicon here — they replace the text wordmark in the
+          navbar and the browser tab icon across the whole site. These save
+          automatically on upload (no need to press “Save all”).
+        </p>
+        <div className="grid gap-6 sm:grid-cols-2">
+          <ImageUploader
+            label="Logo (navbar) — use a transparent PNG/SVG"
+            folder="branding"
+            value={data.branding?.logo}
+            onChange={(img) => setBranding("logo", img)}
+          />
+          <ImageUploader
+            label="Favicon (browser tab) — square, e.g. 512×512"
+            folder="branding"
+            value={data.branding?.favicon}
+            onChange={(img) => setBranding("favicon", img)}
+          />
+        </div>
+      </Section>
 
       <Section title="Site identity">
         <TextField

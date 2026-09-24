@@ -873,6 +873,20 @@ export const SITE_INFO: SiteInfo = {
     "Supporting modern living through thoughtfully designed interiors, furniture and timeless spaces for every home.",
 };
 
+/* ── Branding ──────────────────────────────────────────────────────────────
+   Dashboard-editable brand assets. `logo` replaces the text wordmark in the
+   navbar; `favicon` becomes the browser tab icon. Both empty by default so the
+   site falls back to the text wordmark and the bundled favicon.ico. */
+export type Branding = {
+  logo: { url: string } | null;
+  favicon: { url: string } | null;
+};
+
+export const BRANDING: Branding = {
+  logo: null,
+  favicon: null,
+};
+
 /* ── Footer ────────────────────────────────────────────────────────────────
    Dashboard-editable footer content. Nav links are stored as one flat list of
    { column, label, href } so the Settings page can edit them with the generic

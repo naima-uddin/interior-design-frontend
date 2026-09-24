@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Jost } from "next/font/google";
+import { getSettings } from "@/lib/api";
 import "./globals.css";
 
 // High-contrast display serif for headings (upright + italic accents)
@@ -19,11 +20,19 @@ const jost = Jost({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Velor — A more human home",
-  description:
-    "Furniture and interiors for a calmer tomorrow. Timeless, natural and considered pieces made to belong in your home.",
-};
+// Title/description come from Info Control's site identity; the browser tab
+// icon uses the uploaded favicon when set, otherwise the bundled favicon.ico.
+export async function generateMetadata(): Promise<Metadata> {
+  const { siteInfo, branding } = await getSettings();
+  const faviconUrl = branding.favicon?.url;
+  return {
+    title: siteInfo.name
+      ? `${siteInfo.name} — ${siteInfo.tagline}`
+      : "Velor — A more human home",
+    description: siteInfo.description,
+    ...(faviconUrl ? { icons: { icon: faviconUrl } } : {}),
+  };
+}
 
 // Root layout only sets up html/body/fonts. The storefront chrome (Navbar +
 // Footer) lives in app/(site)/layout.tsx so admin routes — which need none of

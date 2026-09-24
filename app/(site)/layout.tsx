@@ -14,6 +14,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         projectCategories={nav.projectCategories}
         services={nav.services}
         siteName={settings.siteInfo.name}
+        logoUrl={settings.branding.logo?.url}
       />
       {children}
       <Footer footer={settings.footer} contact={settings.company.contact} />
