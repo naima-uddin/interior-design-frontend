@@ -290,16 +290,16 @@ export default function AdminSidebar() {
               {r.label}
             </NavLink>
           ))}
-
-          <NavGroup label="Site" />
-          <NavLink href="/interior-admin/settings" icon="settings">
-            Settings
-          </NavLink>
           <NavLink href="/interior-admin/before-after" icon="compare">
             Before / After
           </NavLink>
           <NavLink href="/interior-admin/hotspot-scene" icon="target">
             Hotspot Scene
+          </NavLink>
+
+          <NavGroup label="Site" />
+          <NavLink href="/interior-admin/settings" icon="settings">
+            Settings
           </NavLink>
           {admin?.role === "admin" && (
             <NavLink href="/interior-admin/team" icon="team">
