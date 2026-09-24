@@ -6,30 +6,35 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { COMPANY } from "@/lib/data";
+import { COMPANY, FOOTER, type FooterConfig } from "@/lib/data";
 
-const QUICK_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Collection", href: "/collection" },
-  { label: "Projects", href: "/projects" },
-  { label: "Services", href: "/services" },
-  { label: "Journal", href: "/blog" },
-  { label: "Contact", href: "/contact" },
-];
+type Contact = typeof COMPANY.contact;
 
-const SUPPORT_LINKS = [
-  { label: "FAQs", href: "/faqs" },
-  { label: "Studio", href: "/studio" },
-  { label: "Spaces", href: "/spaces" },
-];
+// Group the flat nav-link list into ordered columns keyed by `column`.
+function groupColumns(links: FooterConfig["navLinks"]) {
+  const cols: { title: string; links: { label: string; href: string }[] }[] = [];
+  for (const l of links) {
+    let col = cols.find((c) => c.title === l.column);
+    if (!col) {
+      col = { title: l.column, links: [] };
+      cols.push(col);
+    }
+    col.links.push({ label: l.label, href: l.href });
+  }
+  return cols;
+}
 
-const COMPANY_LINKS = [
-  { label: "About Us", href: "/about" },
-  { label: "Our Story", href: "/studio" },
-  { label: "Contact", href: "/contact" },
-];
+export default function Footer({
+  footer = FOOTER,
+  contact = COMPANY.contact,
+}: {
+  footer?: FooterConfig;
+  contact?: Contact;
+}) {
+  const columns = groupColumns(footer.navLinks?.length ? footer.navLinks : FOOTER.navLinks);
+  const phone = contact.phones?.[0] ?? "";
+  const whatsapp = phone.replace(/\D/g, "");
 
-export default function Footer() {
   return (
     <footer className="bg-olive-800 text-cream-100">
       <div className="mx-auto max-w-[1260px] px-5 py-8 sm:px-8 lg:py-12">
@@ -37,90 +42,104 @@ export default function Footer() {
           {/* Brand + CTA */}
           <div>
             <p className="font-serif text-2xl font-medium uppercase tracking-[0.3em]">
-              Velor
+              {footer.brand}
             </p>
             <p className="mt-3 max-w-xs text-sm font-light leading-relaxed text-cream-100/60">
-              Supporting modern living through thoughtfully designed
-              interiors, furniture and timeless spaces for every home.
+              {footer.blurb}
             </p>
-            <Link
-              href="/collection"
-              className="eyebrow mt-5 inline-flex w-fit items-center rounded-full bg-cream-100 px-7 py-3.5 !text-ink transition hover:bg-cream-100/90"
-            >
-              Explore Collection
-            </Link>
+            {footer.ctaLabel && (
+              <Link
+                href={footer.ctaHref || "/collection"}
+                className="eyebrow mt-5 inline-flex w-fit items-center rounded-full bg-cream-100 px-7 py-3.5 !text-ink transition hover:bg-cream-100/90"
+              >
+                {footer.ctaLabel}
+              </Link>
+            )}
 
             <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3">
-              <FooterCol title="Quick Links" links={QUICK_LINKS} collapseAt={3} />
-              <FooterCol title="Support" links={SUPPORT_LINKS} />
-              <FooterCol title="Company" links={COMPANY_LINKS} />
+              {columns.map((col, i) => (
+                <FooterCol
+                  key={col.title}
+                  title={col.title}
+                  links={col.links}
+                  collapseAt={i === 0 ? 3 : undefined}
+                />
+              ))}
             </div>
           </div>
 
           {/* Heading + contact */}
           <div className="lg:border-l lg:border-cream-100/10 lg:pl-14">
             <h2 className="font-serif max-w-sm text-2xl font-medium leading-tight tracking-tight sm:text-3xl lg:text-4xl">
-              Designing Homes For Inspired Living
+              {footer.headline}
             </h2>
 
             <div className="mt-4 space-y-1.5">
-              <p className="text-lg font-light text-cream-100">{COMPANY.contact.phones[0]}</p>
-              <a
-                href={`mailto:${COMPANY.contact.email}`}
-                className="block text-sm font-light text-cream-100/70 transition hover:text-cream-100"
-              >
-                {COMPANY.contact.email}
-              </a>
+              {phone && <p className="text-lg font-light text-cream-100">{phone}</p>}
+              {contact.email && (
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="block text-sm font-light text-cream-100/70 transition hover:text-cream-100"
+                >
+                  {contact.email}
+                </a>
+              )}
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <p className="eyebrow !text-cream-100/45">Office</p>
                 <p className="mt-2 text-sm font-light leading-relaxed text-cream-100/75">
-                  {COMPANY.contact.office}
+                  {contact.office}
                 </p>
               </div>
               <div>
                 <p className="eyebrow !text-cream-100/45">Factory</p>
                 <p className="mt-2 text-sm font-light leading-relaxed text-cream-100/75">
-                  {COMPANY.contact.factory}
+                  {contact.factory}
                 </p>
               </div>
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-8">
-              <div>
-                <p className="eyebrow !text-cream-100/45">Follow Us</p>
-                <div className="mt-3 flex items-center gap-3">
-                  {["Instagram", "Facebook", "Pinterest"].map((s) => (
-                    <Link
-                      key={s}
-                      href="#"
-                      aria-label={s}
-                      className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/20 text-[10px] text-cream-100/80 transition hover:border-cream-100 hover:text-cream-100"
-                    >
-                      {s[0]}
-                    </Link>
-                  ))}
+              {footer.socials?.length > 0 && (
+                <div>
+                  <p className="eyebrow !text-cream-100/45">Follow Us</p>
+                  <div className="mt-3 flex items-center gap-3">
+                    {footer.socials.map((s) => (
+                      <Link
+                        key={s.label}
+                        href={s.href || "#"}
+                        aria-label={s.label}
+                        className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/20 text-[10px] text-cream-100/80 transition hover:border-cream-100 hover:text-cream-100"
+                      >
+                        {s.label[0]}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
               <div>
                 <p className="eyebrow !text-cream-100/45">Let&apos;s Chat</p>
                 <div className="mt-3 flex items-center gap-3">
-                  <a
-                    href={`https://wa.me/${COMPANY.contact.phones[0].replace(/\D/g, "")}`}
-                    aria-label="WhatsApp"
-                    className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/20 text-cream-100/80 transition hover:border-cream-100 hover:text-cream-100"
-                  >
-                    <ChatIcon />
-                  </a>
-                  <a
-                    href={`mailto:${COMPANY.contact.email}`}
-                    aria-label="Email"
-                    className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/20 text-cream-100/80 transition hover:border-cream-100 hover:text-cream-100"
-                  >
-                    <SendIcon />
-                  </a>
+                  {whatsapp && (
+                    <a
+                      href={`https://wa.me/${whatsapp}`}
+                      aria-label="WhatsApp"
+                      className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/20 text-cream-100/80 transition hover:border-cream-100 hover:text-cream-100"
+                    >
+                      <ChatIcon />
+                    </a>
+                  )}
+                  {contact.email && (
+                    <a
+                      href={`mailto:${contact.email}`}
+                      aria-label="Email"
+                      className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/20 text-cream-100/80 transition hover:border-cream-100 hover:text-cream-100"
+                    >
+                      <SendIcon />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -128,13 +147,13 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 flex flex-col items-start justify-between gap-3 border-t border-cream-100/12 pt-5 sm:flex-row sm:items-center">
-          <p className="text-xs font-light text-cream-100/45">
-            © 2026 Velor. All rights reserved.
-          </p>
+          <p className="text-xs font-light text-cream-100/45">{footer.copyright}</p>
           <div className="flex items-center gap-6 text-xs font-light text-cream-100/45">
-            <Link href="/privacy-policy" className="transition hover:text-cream-100">Privacy Policy</Link>
-            <Link href="/terms-conditions" className="transition hover:text-cream-100">Terms &amp; Conditions</Link>
-            <Link href="/cookies" className="transition hover:text-cream-100">Cookies</Link>
+            {(footer.legalLinks?.length ? footer.legalLinks : FOOTER.legalLinks).map((l) => (
+              <Link key={l.label} href={l.href} className="transition hover:text-cream-100">
+                {l.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

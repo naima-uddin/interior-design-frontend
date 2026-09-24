@@ -24,6 +24,7 @@ import {
   WHY_CHOOSE,
   PROCESS,
   COMPANY,
+  FOOTER,
   PROJECT_CATEGORIES,
   projectCategoriesWithCounts,
   type Slide,
@@ -36,6 +37,7 @@ import {
   type Room,
   type Space,
   type Category,
+  type FooterConfig,
 } from "./data";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
@@ -213,9 +215,29 @@ export async function getSpaces(): Promise<{
 export async function getSettings(): Promise<{
   company: typeof COMPANY;
   projectCategories: Category[];
+  footer: FooterConfig;
 }> {
-  return getJSON("/api/settings", {
+  const data = await getJSON<{
+    company?: typeof COMPANY;
+    projectCategories?: Category[];
+    footer?: Partial<FooterConfig>;
+  }>("/api/settings", {
     company: COMPANY,
     projectCategories: PROJECT_CATEGORIES,
+    footer: FOOTER,
   });
+  const f = data.footer ?? {};
+  return {
+    company: data.company ?? COMPANY,
+    projectCategories: data.projectCategories ?? PROJECT_CATEGORIES,
+    // Merge stored footer over defaults so partial/empty backend data still
+    // renders a complete footer (empty link arrays fall back to defaults).
+    footer: {
+      ...FOOTER,
+      ...f,
+      navLinks: f.navLinks?.length ? f.navLinks : FOOTER.navLinks,
+      socials: f.socials?.length ? f.socials : FOOTER.socials,
+      legalLinks: f.legalLinks?.length ? f.legalLinks : FOOTER.legalLinks,
+    },
+  };
 }

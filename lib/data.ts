@@ -855,6 +855,62 @@ export const COMPANY = {
   },
 };
 
+/* ── Footer ────────────────────────────────────────────────────────────────
+   Dashboard-editable footer content. Nav links are stored as one flat list of
+   { column, label, href } so the Settings page can edit them with the generic
+   ObjectListEditor; the Footer groups them by column (preserving order). All
+   fields fall back to these defaults when the backend has none.
+   ──────────────────────────────────────────────────────────────────────── */
+
+export type FooterNavLink = { column: string; label: string; href: string };
+export type FooterLink = { label: string; href: string };
+
+export type FooterConfig = {
+  brand: string;
+  blurb: string;
+  ctaLabel: string;
+  ctaHref: string;
+  headline: string;
+  copyright: string;
+  navLinks: FooterNavLink[];
+  socials: FooterLink[];
+  legalLinks: FooterLink[];
+};
+
+export const FOOTER: FooterConfig = {
+  brand: "Velor",
+  blurb:
+    "Supporting modern living through thoughtfully designed interiors, furniture and timeless spaces for every home.",
+  ctaLabel: "Explore Collection",
+  ctaHref: "/collection",
+  headline: "Designing Homes For Inspired Living",
+  copyright: "© 2026 Velor. All rights reserved.",
+  navLinks: [
+    { column: "Quick Links", label: "Home", href: "/" },
+    { column: "Quick Links", label: "Collection", href: "/collection" },
+    { column: "Quick Links", label: "Projects", href: "/projects" },
+    { column: "Quick Links", label: "Services", href: "/services" },
+    { column: "Quick Links", label: "Journal", href: "/blog" },
+    { column: "Quick Links", label: "Contact", href: "/contact" },
+    { column: "Support", label: "FAQs", href: "/faqs" },
+    { column: "Support", label: "Studio", href: "/studio" },
+    { column: "Support", label: "Spaces", href: "/spaces" },
+    { column: "Company", label: "About Us", href: "/about" },
+    { column: "Company", label: "Our Story", href: "/studio" },
+    { column: "Company", label: "Contact", href: "/contact" },
+  ],
+  socials: [
+    { label: "Instagram", href: "#" },
+    { label: "Facebook", href: "#" },
+    { label: "Pinterest", href: "#" },
+  ],
+  legalLinks: [
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms & Conditions", href: "/terms-conditions" },
+    { label: "Cookies", href: "/cookies" },
+  ],
+};
+
 /* ── Services ──────────────────────────────────────────────────────────── */
 
 export type Service = {
