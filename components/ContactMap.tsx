@@ -38,7 +38,7 @@ export default function ContactMap() {
         <div className="flex gap-2">
           <button
             type="submit"
-            className="eyebrow shrink-0 rounded-full bg-[#383927] px-5 py-2.5 text-cream-100 transition hover:bg-ink"
+            className="eyebrow shrink-0 rounded-full bg-[#383927] px-5 py-2.5 text-white transition hover:bg-ink"
           >
             Search
           </button>
