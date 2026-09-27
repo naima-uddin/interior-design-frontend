@@ -839,7 +839,7 @@ export const COMPANY = {
   contact: {
     office: "House 127 (2nd floor), Road 05, Mohakhali New DOHS, Dhaka 1206",
     factory: "1920 Koborsthan Road, East Badda, Dhaka 1212",
-    phones: ["+880 1633 033033", "+880 1971 968888"],
+    phones: ["+88***********", "+880 1971 968888"],
     email: "hello@velor.studio",
     hours: "Sat–Thu, 10:00 – 19:00",
     cities: [

@@ -53,7 +53,7 @@ export default function MadeToBelong({ image }: { image?: { url: string } | null
           </p>
           <Link
             href="/spaces"
-            className="eyebrow group mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-cream-100/30 px-6 py-3.5 text-cream-100 transition hover:border-cream-100 hover:bg-cream-100 hover:text-ink"
+            className="eyebrow group mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-cream-100/70 px-6 py-3.5 text-cream-200! transition hover:border-cream-100 hover:bg-cream-100 hover:text-ink"
           >
             Find out more
             <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">

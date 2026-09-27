@@ -25,13 +25,12 @@ export default function ProductGallery({
               key={im.url}
               onClick={() => setActive(i)}
               aria-label={`View image ${i + 1}`}
-              className={`relative h-20 w-20 overflow-hidden rounded-xl transition ring-1 ${
-                i === active
-                  ? "ring-2 ring-olive"
-                  : "ring-ink/10 hover:ring-ink/30"
-              }`}
+              className={`relative h-20 w-20 overflow-hidden rounded-xl transition ring-1 ${i === active
+                ? "ring-2 ring-olive"
+                : "ring-ink/10 hover:ring-ink/30"
+                }`}
             >
-              <Image src={im.url} alt="" fill sizes="80px" className="object-cover" />
+              <Image src={im.url} alt="" fill sizes="80px" className="object-contain" />
             </button>
           ))}
         </div>
@@ -46,7 +45,7 @@ export default function ProductGallery({
           fill
           priority
           sizes="(min-width:1024px) 620px, 100vw"
-          className="object-cover"
+          className="object-contain"
         />
       </div>
     </div>
