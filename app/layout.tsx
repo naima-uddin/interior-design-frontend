@@ -40,9 +40,12 @@ export async function generateMetadata(): Promise<Metadata> {
       ? `${siteInfo.name} — ${siteInfo.tagline}`
       : "Velor — A more human home",
     description: siteInfo.description,
-    ...(faviconUrl
-      ? { icons: { icon: { url: faviconDeliveryUrl(faviconUrl), type: "image/png" } } }
-      : {}),
+    // Exactly one icon link: the uploaded favicon (served as PNG) when set,
+    // otherwise the bundled default in /public. The default favicon.ico was
+    // moved out of app/ so Next no longer auto-injects a competing <link>.
+    icons: faviconUrl
+      ? { icon: { url: faviconDeliveryUrl(faviconUrl), type: "image/png" } }
+      : { icon: { url: "/favicon.ico", type: "image/x-icon" } },
   };
 }
 
