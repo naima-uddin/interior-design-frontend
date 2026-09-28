@@ -1,31 +1,37 @@
 "use client";
 
-// Create/edit page for a single resource item. id === "new" renders an empty
-// form (create mode); any other id fetches that item from the admin list
-// (which includes inactive items) and pre-fills the form (edit mode).
+// Create/edit page for a single resource item, driven by query params so it
+// works under `output: export` (no per-id static pages). Read as:
+//   /interior-admin/edit?resource=<key>          → create mode
+//   /interior-admin/edit?resource=<key>&id=<id>  → edit mode
+// Edit mode fetches that item from the admin list (which includes inactive
+// items) and pre-fills the form.
 
-import { use, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import { getResource } from "@/lib/adminResources";
 import { listAll } from "@/lib/adminApi";
 import ResourceForm from "@/components/admin/ResourceForm";
 
-export default function ResourceEditPage({
-  params,
-}: {
-  params: Promise<{ resource: string; id: string }>;
-}) {
-  const { resource: key, id } = use(params);
+function EditPageInner() {
+  const searchParams = useSearchParams();
+  const key = searchParams.get("resource") ?? "";
+  const id = searchParams.get("id") ?? "";
   const resource = getResource(key);
   if (!resource) notFound();
 
-  const isNew = id === "new";
+  const isNew = !id || id === "new";
   const [initial, setInitial] = useState<Record<string, unknown> | null>(isNew ? {} : null);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (isNew) return;
+    if (isNew) {
+      setInitial({});
+      setError("");
+      return;
+    }
+    setInitial(null);
     listAll(resource!.key)
       .then((data) => {
         const item = data.items.find((i) => (i as { _id: string })._id === id);
@@ -37,7 +43,7 @@ export default function ResourceEditPage({
       })
       .catch(() => setError("Failed to load item."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, isNew]);
+  }, [id, isNew, key]);
 
   return (
     <div className="max-w-3xl">
@@ -63,5 +69,13 @@ export default function ResourceEditPage({
         {!error && !initial && <p className="text-sm text-stone-400">Loading…</p>}
       </div>
     </div>
+  );
+}
+
+export default function ResourceEditPage() {
+  return (
+    <Suspense fallback={<p className="text-sm text-stone-400">Loading…</p>}>
+      <EditPageInner />
+    </Suspense>
   );
 }

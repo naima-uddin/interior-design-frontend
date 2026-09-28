@@ -175,7 +175,7 @@ export default function ResourceTable({ resource }: { resource: ResourceConfig }
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-end gap-4">
                     <Link
-                      href={`/interior-admin/${resource.key}/${item._id}`}
+                      href={`/interior-admin/edit?resource=${resource.key}&id=${item._id}`}
                       className="eyebrow text-ink/70 transition hover:text-ink"
                     >
                       Edit

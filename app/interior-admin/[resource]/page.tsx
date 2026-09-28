@@ -1,38 +1,18 @@
-"use client";
+// Server wrapper so `output: export` can pre-render one page per resource key.
+// The interactive list lives in ResourceListClient.
 
-import { use } from "react";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getResource } from "@/lib/adminResources";
-import ResourceTable from "@/components/admin/ResourceTable";
+import { RESOURCES } from "@/lib/adminResources";
+import ResourceListClient from "./ResourceListClient";
 
-export default function ResourceListPage({
+export function generateStaticParams() {
+  return RESOURCES.map((r) => ({ resource: r.key }));
+}
+
+export default async function ResourceListPage({
   params,
 }: {
   params: Promise<{ resource: string }>;
 }) {
-  const { resource: key } = use(params);
-  const resource = getResource(key);
-  if (!resource) notFound();
-
-  return (
-    <div>
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="font-serif text-2xl font-medium text-ink sm:text-3xl">{resource.label}</h1>
-          <p className="mt-1.5 text-sm font-light text-stone">
-            {resource.singular} entries shown on the storefront.
-          </p>
-        </div>
-        <Link
-          href={`/interior-admin/${resource.key}/new`}
-          className="eyebrow inline-flex w-fit items-center rounded-full bg-olive px-6 py-3 !tracking-[0.16em] !text-cream-100 transition hover:bg-olive-800"
-        >
-          + New {resource.singular}
-        </Link>
-      </div>
-
-      <ResourceTable resource={resource} />
-    </div>
-  );
+  const { resource } = await params;
+  return <ResourceListClient resourceKey={resource} />;
 }
