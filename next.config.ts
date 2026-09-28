@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "export",
   images: {
     // Premium furniture/interior photography for the storefront.
     // Swap these for your own CDN / uploaded assets later.
