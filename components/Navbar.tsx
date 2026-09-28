@@ -58,7 +58,7 @@ function NavDropdown({
     >
       <Link
         href={href}
-        className={`eyebrow flex items-center gap-1.5 !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-black! hover:text-black!"
+        className={`eyebrow flex items-center gap-1.5 !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-black! hover:text-gray-600!"
           }`}
       >
         {label}
@@ -175,7 +175,7 @@ export default function Navbar({ projectCategories, services, siteName = "Velor"
               <Link
                 key={l.href}
                 href={l.href}
-                className={`eyebrow !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-black! hover:text-black!"
+                className={`eyebrow !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-black! hover:text-gray-600!"
                   }`}
               >
                 {l.label}
@@ -188,7 +188,7 @@ export default function Navbar({ projectCategories, services, siteName = "Velor"
             <button
               aria-label="Search"
               onClick={() => setSearchOpen(true)}
-              className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-black hover:text-black"
+              className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-black hover:text-gray-600"
                 }`}
             >
               <SearchIcon />
@@ -197,7 +197,7 @@ export default function Navbar({ projectCategories, services, siteName = "Velor"
             <button
               aria-label="Open menu"
               onClick={() => setOpen(true)}
-              className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-black hover:text-black"
+              className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-black hover:text-gray-600"
                 }`}
             >
               <MenuIcon />

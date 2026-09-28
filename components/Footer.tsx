@@ -37,7 +37,7 @@ export default function Footer({
 
   return (
     <footer className="bg-olive-800 text-cream-100">
-      <div className="mx-auto max-w-[1260px] px-5 py-8 sm:px-8 lg:py-12">
+      <div className="mx-auto max-w-[1260px] px-5 py-8 sm:px-6 lg:py-10">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr]">
           {/* Brand + CTA */}
           <div>
