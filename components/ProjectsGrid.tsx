@@ -6,6 +6,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import {
   PROJECTS,
   projectCategoriesWithCounts,
@@ -14,14 +15,14 @@ import {
 } from "@/lib/data";
 
 export default function ProjectsGrid({
-  initialCategory = "all",
   projects: input,
   categories,
 }: {
-  initialCategory?: string;
   projects?: Project[];
   categories?: (Category & { count: number })[];
 }) {
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get("category") ?? "all";
   const all = input?.length ? input : PROJECTS;
   const cats = categories?.length ? categories : projectCategoriesWithCounts();
   const valid = cats.some((c) => c.slug === initialCategory)

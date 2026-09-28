@@ -58,7 +58,7 @@ function NavDropdown({
     >
       <Link
         href={href}
-        className={`eyebrow flex items-center gap-1.5 !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-white/90! hover:text-white!"
+        className={`eyebrow flex items-center gap-1.5 !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-black! hover:text-black!"
           }`}
       >
         {label}
@@ -145,65 +145,65 @@ export default function Navbar({ projectCategories, services, siteName = "Velor"
       >
         <nav className="mx-auto grid h-14 max-w-[1280px] grid-cols-[auto_1fr_auto] items-center px-4 sm:px-6 md:h-16 lg:px-8">
 
-        {/* Left: logo image if uploaded, else the text wordmark */}
-        <Link
-          href="/"
-          aria-label={siteName}
-          className={`font-serif text-lg font-medium uppercase transition-colors sm:text-2xl md:text-[1.7rem] ${solid ? "text-ink" : "text-white"
-            }`}
-          style={{ letterSpacing: "0.42em" }}
-        >
-          {logoUrl ? (
-            <Image
-              src={logoUrl}
-              alt={siteName}
-              width={160}
-              height={40}
-              priority
-              className="h-8 w-auto object-contain sm:h-9 md:h-10"
-            />
-          ) : (
-            <span className="pl-[0.42em]">{siteName}</span>
-          )}
-        </Link>
+          {/* Left: logo image if uploaded, else the text wordmark */}
+          <Link
+            href="/"
+            aria-label={siteName}
+            className={`font-serif text-lg font-medium uppercase transition-colors sm:text-2xl md:text-[1.7rem] ${solid ? "text-ink" : "text-black"
+              }`}
+            style={{ letterSpacing: "0.42em" }}
+          >
+            {logoUrl ? (
+              <Image
+                src={logoUrl}
+                alt={siteName}
+                width={160}
+                height={40}
+                priority
+                className="h-8 w-auto object-contain sm:h-9 md:h-10"
+              />
+            ) : (
+              <span className="pl-[0.42em]">{siteName}</span>
+            )}
+          </Link>
 
-        {/* Center: primary links + dropdowns (desktop) */}
-        <div className="hidden items-center justify-center gap-7 lg:flex">
-          <NavDropdown label="Projects" href="/projects" items={projectItems} onToggle={track} solid={solid} />
-          <NavDropdown label="Services" href="/services" items={serviceItems} onToggle={track} solid={solid} />
-          {LINKS.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`eyebrow !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-white/90! hover:text-white!"
+          {/* Center: primary links + dropdowns (desktop) */}
+          <div className="hidden items-center justify-center gap-7 lg:flex">
+            <NavDropdown label="Projects" href="/projects" items={projectItems} onToggle={track} solid={solid} />
+            <NavDropdown label="Services" href="/services" items={serviceItems} onToggle={track} solid={solid} />
+            {LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`eyebrow !tracking-[0.18em] transition-colors ${solid ? "text-ink/80! hover:text-ink!" : "text-black! hover:text-black!"
+                  }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Right: icons */}
+          <div className="flex items-center justify-end gap-4 sm:gap-5">
+            <button
+              aria-label="Search"
+              onClick={() => setSearchOpen(true)}
+              className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-black hover:text-black"
                 }`}
             >
-              {l.label}
-            </Link>
-          ))}
-        </div>
+              <SearchIcon />
+            </button>
 
-        {/* Right: icons */}
-        <div className="flex items-center justify-end gap-4 sm:gap-5">
-          <button
-            aria-label="Search"
-            onClick={() => setSearchOpen(true)}
-            className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-white/90 hover:text-white"
-              }`}
-          >
-            <SearchIcon />
-          </button>
-
-          <button
-            aria-label="Open menu"
-            onClick={() => setOpen(true)}
-            className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-white/90 hover:text-white"
-              }`}
-          >
-            <MenuIcon />
-          </button>
-        </div>
-      </nav>
+            <button
+              aria-label="Open menu"
+              onClick={() => setOpen(true)}
+              className={`grid h-10 w-10 place-items-center transition ${solid ? "text-ink/80 hover:text-ink" : "text-black hover:text-black"
+                }`}
+            >
+              <MenuIcon />
+            </button>
+          </div>
+        </nav>
       </header>
 
       <NavDrawer open={open} onClose={() => setOpen(false)} />
