@@ -4,7 +4,7 @@
 // bearer token kept in localStorage (simplest reliable option for a
 // cross-port dev SPA; the backend also sets an httpOnly cookie as a backup).
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API = process.env.NEXT_PUBLIC_API_URL;
 const TOKEN_KEY = "velor_admin_token";
 const ADMIN_KEY = "velor_admin_info";
 

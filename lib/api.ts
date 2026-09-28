@@ -44,7 +44,7 @@ import {
   type Branding,
 } from "./data";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API = process.env.NEXT_PUBLIC_API_URL;
 const REVALIDATE = 60; // seconds — ISR-style caching for server fetches
 
 async function getJSON<T>(path: string, fallback: T): Promise<T> {
