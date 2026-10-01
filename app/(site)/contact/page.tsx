@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
 import ContactMap from "@/components/ContactMap";
@@ -85,7 +86,9 @@ export default async function ContactPage() {
               Fields marked required help us prepare for your call.
             </p>
             <div className="mt-7">
-              <ContactForm services={services} />
+              <Suspense fallback={null}>
+                <ContactForm services={services} />
+              </Suspense>
             </div>
           </div>
         </div>

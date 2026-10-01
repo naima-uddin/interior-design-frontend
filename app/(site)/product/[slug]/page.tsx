@@ -79,7 +79,7 @@ export default async function ProductPage({
               {product.description}
             </p>
 
-            <AddToCart colours={product.colours} />
+            <AddToCart colours={product.colours} product={product.title} />
 
             {/* Specs */}
             <dl className="mt-10">

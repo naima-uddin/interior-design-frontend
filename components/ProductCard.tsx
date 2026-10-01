@@ -1,5 +1,6 @@
 // Reusable editorial product card — image mat, name + tagline + price, and a
-// hover "+" add action. Used by Featured Pieces and the Collection grid.
+// hover "+" enquire action that routes to the contact form. Used by Featured
+// Pieces and the Collection grid.
 
 import Link from "next/link";
 import Image from "next/image";
@@ -52,8 +53,8 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         <Link
-          href={`/product/${product.slug}`}
-          aria-label={`View ${product.title}`}
+          href={`/contact?product=${encodeURIComponent(product.title)}`}
+          aria-label={`Enquire about ${product.title}`}
           className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/15 text-ink transition hover:border-olive hover:bg-[#383927] hover:text-cream-100"
         >
           <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">

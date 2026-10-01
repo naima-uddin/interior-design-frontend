@@ -4,11 +4,19 @@
 // a confirmed state. Wires to /api/contact later.
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { SERVICES, type Service } from "@/lib/data";
 
 export default function ContactForm({ services }: { services?: Service[] }) {
   const options = services?.length ? services : SERVICES;
   const [sent, setSent] = useState(false);
+
+  // When arriving from a product's "+" / Enquire action, seed the message with
+  // the product name so the designer knows what the enquiry is about.
+  const product = useSearchParams().get("product");
+  const defaultMessage = product
+    ? `I'm interested in "${product}". Please get in touch.`
+    : undefined;
 
   if (sent) {
     return (
@@ -70,6 +78,7 @@ export default function ContactForm({ services }: { services?: Service[] }) {
         <textarea
           name="message"
           rows={5}
+          defaultValue={defaultMessage}
           placeholder="Location, size, timeline, and what you have in mind…"
           className="w-full rounded-xl border border-ink/15 bg-cream px-4 py-3 text-sm text-ink placeholder:text-stone-400 focus:border-olive focus:outline-none"
         />
